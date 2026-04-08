@@ -1,3 +1,4 @@
+import Link from "next/link";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
 export default function Tagline() {
@@ -5,21 +6,26 @@ export default function Tagline() {
     <section
       id="tagline"
       className="section-padding relative overflow-hidden"
-      style={{ backgroundColor: "var(--cream-light)" }}
+      style={{ backgroundColor: "var(--cream)" }}
       aria-label="Brand statement"
     >
-      {/* Faint gold radial glow */}
+      {/* Gold radial glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,169,110,0.08) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 80% at 50% 50%, rgba(201,169,110,0.10) 0%, transparent 70%)",
         }}
         aria-hidden="true"
       />
 
+      {/* Decorative horizontal rule lines */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--gold-mid)]/25 to-transparent" aria-hidden="true" />
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--gold-mid)]/25 to-transparent" aria-hidden="true" />
+
       <div className="container-brand relative z-10">
         <div className="max-w-[var(--content-mid)] mx-auto text-center">
+
           <MotionWrapper delay={0.1}>
             <div className="flex items-center justify-center gap-4 mb-10">
               <div className="divider-gold" />
@@ -30,20 +36,57 @@ export default function Tagline() {
             </div>
           </MotionWrapper>
 
-          <MotionWrapper delay={0.25}>
+          {/* Main brand statement */}
+          <MotionWrapper delay={0.2}>
             <blockquote
-              className="font-display font-light italic text-[var(--charcoal)] leading-tight"
-              style={{ fontSize: "var(--text-section)" }}
+              className="font-display font-light italic text-[var(--charcoal)] leading-tight mb-8"
+              style={{ fontSize: "var(--text-display)" }}
             >
-              "Where every pour is an occasion."
+              "Where every pour<br className="hidden sm:block" /> is an occasion."
             </blockquote>
           </MotionWrapper>
 
-          <MotionWrapper delay={0.4}>
-            <p className="mt-8 text-[var(--charcoal-mid)] max-w-[520px] mx-auto leading-relaxed">
+          <MotionWrapper delay={0.35}>
+            <p className="text-[var(--charcoal-mid)] max-w-[520px] mx-auto leading-relaxed mb-10">
               From intimate garden gatherings to grand ballroom galas — Bubbles &amp; Brews Co.
               brings luxury, warmth, and effortless elegance to every moment worth celebrating.
             </p>
+          </MotionWrapper>
+
+          {/* Winking line — the personality beat */}
+          <MotionWrapper delay={0.5}>
+            <p className="font-display italic text-[var(--muted)] mb-10" style={{ fontSize: "var(--text-lead)" }}>
+              Yes, we also do the ones where nobody drinks.{" "}
+              <Link
+                href="/#offerings"
+                className="text-[var(--gold-deep)] not-italic underline-offset-4 hover:underline transition-all"
+              >
+                Meet Prosecco Zero →
+              </Link>
+            </p>
+          </MotionWrapper>
+
+          {/* Three value pillars */}
+          <MotionWrapper delay={0.6}>
+            <div className="flex flex-wrap items-center justify-center gap-0">
+              {[
+                { label: "Mobile Bar", sub: "Bella arrives at your venue" },
+                { label: "On Tap", sub: "Porta-Bella for venues" },
+                { label: "Bottled", sub: "Prosecco Zero to take home" },
+              ].map((item, i) => (
+                <div
+                  key={item.label}
+                  className="flex flex-col items-center gap-1 px-8 py-4 border-l border-[var(--gold-mid)]/20 first:border-0"
+                >
+                  <span className="font-display text-lg font-light text-[var(--charcoal)] tracking-wide">
+                    {item.label}
+                  </span>
+                  <span className="text-xs text-[var(--muted)] tracking-wide">
+                    {item.sub}
+                  </span>
+                </div>
+              ))}
+            </div>
           </MotionWrapper>
         </div>
       </div>

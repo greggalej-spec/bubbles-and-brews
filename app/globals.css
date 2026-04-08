@@ -134,6 +134,12 @@ body {
   }
 }
 
+/* ─── Scroll offset for fixed navbar ─────────────────────────────────── */
+/* Prevents fixed nav from covering section headings when scrolled via anchor */
+[id] {
+  scroll-margin-top: 80px;
+}
+
 /* ─── Mobile-first global rules ──────────────────────────────────────── */
 
 /* Pad body bottom on mobile to clear the sticky contact bar (≈64px) */

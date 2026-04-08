@@ -1,18 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import PlaceholderAsset from "@/components/ui/PlaceholderAsset";
 import MotionWrapper from "@/components/ui/MotionWrapper";
+import { BRAND } from "@/lib/constants";
 
-const GALLERY_ITEMS = [
-  { id: 1, label: "Event Photography 1", aspectRatio: "4/5",  note: "Source: Instagram — event bar setup" },
-  { id: 2, label: "Event Photography 2", aspectRatio: "16/9", note: "Source: Instagram — reception or party" },
-  { id: 3, label: "Event Photography 3", aspectRatio: "1/1",  note: "Source: Instagram — close-up pour or detail" },
-  { id: 4, label: "Event Photography 4", aspectRatio: "1/1",  note: "Source: Instagram — guests or celebration" },
-  { id: 5, label: "Event Photography 5", aspectRatio: "16/9", note: "Source: Instagram — venue wide shot" },
-  { id: 6, label: "Event Photography 6", aspectRatio: "4/5",  note: "Source: Instagram — product or lifestyle" },
+const STAT_CELLS = [
+  { value: "1,200+", label: "Bottles Served" },
+  { value: "85+",    label: "Events Hosted" },
+  { value: "18,500+", label: "Glasses Poured" },
 ];
 
 export default function EventsGallery() {
@@ -49,64 +47,138 @@ export default function EventsGallery() {
           </div>
           <MotionWrapper delay={0.3} direction="left">
             <Link
-              href="/events"
+              href={BRAND.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm tracking-widest uppercase text-[var(--gold-deep)] hover:text-[var(--gold-accent)] transition-colors border-b border-[var(--gold-mid)]/50 hover:border-[var(--gold-accent)] pb-1"
             >
-              See All Events
+              See More on Instagram
             </Link>
           </MotionWrapper>
         </div>
 
-        {/* Gallery grid */}
+        {/* Editorial grid — real assets + typographic cells */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-[var(--gold-mid)]/15">
-          {GALLERY_ITEMS.map((item, i) => (
+
+          {/* Cell 1: Rosé bottle — tall portrait */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative overflow-hidden"
+            style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "4/5" }}
+          >
+            <Image
+              src="/assets/prosecco-zero-rose.png"
+              alt="Prosecco Zero Rosé — blush bottle"
+              fill
+              className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 50vw, 33vw"
+            />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ background: "linear-gradient(to top, rgba(212,132,138,0.15), transparent)" }}
+              aria-hidden="true"
+            />
+            <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-xs tracking-widest uppercase text-[var(--rose)] border border-[var(--rose)]/40 px-3 py-1.5 bg-[var(--cream-light)]/90">
+                Prosecco Zero Rosé
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Cell 2: Bottle video — wide landscape */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative overflow-hidden col-span-1 md:col-span-2"
+            style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "16/9" }}
+          >
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-contain"
+              poster="/assets/prosecco-zero-rose.png"
+            >
+              <source src="/assets/bottle-dolly.mp4" type="video/mp4" />
+            </video>
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: "linear-gradient(135deg, rgba(201,169,110,0.05) 0%, transparent 60%)" }}
+              aria-hidden="true"
+            />
+            {/* Label */}
+            <div className="absolute bottom-4 left-4">
+              <span className="text-xs tracking-widest uppercase text-[var(--gold-mid)] border border-[var(--gold-mid)]/30 px-3 py-1.5 bg-[var(--black)]/60 backdrop-blur-sm">
+                Prosecco Zero
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Stat cells */}
+          {STAT_CELLS.map((stat, i) => (
             <motion.div
-              key={item.id}
+              key={stat.label}
               initial={{ opacity: 0, scale: 0.97 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.7, delay: 0.05 * i, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative overflow-hidden"
-              style={{
-                backgroundColor: "var(--cream-light)",
-                gridColumn: item.aspectRatio === "16/9" ? "span 2" : undefined,
-              }}
+              transition={{ duration: 0.7, delay: 0.15 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              className="relative overflow-hidden flex flex-col items-center justify-center gap-2 py-12 px-6"
+              style={{ backgroundColor: "var(--cream-light)", aspectRatio: "1/1" }}
             >
-              <PlaceholderAsset
-                label={item.label}
-                aspectRatio={item.aspectRatio}
-                note={item.note}
-                className="w-full transition-transform duration-700 group-hover:scale-105"
-              />
-              {/* Hover overlay */}
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                style={{ backgroundColor: "rgba(201,169,110,0.12)" }}
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: "radial-gradient(ellipse 80% 80% at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 70%)",
+                }}
                 aria-hidden="true"
+              />
+              <span
+                className="font-display font-light text-[var(--gold-deep)] relative"
+                style={{ fontSize: "var(--text-section)" }}
               >
-                <span className="text-[var(--gold-deep)] text-xs tracking-widest uppercase border border-[var(--gold-mid)] px-4 py-2">
-                  View
-                </span>
-              </div>
+                {stat.value}
+              </span>
+              <span className="text-xs tracking-widest uppercase text-[var(--muted)] text-center relative">
+                {stat.label}
+              </span>
             </motion.div>
           ))}
-        </div>
 
-        {/* Instagram CTA */}
-        <MotionWrapper delay={0.3}>
-          <div className="mt-10 text-center">
+          {/* Instagram CTA cell */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.33, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative overflow-hidden flex flex-col items-center justify-center gap-5 py-12 px-8"
+            style={{ backgroundColor: "var(--charcoal)", aspectRatio: "1/1" }}
+          >
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "radial-gradient(ellipse 80% 80% at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 70%)",
+              }}
+              aria-hidden="true"
+            />
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--gold-mid)" className="relative opacity-70 group-hover:opacity-100 transition-opacity" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <p className="font-display italic text-[var(--white)] text-center relative" style={{ fontSize: "var(--text-lead)" }}>
+              "See our moments"
+            </p>
             <Link
-              href="https://www.instagram.com/bubblesandbrewsco"
+              href={BRAND.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 text-[var(--muted)] hover:text-[var(--gold-deep)] transition-colors text-sm tracking-wide"
+              className="relative text-xs tracking-widest uppercase text-[var(--gold-mid)] border border-[var(--gold-mid)]/30 px-5 py-2.5 hover:bg-[var(--gold-mid)]/10 transition-colors duration-300"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-              Follow @bubblesandbrewsco for more moments
+              @bubblesandbrewsco
             </Link>
-          </div>
-        </MotionWrapper>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );

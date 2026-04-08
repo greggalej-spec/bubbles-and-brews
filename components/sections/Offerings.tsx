@@ -77,17 +77,26 @@ function OfferingCard({
         ease: [0.16, 1, 0.3, 1],
       }}
       className="group p-8 md:p-10 flex flex-col gap-6 relative overflow-hidden transition-colors duration-500"
-      style={{ backgroundColor: "var(--cream-light)" }}
+      style={{
+        backgroundColor: offering.id === "prosecco-zero-rose" ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))" : "var(--cream-light)",
+      }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.backgroundColor = "var(--cream)";
+        (e.currentTarget as HTMLElement).style.backgroundColor =
+          offering.id === "prosecco-zero-rose"
+            ? "color-mix(in srgb, var(--rose-light) 15%, var(--cream))"
+            : "var(--cream)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.backgroundColor = "var(--cream-light)";
+        (e.currentTarget as HTMLElement).style.backgroundColor =
+          offering.id === "prosecco-zero-rose"
+            ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))"
+            : "var(--cream-light)";
       }}
     >
-      {/* Hover gold accent line */}
+      {/* Hover accent line — rose for rosé card, gold for others */}
       <div
-        className="absolute top-0 left-0 right-0 h-px bg-[var(--gold-mid)] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+        className="absolute top-0 left-0 right-0 h-px scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+        style={{ backgroundColor: offering.id === "prosecco-zero-rose" ? "var(--rose)" : "var(--gold-mid)" }}
         aria-hidden="true"
       />
 
