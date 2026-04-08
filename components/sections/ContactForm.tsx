@@ -335,7 +335,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="group relative flex items-center justify-center gap-3 px-8 py-4 bg-[var(--gold-mid)] text-[var(--black)] text-sm tracking-widest uppercase font-medium overflow-hidden hover:bg-[var(--gold-light)] transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+                className="group relative flex items-center justify-center gap-3 px-8 py-4 min-h-[44px] bg-[var(--gold-mid)] text-[var(--black)] text-sm tracking-widest uppercase font-medium overflow-hidden hover:bg-[var(--gold-light)] transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
               >
                 <span
                   className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"

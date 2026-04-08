@@ -100,7 +100,7 @@ export default function Hero() {
         >
           <Link
             href="/contact"
-            className="group px-8 py-4 bg-[var(--charcoal)] text-[var(--cream-light)] text-sm tracking-widest uppercase font-medium relative overflow-hidden transition-all duration-500 hover:bg-[var(--gold-deep)]"
+            className="group px-8 py-4 min-h-[44px] bg-[var(--charcoal)] text-[var(--cream-light)] text-sm tracking-widest uppercase font-medium relative overflow-hidden transition-all duration-500 hover:bg-[var(--gold-deep)]"
           >
             <span
               className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"
@@ -111,7 +111,7 @@ export default function Hero() {
           </Link>
           <Link
             href="/offerings"
-            className="px-8 py-4 border border-[var(--charcoal)]/25 text-[var(--charcoal-mid)] text-sm tracking-widest uppercase hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-all duration-400"
+            className="px-8 py-4 min-h-[44px] border border-[var(--charcoal)]/25 text-[var(--charcoal-mid)] text-sm tracking-widest uppercase hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-all duration-400"
           >
             Explore Offerings
           </Link>

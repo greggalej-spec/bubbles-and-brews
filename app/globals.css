@@ -115,19 +115,6 @@ body {
   }
 }
 
-/* Minimum touch target size for all interactive elements */
-a, button {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-}
-
-/* Exceptions for inline/decorative links that shouldn't stretch */
-a.inline-link, footer a, nav a {
-  min-height: unset;
-  display: inline;
-}
-
 /* ─── Layout utilities ───────────────────────────────────────────────── */
 .section-padding {
   padding-top: var(--section-gap);

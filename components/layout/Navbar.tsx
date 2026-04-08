@@ -84,6 +84,7 @@ export default function Navbar() {
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10"
             style={{ backgroundColor: "var(--cream-light)" }}
+            data-testid="mobile-menu"
           >
             {NAV_LINKS.map((link, i) => (
               <motion.div
