@@ -59,7 +59,7 @@ export const OFFERINGS = [
     name: "Bella",
     pitch: "She arrives. The room notices.",
     description:
-      "An imported Italian carbonated wine cart — Bella is a fully curated, visually stunning luxury mobile prosecco bar that becomes the centrepiece of your event. Vintage-styled, bespoke-branded, and serving prosecco on tap. She transforms any occasion into an experience people remember.",
+      "Vintage Italian carbonated wine cart, bespoke-branded and serving prosecco on tap. She arrives. The room transforms.",
     useCases: ["Weddings", "Corporate activations", "Brand events", "Luxury parties"],
     cta: "Book Bella for Your Event",
     type: "experience",
@@ -72,7 +72,7 @@ export const OFFERINGS = [
     name: "Porta-Bella",
     pitch: "Prosecco on tap. Wherever you are.",
     description:
-      "A portable countertop prosecco tap system, imported from Italy and bespokely branded — new to the Caribbean market. Uses the same 20-litre pressurised keg as Bella (equivalent to 27+ bottles), always sealed and temperature-controlled. Available for permanent restaurant install or event rental. Limited to 5 units.",
+      "The first portable prosecco tap system in the Caribbean. Imported from Italy, bespoke-branded, always fresh. Limited to 5 units.",
     useCases: ["Restaurants & bars", "Hotels", "Recurring venues", "Corporate offices"],
     cta: "Activate Porta-Bella at Your Venue",
     type: "product",
@@ -85,7 +85,7 @@ export const OFFERINGS = [
     name: "Prosecco Zero",
     pitch: "All the flavor. Zero the guilt.",
     description:
-      "From Peninsula Winery — the world's lowest-sugar prosecco. Just 2.8g per bottle versus 25g+ in standard prosecco. Crafted from premium Glera grapes in Italy's Friuli Venezia Giulia region using a novel fermentation approach. Available in Brut (floral, fresh, crisp) and Rosé (strawberries, red berries, lively and silky).",
+      "The world's lowest-sugar prosecco, from Peninsula Winery. Just 2.8g per bottle. Available in Brut and Rosé.",
     useCases: ["Inclusive celebrations", "Health-conscious hosts", "Bridal events", "Keto-friendly"],
     cta: "Order for Your Event",
     type: "bottle",
