@@ -29,8 +29,8 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       aria-label="Hero"
     >
-      {/* ── Video background (desktop only) ──────────────────────────── */}
-      {!shouldReduceMotion && !isMobile && (
+      {/* ── Video background ─────────────────────────────────────────── */}
+      {!shouldReduceMotion && (
         <video
           autoPlay
           muted
@@ -45,16 +45,16 @@ export default function Hero() {
         </video>
       )}
 
-      {/* ── Gradient fallback — mobile + reduced motion ───────────────── */}
-      {(shouldReduceMotion || isMobile) && (
+      {/* ── Reduced motion fallback — champagne gold gradient ────────── */}
+      {shouldReduceMotion && (
         <div
           className="absolute inset-0"
           aria-hidden="true"
           style={{
             background: `
-              radial-gradient(ellipse 70% 60% at 50% 35%, rgba(201,169,110,0.22) 0%, transparent 65%),
-              radial-gradient(ellipse 50% 70% at 15% 80%, rgba(201,169,110,0.10) 0%, transparent 55%),
-              linear-gradient(160deg, #1A1816 0%, #2A2520 40%, #0E0D0B 100%)
+              radial-gradient(ellipse 80% 70% at 50% 30%, rgba(201,169,110,0.55) 0%, rgba(201,169,110,0.20) 45%, transparent 70%),
+              radial-gradient(ellipse 60% 80% at 80% 80%, rgba(232,213,163,0.30) 0%, transparent 55%),
+              linear-gradient(160deg, #2A2218 0%, #1A1510 50%, #0E0D0B 100%)
             `,
           }}
         />

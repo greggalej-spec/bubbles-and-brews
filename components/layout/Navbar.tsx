@@ -56,12 +56,12 @@ export default function Navbar() {
             className={cn("flex items-center gap-3 transition-colors duration-300 group", brandColor)}
             aria-label="Bubbles & Brews Co. — Home"
           >
-            <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0 border border-[var(--gold-mid)]/30">
+            <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 border border-[var(--gold-mid)]/30">
               <Image
                 src="/assets/bella-event.jpg"
                 alt="Bubbles & Brews Co."
-                width={36}
-                height={36}
+                width={80}
+                height={80}
                 className="object-cover w-full h-full"
               />
             </div>
@@ -171,8 +171,8 @@ export default function Navbar() {
           >
             {/* Logo in mobile menu */}
             <div className="absolute top-8 left-6 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full overflow-hidden border border-[var(--gold-mid)]/30">
-                <Image src="/assets/bella-event.jpg" alt="" width={36} height={36} className="object-cover" aria-hidden="true" />
+              <div className="w-20 h-20 rounded-full overflow-hidden border border-[var(--gold-mid)]/30">
+                <Image src="/assets/bella-event.jpg" alt="" width={80} height={80} className="object-cover" aria-hidden="true" />
               </div>
               <span className="font-display text-xl font-light tracking-[0.08em] text-[var(--charcoal)]">B&amp;B Co.</span>
             </div>

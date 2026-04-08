@@ -112,25 +112,17 @@ export default function EventsGallery() {
             className="relative overflow-hidden col-span-1 md:col-span-2"
             style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "16/9" }}
           >
-            {/* Video desktop-only — iOS ignores preload="none" on autoPlay */}
             <video
               autoPlay
               muted
               loop
               playsInline
               preload="none"
-              className="w-full h-full object-contain hidden md:block"
+              className="w-full h-full object-contain"
               poster="/assets/prosecco-extract-1.png"
             >
               <source src="/assets/slow-dolly-2.mp4" type="video/mp4" />
             </video>
-            {/* Static poster for mobile */}
-            <img
-              src="/assets/prosecco-extract-1.png"
-              alt="Prosecco Zero"
-              className="w-full h-full object-contain md:hidden"
-              aria-hidden="true"
-            />
             <div
               className="absolute inset-0 pointer-events-none"
               style={{ background: "linear-gradient(135deg, rgba(201,169,110,0.05) 0%, transparent 60%)" }}

@@ -46,36 +46,18 @@ export default function BellaSplineScene() {
         <MotionWrapper delay={0.25}>
           <div className="relative max-w-4xl mx-auto">
 
-            {/* Desktop: autoplay video */}
-            {!isMobile && (
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
-                className="w-full object-cover"
-                style={{ aspectRatio: "16/9" }}
-                aria-label="Bella mobile prosecco bar in action"
-              >
-                <source src="/assets/dolly-out.mp4" type="video/mp4" />
-              </video>
-            )}
-
-            {/* Mobile: static product image */}
-            {isMobile && (
-              <div
-                className="w-full flex items-center justify-center"
-                style={{ aspectRatio: "16/9", backgroundColor: "var(--cream-dark)" }}
-                aria-hidden="true"
-              >
-                <img
-                  src="/assets/prosecco-extract-1.png"
-                  alt=""
-                  className="h-full object-contain py-6"
-                />
-              </div>
-            )}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              className="w-full object-cover"
+              style={{ aspectRatio: "16/9" }}
+              aria-label="Bella mobile prosecco bar in action"
+            >
+              <source src="/assets/dolly-out.mp4" type="video/mp4" />
+            </video>
 
             {/* Decorative corner lines */}
             <div className="absolute -top-3 -left-3 w-12 h-12 border-l border-t border-[var(--gold-mid)]/30" aria-hidden="true" />

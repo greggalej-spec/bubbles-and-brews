@@ -120,7 +120,6 @@ function OfferingCard({
         </div>
       ) : "video" in offering && offering.video ? (
         <div className="relative w-full overflow-hidden" style={{ aspectRatio: "3/4" }}>
-          {/* Video on desktop only — iOS Safari ignores preload="none" when autoPlay is set */}
           <video
             autoPlay
             muted
@@ -128,20 +127,11 @@ function OfferingCard({
             playsInline
             preload="none"
             poster={(offering as { videoPoster?: string }).videoPoster}
-            className="w-full h-full object-cover hidden md:block"
+            className="w-full h-full object-cover"
             aria-hidden="true"
           >
             <source src={offering.video as string} type="video/mp4" />
           </video>
-          {/* Static poster for mobile */}
-          {(offering as { videoPoster?: string }).videoPoster && (
-            <img
-              src={(offering as { videoPoster?: string }).videoPoster}
-              alt=""
-              className="w-full h-full object-cover md:hidden"
-              aria-hidden="true"
-            />
-          )}
           {/* Subtle overlay for depth */}
           <div
             className="absolute inset-0 pointer-events-none"

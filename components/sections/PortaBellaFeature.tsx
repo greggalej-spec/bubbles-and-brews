@@ -68,28 +68,17 @@ export default function PortaBellaFeature() {
             className="relative overflow-hidden w-full"
             style={{ aspectRatio: "4/5", backgroundColor: "var(--cream-dark)" }}
           >
-            {/* Desktop: autoplay video */}
-            {!isMobile && (
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
-                className="w-full h-full object-cover"
-                aria-label="Porta-Bella countertop prosecco tap unit"
-              >
-                <source src="/assets/dolly-clean-1.mp4" type="video/mp4" />
-              </video>
-            )}
-            {/* Mobile: static product image */}
-            {isMobile && (
-              <img
-                src="/assets/prosecco-extract-1.png"
-                alt="Porta-Bella countertop tap system"
-                className="w-full h-full object-contain p-10"
-              />
-            )}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              className="w-full h-full object-cover"
+              aria-label="Porta-Bella countertop prosecco tap unit"
+            >
+              <source src="/assets/dolly-clean-1.mp4" type="video/mp4" />
+            </video>
           </motion.div>
 
           {/* Specs + content */}

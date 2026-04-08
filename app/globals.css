@@ -259,11 +259,6 @@ input[type="submit"], input[type="button"], input[type="reset"],
   .bubble-field-container { display: none; }
 }
 
-/* Disable bubble field on mobile — 24 concurrent GPU-composited animations
-   cause memory pressure on iOS Safari, leading to tab crashes */
-@media (max-width: 767px) {
-  .bubble-field-container { display: none; }
-}
 
 /* ─── Grain texture overlay ──────────────────────────────────────────── */
 .grain::after {

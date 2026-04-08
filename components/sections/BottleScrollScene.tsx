@@ -73,7 +73,7 @@ export default function BottleScrollScene() {
     );
   }
 
-  // ── Mobile: static poster image (no video — iOS Safari ignores preload="none" on autoPlay)
+  // ── Mobile: autoplay loop ────────────────────────────────────────────
   if (isMobile) {
     return (
       <section
@@ -81,12 +81,18 @@ export default function BottleScrollScene() {
         className="relative overflow-hidden"
         style={{ backgroundColor: "var(--black)" }}
       >
-        {/* Static product image — no video on mobile */}
-        <div
-          className="w-full h-[60vw] min-h-[320px] bg-center bg-cover"
-          style={{ backgroundImage: "url('/assets/prosecco-extract-1.png')", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          poster="/assets/prosecco-extract-1.png"
+          className="w-full h-[60vw] min-h-[320px] object-cover"
           aria-hidden="true"
-        />
+        >
+          <source src="/assets/slow-dolly-1.mp4" type="video/mp4" />
+        </video>
 
         {/* Dark overlay */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(14,13,11,0.55)" }} aria-hidden="true" />
