@@ -46,7 +46,7 @@ export default function Tagline() {
           </MotionWrapper>
 
           <MotionWrapper delay={0.35}>
-            <p className="text-[var(--charcoal-mid)] max-w-[520px] mx-auto leading-relaxed mb-10">
+            <p className="text-[var(--charcoal-mid)] max-w-[440px] mx-auto leading-loose mb-14">
               From intimate garden gatherings to grand ballroom galas — Bubbles &amp; Brews Co.
               brings luxury, warmth, and effortless elegance to every moment worth celebrating.
             </p>

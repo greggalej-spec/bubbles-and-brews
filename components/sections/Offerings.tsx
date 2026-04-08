@@ -75,7 +75,7 @@ function OfferingCard({
         delay: 0.1 + index * 0.12,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="group p-10 md:p-14 flex flex-col gap-8 relative overflow-hidden transition-colors duration-500"
+      className="group p-10 md:p-16 flex flex-col gap-10 relative overflow-hidden transition-colors duration-500"
       style={{
         backgroundColor: offering.id === "bottles" ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))" : "var(--cream-light)",
       }}
