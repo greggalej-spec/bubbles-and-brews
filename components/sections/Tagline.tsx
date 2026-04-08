@@ -1,4 +1,3 @@
-import Link from "next/link";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
 export default function Tagline() {
@@ -53,21 +52,8 @@ export default function Tagline() {
             </p>
           </MotionWrapper>
 
-          {/* Winking line — the personality beat */}
-          <MotionWrapper delay={0.5}>
-            <p className="font-display italic text-[var(--muted)] mb-10" style={{ fontSize: "var(--text-lead)" }}>
-              Yes, we also do the ones where nobody drinks.{" "}
-              <Link
-                href="/#offerings"
-                className="text-[var(--gold-deep)] not-italic underline-offset-4 hover:underline transition-all"
-              >
-                Meet Prosecco Zero →
-              </Link>
-            </p>
-          </MotionWrapper>
-
           {/* Three value pillars */}
-          <MotionWrapper delay={0.6}>
+          <MotionWrapper delay={0.5}>
             <div className="flex flex-wrap items-center justify-center gap-0">
               {[
                 { label: "Mobile Bar", sub: "Bella arrives at your venue" },
