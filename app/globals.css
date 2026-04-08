@@ -1,26 +1,183 @@
 @import "tailwindcss";
 
+/* ─── Design Tokens ──────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand palette */
+  --gold-light:   #E8D5A3;
+  --gold-mid:     #C9A96E;
+  --gold-deep:    #A07830;
+  --gold-accent:  #8B6914;
+  --black:        #080806;
+  --black-soft:   #111110;
+  --black-muted:  #1C1C1A;
+  --white:        #FAFAF8;
+  --white-warm:   #F5F0E8;
+
+  /* ── Light-first surface tokens (primary design language) ── */
+  --cream:        #F5F0E8; /* Nyetimber-range warm cream — main background */
+  --cream-light:  #FAF7F2; /* Almost white with warmth — section alternate */
+  --cream-dark:   #EDE4D3; /* Deeper cream — card panels, borders */
+  --charcoal:     #1A1816; /* Near-black for primary text on light */
+  --charcoal-mid: #3D3A35; /* Secondary text */
+  --muted:        #7A7570; /* Muted text — labels, captions */
+  --muted-light:  #B0AAA2; /* Very muted — decorative text on light bg */
+
+  /* Typography scale — editorial rhythm */
+  --text-hero:    clamp(3.5rem, 8vw, 7.5rem);
+  --text-display: clamp(2.5rem, 5vw, 5rem);
+  --text-section: clamp(1.75rem, 3vw, 3rem);
+  --text-lead:    clamp(1.1rem, 1.5vw, 1.35rem);
+  --text-body:    1rem;
+  --text-small:   0.875rem;
+
+  /* Spacing rhythm — mobile-first clamp values */
+  --section-gap:  clamp(4rem, 10vw, 10rem);   /* tighter on mobile */
+  --content-max:  1400px;
+  --content-wide: 1200px;
+  --content-mid:  900px;
+
+  /* Motion tokens */
+  --ease-luxury:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-reveal:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --duration-base: 0.6s;
+  --duration-slow: 1.2s;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gold-light:  var(--gold-light);
+  --color-gold-mid:    var(--gold-mid);
+  --color-gold-deep:   var(--gold-deep);
+  --color-gold-accent: var(--gold-accent);
+  --color-brand-black: var(--black);
+  --color-brand-white: var(--white);
+  --color-muted:       var(--muted);
+  --font-display: var(--font-cormorant);
+  --font-body:    var(--font-dm-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base Reset ─────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--cream-light); /* light-first — cream/champagne base */
+  color: var(--charcoal);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--text-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.text-hero    { font-size: var(--text-hero); }
+.text-display { font-size: var(--text-display); }
+.text-section { font-size: var(--text-section); }
+.text-lead    { font-size: var(--text-lead); }
+
+/* Gold gradient text utility */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-mid) 50%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold-mid); border-radius: 3px; }
+
+/* ─── Selection ──────────────────────────────────────────────────────── */
+::selection {
+  background: var(--gold-mid);
+  color: var(--black);
+}
+
+/* ─── Mobile-first global rules ──────────────────────────────────────── */
+
+/* Pad body bottom on mobile to clear the sticky contact bar (≈64px) */
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 64px;
+  }
+}
+
+/* Minimum touch target size for all interactive elements */
+a, button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Exceptions for inline/decorative links that shouldn't stretch */
+a.inline-link, footer a, nav a {
+  min-height: unset;
+  display: inline;
+}
+
+/* ─── Layout utilities ───────────────────────────────────────────────── */
+.section-padding {
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
+}
+
+.container-brand {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.5rem, 4vw, 4rem);
+  padding-right: clamp(1.5rem, 4vw, 4rem);
+}
+
+/* ─── Gold divider ───────────────────────────────────────────────────── */
+.divider-gold {
+  width: 3rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-mid), transparent);
+}
+
+/* ─── Grain texture overlay ──────────────────────────────────────────── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.04;
+}
+
+/* ─── Placeholder asset blocks ───────────────────────────────────────── */
+.asset-placeholder {
+  position: relative;
+  background: linear-gradient(135deg, var(--cream-dark) 0%, var(--cream) 100%);
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--muted);
+  font-size: var(--text-small);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Dark variant for use inside dark sections */
+.asset-placeholder-dark {
+  background: linear-gradient(135deg, #1C1C1A 0%, #111110 100%);
+  border: 1px solid rgba(201, 169, 110, 0.15);
 }
