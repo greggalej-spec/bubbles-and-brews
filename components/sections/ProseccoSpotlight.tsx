@@ -112,13 +112,13 @@ export default function ProseccoSpotlight() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="px-7 py-3.5 bg-[var(--charcoal)] text-[var(--cream-light)] text-sm tracking-widest uppercase font-medium hover:bg-[var(--gold-deep)] transition-colors duration-300"
+                  className="px-7 py-3.5 bg-[var(--charcoal)] text-[var(--cream-light)] text-sm tracking-wider font-medium hover:bg-[var(--gold-deep)] transition-colors duration-300"
                 >
                   Order for Your Event
                 </Link>
                 <Link
                   href="/offerings/prosecco-zero"
-                  className="px-7 py-3.5 border border-[var(--charcoal)]/20 text-[var(--charcoal-mid)] text-sm tracking-widest uppercase hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-all duration-300"
+                  className="px-7 py-3.5 border border-[var(--charcoal)]/20 text-[var(--charcoal-mid)] text-sm tracking-wider hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-all duration-300"
                 >
                   Learn More
                 </Link>

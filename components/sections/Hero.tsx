@@ -49,7 +49,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect fill='%23C9A96E' width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
         }}
         aria-hidden="true"
       />
@@ -127,7 +127,7 @@ export default function Hero() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--muted)] hover:text-[var(--gold-deep)] transition-colors"
         aria-label="Scroll down"
       >
-        <span className="text-[10px] tracking-[0.2em] uppercase">Discover</span>
+        <span className="text-xs tracking-[0.2em] uppercase">Discover</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

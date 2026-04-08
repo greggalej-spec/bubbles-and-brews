@@ -37,7 +37,7 @@ export default function Navbar() {
           {/* Wordmark */}
           <Link
             href="/"
-            className="font-display text-xl md:text-2xl font-light tracking-[0.12em] text-[var(--charcoal)] hover:text-[var(--gold-deep)] transition-colors duration-300"
+            className="font-display text-xl md:text-2xl font-light tracking-[0.08em] text-[var(--charcoal)] hover:text-[var(--gold-deep)] transition-colors duration-300"
             aria-label="Bubbles & Brews Co. — Home"
           >
             B&amp;B Co.

@@ -151,7 +151,7 @@ export default function ContactForm() {
                     <Phone size={14} className="text-[var(--gold-mid)]" />
                   </div>
                   <div>
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[var(--muted)] mb-0.5">Call us</p>
+                    <p className="text-xs tracking-[0.2em] uppercase text-[var(--muted)] mb-0.5">Call us</p>
                     <p className="text-sm text-[var(--white)]/70 group-hover:text-[var(--gold-light)] transition-colors">
                       {BRAND.phone}
                     </p>
@@ -165,7 +165,7 @@ export default function ContactForm() {
                     <Mail size={14} className="text-[var(--gold-mid)]" />
                   </div>
                   <div>
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[var(--muted)] mb-0.5">Email</p>
+                    <p className="text-xs tracking-[0.2em] uppercase text-[var(--muted)] mb-0.5">Email</p>
                     <p className="text-sm text-[var(--white)]/70 group-hover:text-[var(--gold-light)] transition-colors">
                       {BRAND.email}
                     </p>
@@ -184,7 +184,7 @@ export default function ContactForm() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[var(--muted)] mb-0.5">WhatsApp</p>
+                    <p className="text-xs tracking-[0.2em] uppercase text-[var(--muted)] mb-0.5">WhatsApp</p>
                     <p className="text-sm text-[#25D366]/80 group-hover:text-[#25D366] transition-colors">
                       Chat with us directly
                     </p>

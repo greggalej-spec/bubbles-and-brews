@@ -91,7 +91,7 @@ export default function BellaFeature() {
           <MotionWrapper delay={0.62}>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-[var(--charcoal)] text-[var(--cream-light)] text-sm tracking-widest uppercase font-medium relative overflow-hidden hover:bg-[var(--gold-deep)] transition-colors duration-300"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-[var(--charcoal)] text-[var(--cream-light)] text-sm tracking-wider font-medium relative overflow-hidden hover:bg-[var(--gold-deep)] transition-colors duration-300"
             >
               <span
                 className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"

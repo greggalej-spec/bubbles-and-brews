@@ -46,7 +46,7 @@ export default function MetricsCounter() {
             <span className="italic text-gold-gradient">the pour.</span>
           </h2>
           {/* PLACEHOLDER notice — remove once real metrics are confirmed */}
-          <p className="mt-4 text-[var(--muted)] text-xs tracking-wide">
+          <p className="mt-4 text-[var(--muted-dark)] text-xs tracking-wide">
             *Figures are approximate placeholders — update in{" "}
             <code className="text-[var(--gold-mid)]/70">lib/constants.ts</code>
           </p>
@@ -75,7 +75,7 @@ export default function MetricsCounter() {
                   duration={1800}
                 />
               </span>
-              <span className="text-xs tracking-widest uppercase text-[var(--muted)] text-center">
+              <span className="text-xs tracking-widest uppercase text-[var(--muted-dark)] text-center">
                 {metric.label}
               </span>
             </MotionWrapper>

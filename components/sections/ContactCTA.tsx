@@ -120,12 +120,12 @@ export default function ContactCTA() {
             <div className="mt-16 flex flex-wrap items-center justify-center gap-8">
               {[
                 "Trinidad's Premier Prosecco Experience",
-                "Mobile • On Tap • Bottled",
+                "Mobile · On Tap · Bottled",
                 "Events · Venues · Private Functions",
               ].map((signal) => (
                 <span
                   key={signal}
-                  className="text-[10px] tracking-[0.2em] uppercase text-[var(--muted-light)] border-l border-[var(--gold-mid)]/20 pl-4 first:border-0 first:pl-0"
+                  className="text-xs text-[var(--muted)] border-l border-[var(--gold-mid)]/20 pl-4 first:border-0 first:pl-0"
                 >
                   {signal}
                 </span>

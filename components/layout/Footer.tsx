@@ -5,20 +5,21 @@ import { BRAND, NAV_LINKS } from "@/lib/constants";
 export default function Footer() {
   const year = new Date().getFullYear();
 
+  /* muted-dark (#8A8480) on near-black (#0E0D0B) = ~5.2:1 — passes WCAG AA */
   return (
     <footer className="bg-[var(--black)] border-t border-[var(--gold-mid)]/10">
       <div className="container-brand py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
           {/* Brand column */}
           <div className="flex flex-col gap-5">
-            <p className="font-display text-3xl font-light tracking-[0.12em] text-[var(--white)]">
+            <p className="font-display text-3xl font-light tracking-[0.08em] text-[var(--white)]">
               Bubbles &amp; Brews Co.
             </p>
-            <p className="text-[var(--muted)] text-sm leading-relaxed max-w-[260px]">
+            <p className="text-[var(--muted-dark)] text-sm leading-relaxed max-w-[260px]">
               Trinidad's most elevated prosecco experience — mobile bar, curated products, and prosecco on tap.
             </p>
             <div className="divider-gold mt-2" />
-            <p className="text-[var(--muted)] text-xs tracking-widest uppercase">
+            <p className="text-[var(--muted-dark)] text-xs tracking-wider">
               Trinidad &amp; Tobago
             </p>
           </div>
@@ -86,10 +87,10 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-[var(--gold-mid)]/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[var(--muted)] tracking-wide">
+          <p className="text-xs text-[var(--muted-dark)] tracking-wide">
             &copy; {year} Bubbles &amp; Brews Co. All rights reserved.
           </p>
-          <p className="text-xs text-[var(--muted)] tracking-wide">
+          <p className="text-xs text-[var(--muted-dark)] tracking-wide">
             Trinidad &amp; Tobago
           </p>
         </div>

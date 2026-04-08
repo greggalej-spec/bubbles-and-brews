@@ -5,11 +5,11 @@
   /* Brand palette */
   --gold-light:   #E8D5A3;
   --gold-mid:     #C9A96E;
-  --gold-deep:    #A07830;
-  --gold-accent:  #8B6914;
-  --black:        #080806;
-  --black-soft:   #111110;
-  --black-muted:  #1C1C1A;
+  --gold-deep:    #8A6520; /* darkened from #A07830 — now 4.6:1 on cream */
+  --gold-accent:  #7A5510;
+  --black:        #0E0D0B; /* warm near-black — avoids pure #000 harshness */
+  --black-soft:   #141310;
+  --black-muted:  #1E1C19;
   --white:        #FAFAF8;
   --white-warm:   #F5F0E8;
 
@@ -19,8 +19,9 @@
   --cream-dark:   #EDE4D3; /* Deeper cream — card panels, borders */
   --charcoal:     #1A1816; /* Near-black for primary text on light */
   --charcoal-mid: #3D3A35; /* Secondary text */
-  --muted:        #7A7570; /* Muted text — labels, captions */
-  --muted-light:  #B0AAA2; /* Very muted — decorative text on light bg */
+  --muted:        #6A6460; /* Muted text on light — passes 4.5:1 on cream */
+  --muted-dark:   #8A8480; /* Muted text on dark bg — passes 4.5:1 on near-black */
+  --muted-light:  #B0AAA2; /* Decorative only — not used for readable text */
 
   /* Typography scale — editorial rhythm */
   --text-hero:    clamp(3.5rem, 8vw, 7.5rem);
@@ -66,6 +67,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--cream-light); /* prevent browser-default black flash */
 }
 
 body {
@@ -142,7 +144,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect fill='%23C9A96E' width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
   opacity: 0.04;
 }
@@ -159,8 +161,6 @@ body {
   gap: 0.75rem;
   color: var(--muted);
   font-size: var(--text-small);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 /* Dark variant for use inside dark sections */

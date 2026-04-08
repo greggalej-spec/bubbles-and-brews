@@ -35,7 +35,7 @@ export default function PlaceholderAsset({
         {label}
       </span>
       {note && (
-        <span className="text-[10px] opacity-40 max-w-[200px] text-center leading-relaxed">
+        <span className="text-xs opacity-40 max-w-[200px] text-center leading-relaxed">
           {note}
         </span>
       )}
