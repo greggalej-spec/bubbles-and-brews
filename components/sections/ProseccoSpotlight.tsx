@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import BottleScene3D from "@/components/ui/BottleScene3D";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
 /**
@@ -62,12 +62,29 @@ export default function ProseccoSpotlight() {
             className="relative"
           >
             <div className="relative max-w-[320px] mx-auto">
-              {/*
-               * ── 3D BOTTLE SCENE ─────────────────────────────────────
-               * Pass splineUrl once model is ready:
-               * <BottleScene3D splineUrl="https://prod.spline.design/..." className="w-full" />
-               */}
-              <BottleScene3D className="w-full" />
+              {/* Prosecco Zero Rosé — 3D render video */}
+              {shouldReduceMotion ? (
+                <Image
+                  src="/assets/prosecco-zero-rose.png"
+                  alt="Prosecco Zero Rosé — blush bottle with black label and cherub graphic"
+                  width={320}
+                  height={480}
+                  className="w-full object-contain drop-shadow-xl"
+                  priority
+                />
+              ) : (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full object-contain drop-shadow-xl"
+                  style={{ maxHeight: 480 }}
+                  poster="/assets/prosecco-zero-rose.png"
+                >
+                  <source src="/assets/bottle-dolly.mp4" type="video/mp4" />
+                </video>
+              )}
 
               {/* Decorative concentric rings — Nyetimber-inspired */}
               <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border border-[var(--gold-mid)]/20" aria-hidden="true" />

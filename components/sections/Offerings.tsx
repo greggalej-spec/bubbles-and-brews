@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
@@ -95,14 +96,28 @@ function OfferingCard({
         {typeLabel[offering.type]}
       </span>
 
-      {/* Visual placeholder
-          REPLACE: Swap <PlaceholderAsset> with <Image> once assets are received. */}
-      <PlaceholderAsset
-        label={`${offering.name} — Visual`}
-        aspectRatio={offering.type === "bottle" ? "3/4" : "16/9"}
-        note="Awaiting client-supplied or Instagram-derived image"
-        className="w-full"
-      />
+      {/* Product visual */}
+      {"image" in offering && offering.image ? (
+        <div
+          className="relative w-full overflow-hidden"
+          style={{ aspectRatio: offering.type === "bottle" ? "3/4" : "16/9" }}
+        >
+          <Image
+            src={offering.image as string}
+            alt={(offering as { imageAlt?: string; name: string }).imageAlt ?? offering.name}
+            fill
+            className="object-contain"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+      ) : (
+        <PlaceholderAsset
+          label={`${offering.name} — Visual`}
+          aspectRatio={offering.type === "bottle" ? "3/4" : "16/9"}
+          note="Awaiting client-supplied or Instagram-derived image"
+          className="w-full"
+        />
+      )}
 
       {/* Content */}
       <div className="flex flex-col gap-3">

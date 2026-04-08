@@ -76,13 +76,9 @@ export const OFFERINGS = [
     useCases: ["Bridal showers", "Intimate dinners", "Photography-ready events"],
     cta: "Inquire About Availability",
     type: "bottle",
-    /*
-     * ASSET PLACEHOLDER: Rosé bottle cutout image
-     * Source: Client-supplied or distributor media
-     * Style: Rose-tinted lighting, soft bokeh background
-     * Status: Awaiting client asset delivery
-     */
-    imagePlaceholder: true,
+    image: "/assets/prosecco-zero-rose.png",
+    imageAlt: "Prosecco Zero Rosé — blush bottle with black label and cherub graphic",
+    imagePlaceholder: false,
   },
   {
     id: "bella",
