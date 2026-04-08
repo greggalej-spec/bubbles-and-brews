@@ -84,12 +84,6 @@ export default function StickyContactBar() {
             className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end gap-3"
           >
             <Link
-              href="/contact"
-              className="px-5 py-2.5 bg-[var(--charcoal)] text-[var(--cream-light)] text-xs tracking-widest uppercase font-medium hover:bg-[var(--gold-deep)] transition-all duration-300 shadow-lg shadow-[var(--charcoal)]/15"
-            >
-              Book Now
-            </Link>
-            <Link
               href={BRAND.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
