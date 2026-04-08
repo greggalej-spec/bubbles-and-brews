@@ -54,7 +54,7 @@ export default function Tagline() {
 
           {/* Three value pillars */}
           <MotionWrapper delay={0.5}>
-            <div className="flex flex-wrap items-center justify-center gap-0">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-0">
               {[
                 { label: "Mobile Bar", sub: "Bella arrives at your venue" },
                 { label: "On Tap", sub: "Porta-Bella for venues" },
@@ -62,7 +62,7 @@ export default function Tagline() {
               ].map((item, i) => (
                 <div
                   key={item.label}
-                  className="flex flex-col items-center gap-1 px-8 py-4 border-l border-[var(--gold-mid)]/20 first:border-0"
+                  className="flex flex-col items-center gap-2 px-10 py-5 border-l border-[var(--gold-mid)]/20 first:border-0"
                 >
                   <span className="font-display text-lg font-light text-[var(--charcoal)] tracking-wide">
                     {item.label}

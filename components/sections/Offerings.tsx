@@ -100,7 +100,7 @@ function OfferingCard({
       />
 
       {/* Type badge */}
-      <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-deep)] border border-[var(--gold-mid)]/40 px-3 py-1 w-fit">
+      <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-deep)] border border-[var(--gold-mid)]/40 px-4 py-2 w-fit">
         {typeLabel[offering.type]}
       </span>
 
@@ -159,7 +159,7 @@ function OfferingCard({
         {offering.useCases.map((uc) => (
           <span
             key={uc}
-            className="text-xs text-[var(--muted)] border border-[var(--charcoal)]/10 px-2.5 py-1"
+            className="text-xs text-[var(--muted)] border border-[var(--charcoal)]/10 px-3 py-1.5"
           >
             {uc}
           </span>
