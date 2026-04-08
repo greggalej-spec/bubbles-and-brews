@@ -28,6 +28,9 @@ const SPLINE_URL = "";
 export default function BellaSplineScene() {
   const shouldReduceMotion = useReducedMotion();
 
+  // Hide entirely until a Spline scene is configured — no empty-promise UI
+  if (!SPLINE_URL) return null;
+
   return (
     <section
       className="section-padding relative overflow-hidden"

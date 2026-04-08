@@ -45,11 +45,6 @@ export default function MetricsCounter() {
             The numbers behind<br />
             <span className="italic text-gold-gradient">the pour.</span>
           </h2>
-          {/* PLACEHOLDER notice — remove once real metrics are confirmed */}
-          <p className="mt-4 text-[var(--muted-dark)] text-xs tracking-wide">
-            *Figures are approximate placeholders — update in{" "}
-            <code className="text-[var(--gold-mid)]/70">lib/constants.ts</code>
-          </p>
         </MotionWrapper>
 
         {/* Counter grid */}

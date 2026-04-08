@@ -134,7 +134,7 @@ export default function ContactForm() {
               </h1>
             </MotionWrapper>
             <MotionWrapper delay={0.32}>
-              <p className="text-[var(--white)]/60 leading-relaxed mb-12">
+              <p className="text-[var(--charcoal-mid)] leading-relaxed mb-12">
                 Whether you're planning a wedding, activating Porta-Bella at your venue, or
                 interested in our Prosecco Zero range — we'd love to hear from you.
               </p>
@@ -152,7 +152,7 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="text-xs tracking-[0.2em] uppercase text-[var(--muted)] mb-0.5">Call us</p>
-                    <p className="text-sm text-[var(--white)]/70 group-hover:text-[var(--gold-light)] transition-colors">
+                    <p className="text-sm text-[var(--charcoal-mid)] group-hover:text-[var(--gold-deep)] transition-colors">
                       {BRAND.phone}
                     </p>
                   </div>
@@ -166,7 +166,7 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="text-xs tracking-[0.2em] uppercase text-[var(--muted)] mb-0.5">Email</p>
-                    <p className="text-sm text-[var(--white)]/70 group-hover:text-[var(--gold-light)] transition-colors">
+                    <p className="text-sm text-[var(--charcoal-mid)] group-hover:text-[var(--gold-deep)] transition-colors">
                       {BRAND.email}
                     </p>
                   </div>
@@ -185,7 +185,7 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="text-xs tracking-[0.2em] uppercase text-[var(--muted)] mb-0.5">WhatsApp</p>
-                    <p className="text-sm text-[#25D366]/80 group-hover:text-[#25D366] transition-colors">
+                    <p className="text-sm text-[var(--charcoal-mid)] group-hover:text-[var(--gold-deep)] transition-colors">
                       Chat with us directly
                     </p>
                   </div>
@@ -295,7 +295,7 @@ export default function ContactForm() {
                     type="date"
                     value={form.date}
                     onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))}
-                    className={`${field} [color-scheme:dark]`}
+                    className={field}
                   />
                 </div>
               </div>

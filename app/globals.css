@@ -23,6 +23,14 @@
   --muted-dark:   #8A8480; /* Muted text on dark bg — passes 4.5:1 on near-black */
   --muted-light:  #B0AAA2; /* Decorative only — not used for readable text */
 
+  /* Rosé secondary accent — product-driven, celebratory moments */
+  --rose:         #D4848A;
+  --rose-light:   #ECC5C8;
+  --rose-dark:    #A85A60;
+
+  /* WhatsApp brand green — isolated, not a general accent */
+  --brand-wa:     #25D366;
+
   /* Typography scale — editorial rhythm */
   --text-hero:    clamp(3.5rem, 8vw, 7.5rem);
   --text-display: clamp(2.5rem, 5vw, 5rem);

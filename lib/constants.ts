@@ -42,9 +42,10 @@ export const METRICS = [
 
 /* ─── Navigation links ───────────────────────────────────────────────── */
 export const NAV_LINKS = [
-  { label: "Offerings", href: "/offerings" },
+  { label: "Offerings", href: "/#offerings" },
   { label: "Bella", href: "/offerings/bella" },
-  { label: "Events", href: "/events" },
+  /* Events page not yet built — restore when /events page is created:
+     { label: "Events", href: "/events" }, */
   { label: "Contact", href: "/contact" },
 ];
 
