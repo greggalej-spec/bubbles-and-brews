@@ -108,6 +108,24 @@ body {
   color: var(--black);
 }
 
+/* ─── Focus indicators — keyboard accessibility ──────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--gold-mid);
+  outline-offset: 3px;
+}
+
+/* ─── Reduced motion — respect user preference ───────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* ─── Mobile-first global rules ──────────────────────────────────────── */
 
 /* Pad body bottom on mobile to clear the sticky contact bar (≈64px) */

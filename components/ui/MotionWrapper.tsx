@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { cn } from "@/lib/cn";
 
@@ -25,6 +25,7 @@ export default function MotionWrapper({
 }: MotionWrapperProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-10% 0px" });
+  const shouldReduceMotion = useReducedMotion();
 
   const offsets = {
     up:    { y: 40, x: 0 },
@@ -34,7 +35,10 @@ export default function MotionWrapper({
     none:  { y: 0, x: 0 },
   };
 
-  const initial = { opacity: 0, ...offsets[direction] };
+  const initial = shouldReduceMotion
+    ? { opacity: 0, x: 0, y: 0 }
+    : { opacity: 0, ...offsets[direction] };
+
   const animate = isInView
     ? { opacity: 1, y: 0, x: 0 }
     : initial;
@@ -45,9 +49,9 @@ export default function MotionWrapper({
       initial={initial}
       animate={animate}
       transition={{
-        duration: 0.9,
-        delay,
-        ease: [0.16, 1, 0.3, 1], /* luxury ease */
+        duration: shouldReduceMotion ? 0.15 : 0.9,
+        delay: shouldReduceMotion ? 0 : delay,
+        ease: [0.16, 1, 0.3, 1],
       }}
       className={cn(className)}
     >

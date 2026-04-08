@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 
 interface AnimatedCounterProps {
   target: number;
@@ -21,11 +21,18 @@ export default function AnimatedCounter({
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-5% 0px" });
+  const shouldReduceMotion = useReducedMotion();
   const [count, setCount] = useState(0);
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!isInView) return;
+
+    /* Skip animation entirely for users who prefer reduced motion */
+    if (shouldReduceMotion) {
+      setCount(target);
+      return;
+    }
 
     const start = performance.now();
 
@@ -47,7 +54,7 @@ export default function AnimatedCounter({
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
-  }, [isInView, target, duration]);
+  }, [isInView, target, duration, shouldReduceMotion]);
 
   return (
     <span ref={ref}>
