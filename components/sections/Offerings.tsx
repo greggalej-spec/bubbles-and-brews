@@ -142,18 +142,15 @@ function OfferingCard({
       ) : null}
 
       {/* Content */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4">
         <h3
           className="font-display font-light text-[var(--charcoal)] leading-tight"
           style={{ fontSize: "var(--text-section)" }}
         >
           {offering.name}
         </h3>
-        <p className="text-[var(--gold-deep)] text-sm italic font-display">
+        <p className="text-[var(--gold-deep)] text-base italic font-display leading-relaxed">
           {offering.pitch}
-        </p>
-        <p className="text-[var(--charcoal-mid)] text-sm leading-relaxed line-clamp-3">
-          {offering.description}
         </p>
       </div>
 
