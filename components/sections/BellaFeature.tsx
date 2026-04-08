@@ -99,14 +99,14 @@ export default function BellaFeature() {
         className="relative overflow-hidden min-h-[60vw] sm:min-h-[50vh] lg:min-h-0 flex items-center justify-center"
         style={{ backgroundColor: "var(--black)" }}
       >
-        {/* Background video */}
+        {/* Background video — desktop only, iOS Safari ignores preload="none" on autoPlay */}
         <video
           autoPlay
           muted
           loop
           playsInline
           preload="none"
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
+          className="absolute inset-0 w-full h-full object-cover opacity-60 hidden md:block"
           aria-hidden="true"
         >
           <source src="/assets/animate-frames.mp4" type="video/mp4" />

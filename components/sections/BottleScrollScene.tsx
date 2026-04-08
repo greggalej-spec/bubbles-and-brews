@@ -47,13 +47,14 @@ export default function BottleScrollScene() {
     });
   }, [scrollYProgress, shouldReduceMotion, isMobile]);
 
-  // Fade text layers with scroll (desktop only — mobile uses static positions)
+  // All useTransform calls must be at the top level — never inside JSX or after early returns
   const eyebrowOpacity  = useTransform(scrollYProgress, [0, 0.12, 0.35, 0.5],  [0, 1, 1, 0]);
   const headingOpacity  = useTransform(scrollYProgress, [0.05, 0.18, 0.38, 0.52], [0, 1, 1, 0]);
   const subOpacity      = useTransform(scrollYProgress, [0.12, 0.25, 0.42, 0.55], [0, 1, 1, 0]);
   const ctaOpacity      = useTransform(scrollYProgress, [0.55, 0.68, 0.88, 1],   [0, 1, 1, 0]);
   const ctaHeadOpacity  = useTransform(scrollYProgress, [0.52, 0.65, 0.88, 1],   [0, 1, 1, 0]);
   const overlayOpacity  = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.72, 0.55, 0.55, 0.72]);
+  const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   // ── Reduced motion: static image ─────────────────────────────────────
   if (shouldReduceMotion) {
@@ -72,7 +73,7 @@ export default function BottleScrollScene() {
     );
   }
 
-  // ── Mobile: autoplay loop ────────────────────────────────────────────
+  // ── Mobile: static poster image (no video — iOS Safari ignores preload="none" on autoPlay)
   if (isMobile) {
     return (
       <section
@@ -80,18 +81,12 @@ export default function BottleScrollScene() {
         className="relative overflow-hidden"
         style={{ backgroundColor: "var(--black)" }}
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          poster="/assets/prosecco-zero-rose.png"
-          className="w-full h-[60vw] min-h-[320px] object-cover"
+        {/* Static product image — no video on mobile */}
+        <div
+          className="w-full h-[60vw] min-h-[320px] bg-center bg-cover"
+          style={{ backgroundImage: "url('/assets/prosecco-zero-rose.png')", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}
           aria-hidden="true"
-        >
-          <source src="/assets/slow-dolly-1.mp4" type="video/mp4" />
-        </video>
+        />
 
         {/* Dark overlay */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(14,13,11,0.55)" }} aria-hidden="true" />
@@ -222,7 +217,7 @@ export default function BottleScrollScene() {
 
         {/* Scroll hint */}
         <motion.div
-          style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [1, 0]) }}
+          style={{ opacity: scrollHintOpacity }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--muted-dark)] pointer-events-none"
         >
           <span className="text-xs tracking-[0.2em] uppercase">Scroll to reveal</span>
