@@ -47,6 +47,7 @@ export default function CorkPop() {
 
   useEffect(() => {
     if (shouldReduceMotion) return;
+    if (window.innerWidth < 768 || "ontouchstart" in window) return;
     const t = setTimeout(() => setActive(true), 2800);
     return () => clearTimeout(t);
   }, [shouldReduceMotion]);

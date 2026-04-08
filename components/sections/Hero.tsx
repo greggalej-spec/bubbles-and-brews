@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { BRAND } from "@/lib/constants";
@@ -13,6 +14,11 @@ import CorkPop from "@/components/ui/CorkPop";
  */
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  // Skip autoplay video on mobile — iOS Safari GPU memory crash
+  const [isMobile, setIsMobile] = useState(true); // default true (SSR-safe: no flash)
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
+  }, []);
 
   const scrollToContent = () => {
     document.getElementById("metrics")?.scrollIntoView({ behavior: "smooth" });
@@ -23,14 +29,14 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       aria-label="Hero"
     >
-      {/* ── Video background ─────────────────────────────────────────── */}
-      {!shouldReduceMotion && (
+      {/* ── Video background (desktop only) ──────────────────────────── */}
+      {!shouldReduceMotion && !isMobile && (
         <video
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           poster="/assets/prosecco-zero-rose.png"
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
@@ -39,8 +45,8 @@ export default function Hero() {
         </video>
       )}
 
-      {/* ── Reduced motion fallback ───────────────────────────────────── */}
-      {shouldReduceMotion && (
+      {/* ── Gradient fallback — mobile + reduced motion ───────────────── */}
+      {(shouldReduceMotion || isMobile) && (
         <div
           className="absolute inset-0"
           aria-hidden="true"
@@ -48,7 +54,7 @@ export default function Hero() {
             background: `
               radial-gradient(ellipse 70% 60% at 50% 35%, rgba(201,169,110,0.22) 0%, transparent 65%),
               radial-gradient(ellipse 50% 70% at 15% 80%, rgba(201,169,110,0.10) 0%, transparent 55%),
-              linear-gradient(160deg, #FAF7F2 0%, #F5F0E8 40%, #EDE4D3 100%)
+              linear-gradient(160deg, #1A1816 0%, #2A2520 40%, #0E0D0B 100%)
             `,
           }}
         />

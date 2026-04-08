@@ -15,6 +15,8 @@ export default function LoadingScreen() {
 
   useEffect(() => {
     if (shouldReduceMotion) return;
+    // Skip on mobile — SVG animations + hero loading causes GPU memory crash on iOS
+    if (window.innerWidth < 768 || "ontouchstart" in window) return;
     if (typeof sessionStorage === "undefined") return;
     if (sessionStorage.getItem("bb-loaded")) return;
     sessionStorage.setItem("bb-loaded", "1");
