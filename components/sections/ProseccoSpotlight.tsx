@@ -65,7 +65,7 @@ export default function ProseccoSpotlight() {
               {/* Prosecco Zero Rosé — 3D render video */}
               {shouldReduceMotion ? (
                 <Image
-                  src="/assets/prosecco-zero-rose.png"
+                  src="/assets/prosecco-extract-1.png"
                   alt="Prosecco Zero Rosé — blush bottle with black label and cherub graphic"
                   width={320}
                   height={480}
@@ -80,7 +80,7 @@ export default function ProseccoSpotlight() {
                   playsInline
                   className="w-full object-contain drop-shadow-xl"
                   style={{ maxHeight: 480 }}
-                  poster="/assets/prosecco-zero-rose.png"
+                  poster="/assets/prosecco-extract-1.png"
                 >
                   <source src="/assets/bottle-dolly.mp4" type="video/mp4" />
                 </video>

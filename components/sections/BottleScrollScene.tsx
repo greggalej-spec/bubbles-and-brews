@@ -62,7 +62,7 @@ export default function BottleScrollScene() {
       <section aria-label="Prosecco Zero bottle showcase">
         <div className="relative flex items-center justify-center py-24" style={{ backgroundColor: "var(--black)" }}>
           <Image
-            src="/assets/prosecco-zero-rose.png"
+            src="/assets/prosecco-extract-1.png"
             alt="Prosecco Zero Rosé bottle"
             width={320}
             height={480}
@@ -84,7 +84,7 @@ export default function BottleScrollScene() {
         {/* Static product image — no video on mobile */}
         <div
           className="w-full h-[60vw] min-h-[320px] bg-center bg-cover"
-          style={{ backgroundImage: "url('/assets/prosecco-zero-rose.png')", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}
+          style={{ backgroundImage: "url('/assets/prosecco-extract-1.png')", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}
           aria-hidden="true"
         />
 

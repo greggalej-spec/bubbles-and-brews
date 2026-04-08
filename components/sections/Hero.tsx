@@ -37,7 +37,7 @@ export default function Hero() {
           loop
           playsInline
           preload="metadata"
-          poster="/assets/prosecco-zero-rose.png"
+          poster="/assets/prosecco-extract-1.png"
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         >

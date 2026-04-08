@@ -64,7 +64,7 @@ export const OFFERINGS = [
     cta: "Book Bella for Your Event",
     type: "experience",
     video: "/assets/champagne-glass.mp4",
-    videoPoster: "/assets/prosecco-zero-rose.png",
+    videoPoster: "/assets/prosecco-extract-1.png",
     imagePlaceholder: false,
   },
   {
@@ -77,7 +77,7 @@ export const OFFERINGS = [
     cta: "Activate Porta-Bella at Your Venue",
     type: "product",
     video: "/assets/dolly-clean-2.mp4",
-    videoPoster: "/assets/prosecco-zero-rose.png",
+    videoPoster: "/assets/prosecco-extract-1.png",
     imagePlaceholder: false,
   },
   {
@@ -89,8 +89,8 @@ export const OFFERINGS = [
     useCases: ["Inclusive celebrations", "Health-conscious hosts", "Bridal events", "Keto-friendly"],
     cta: "Order for Your Event",
     type: "bottle",
-    image: "/assets/prosecco-zero-rose.png",
-    imageAlt: "Prosecco Zero Rosé — blush bottle with black label",
+    image: "/assets/prosecco-extract-1.png",
+    imageAlt: "Prosecco Zero — clear bottle with gold cap",
     imagePlaceholder: false,
   },
 ] as const;

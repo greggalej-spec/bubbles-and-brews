@@ -23,8 +23,8 @@ const VARIANTS = [
     tasting: "Strawberries and red berries. Intense and persistent, lively and silky.",
     abv: "11.5%",
     sugar: "2.8g / bottle",
-    image: "/assets/prosecco-zero-rose.png",
-    imageAlt: "Prosecco Zero Rosé — blush bottle with black label",
+    image: "/assets/prosecco-extract-1.png",
+    imageAlt: "Prosecco Zero Rosé — gold cap bottle",
   },
 ];
 

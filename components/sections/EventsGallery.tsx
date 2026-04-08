@@ -60,7 +60,7 @@ export default function EventsGallery() {
         {/* Editorial grid — real assets + typographic cells */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-[var(--gold-mid)]/15">
 
-          {/* Cell 1: Prosecco Zero Rosé (black label) — tall portrait */}
+          {/* Cell 1: Prosecco Zero — tall portrait */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -69,35 +69,35 @@ export default function EventsGallery() {
             style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "4/5" }}
           >
             <Image
-              src="/assets/prosecco-zero-rose.png"
-              alt="Prosecco Zero Rosé — blush bottle"
+              src="/assets/prosecco-extract-1.png"
+              alt="Prosecco Zero — clear bottle with gold cap"
               fill
               className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
               sizes="(max-width: 768px) 50vw, 33vw"
             />
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              style={{ background: "linear-gradient(to top, rgba(212,132,138,0.15), transparent)" }}
+              style={{ background: "linear-gradient(to top, rgba(201,169,110,0.15), transparent)" }}
               aria-hidden="true"
             />
             <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span className="text-xs tracking-widest uppercase text-[var(--rose)] border border-[var(--rose)]/40 px-3 py-1.5 bg-[var(--cream-light)]/90">
-                Prosecco Zero Rosé
+              <span className="text-xs tracking-widest uppercase text-[var(--gold-deep)] border border-[var(--gold-mid)]/40 px-3 py-1.5 bg-[var(--cream-light)]/90">
+                Prosecco Zero
               </span>
             </div>
           </motion.div>
 
-          {/* Cell 1b: Second rosé portrait */}
+          {/* Cell 1b: Second bottle portrait (mobile only) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="group relative overflow-hidden md:hidden"
-            style={{ backgroundColor: "color-mix(in srgb, var(--rose-light) 12%, var(--cream-dark))", aspectRatio: "4/5" }}
+            style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "4/5" }}
           >
             <Image
-              src="/assets/prosecco-zero-brut.png"
-              alt="Prosecco Rosé — blush bottle"
+              src="/assets/prosecco-extract-1.png"
+              alt="Prosecco Zero"
               fill
               className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
               sizes="50vw"
@@ -120,13 +120,13 @@ export default function EventsGallery() {
               playsInline
               preload="none"
               className="w-full h-full object-contain hidden md:block"
-              poster="/assets/prosecco-zero-rose.png"
+              poster="/assets/prosecco-extract-1.png"
             >
               <source src="/assets/slow-dolly-2.mp4" type="video/mp4" />
             </video>
             {/* Static poster for mobile */}
             <img
-              src="/assets/prosecco-zero-rose.png"
+              src="/assets/prosecco-extract-1.png"
               alt="Prosecco Zero"
               className="w-full h-full object-contain md:hidden"
               aria-hidden="true"
@@ -173,7 +173,7 @@ export default function EventsGallery() {
             </motion.div>
           ))}
 
-          {/* Dark brut bottle portrait */}
+          {/* Bottle portrait — dark editorial cell */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -182,8 +182,8 @@ export default function EventsGallery() {
             style={{ backgroundColor: "var(--charcoal)", aspectRatio: "1/1" }}
           >
             <Image
-              src="/assets/prosecco-extract-2.png"
-              alt="Prosecco Brut — dark bottle"
+              src="/assets/prosecco-extract-1.png"
+              alt="Prosecco Zero — gold cap bottle"
               fill
               className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
               sizes="33vw"
