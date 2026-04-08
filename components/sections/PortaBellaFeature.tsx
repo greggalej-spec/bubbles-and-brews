@@ -1,9 +1,8 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
-import PlaceholderAsset from "@/components/ui/PlaceholderAsset";
 
 const SPECS = [
   { label: "Keg Volume", value: "20 Litres" },
@@ -17,6 +16,10 @@ const SPECS = [
 export default function PortaBellaFeature() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const [isMobile, setIsMobile] = useState(true);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
+  }, []);
 
   return (
     <section
@@ -62,13 +65,31 @@ export default function PortaBellaFeature() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="relative overflow-hidden w-full"
+            style={{ aspectRatio: "4/5", backgroundColor: "var(--cream-dark)" }}
           >
-            <PlaceholderAsset
-              label="Porta-Bella Countertop Unit"
-              aspectRatio="4/5"
-              note="Client-supplied product photography in bar/restaurant setting"
-              className="w-full"
-            />
+            {/* Desktop: autoplay video */}
+            {!isMobile && (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="none"
+                className="w-full h-full object-cover"
+                aria-label="Porta-Bella countertop prosecco tap unit"
+              >
+                <source src="/assets/dolly-clean-1.mp4" type="video/mp4" />
+              </video>
+            )}
+            {/* Mobile: static product image */}
+            {isMobile && (
+              <img
+                src="/assets/prosecco-extract-1.png"
+                alt="Porta-Bella countertop tap system"
+                className="w-full h-full object-contain p-10"
+              />
+            )}
           </motion.div>
 
           {/* Specs + content */}

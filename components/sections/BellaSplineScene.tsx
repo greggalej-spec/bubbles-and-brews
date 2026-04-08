@@ -1,41 +1,23 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
 /**
- * Bella — 3D Spline showcase section.
- *
- * TO ACTIVATE:
- *   1. Get a GLB of the Bella bar (Meshy.ai image-to-3D, Sketchfab, or Blender)
- *   2. Import into Spline → add idle rotation + mouse-hover tilt
- *   3. Share → Publish → copy the scene URL
- *   4. Set SPLINE_URL below to that URL
- *   5. Run: npm install @splinetool/react-spline
- *   6. Uncomment the Spline import and swap the placeholder div
- *
- * FREE PLAN NOTE:
- *   Spline adds a watermark (~28px) at the bottom-right of the canvas.
- *   The clipPath wrapper below crops it out cleanly.
+ * Bella video showcase — replaces the Spline 3D placeholder.
+ * Uses dolly-out.mp4 — desktop autoplay, mobile shows static image.
  */
-
-// ── Paste your Spline URL here when ready ──────────────────────────────────
-const SPLINE_URL = "";
-// ──────────────────────────────────────────────────────────────────────────
-
-// import Spline from "@splinetool/react-spline";   ← uncomment after npm install
-
 export default function BellaSplineScene() {
-  const shouldReduceMotion = useReducedMotion();
-
-  // Hide entirely until a Spline scene is configured — no empty-promise UI
-  if (!SPLINE_URL) return null;
+  const [isMobile, setIsMobile] = useState(true);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
+  }, []);
 
   return (
     <section
       className="section-padding relative overflow-hidden"
       style={{ backgroundColor: "var(--cream)" }}
-      aria-label="Bella 3D showcase"
+      aria-label="Bella in action"
     >
       {/* Gold radial wash */}
       <div
@@ -61,41 +43,37 @@ export default function BellaSplineScene() {
           </h2>
         </MotionWrapper>
 
-        {/* 3D Scene slot */}
         <MotionWrapper delay={0.25}>
-          <div className="relative max-w-3xl mx-auto">
-            {SPLINE_URL && !shouldReduceMotion ? (
-              /* ── ACTIVE: Spline scene ───────────────────────────────── */
-              <div
-                className="w-full rounded-sm overflow-hidden"
-                style={{
-                  aspectRatio: "16/9",
-                  /* Crops the Spline watermark off the bottom */
-                  clipPath: "inset(0 0 32px 0)",
-                }}
-              >
-                {/*
-                 * Uncomment after: npm install @splinetool/react-spline
-                 * <Spline scene={SPLINE_URL} />
-                 */}
-              </div>
-            ) : (
-              /* ── PLACEHOLDER: shown until SPLINE_URL is set ─────────── */
-              <div
-                className="asset-placeholder w-full rounded-sm"
+          <div className="relative max-w-4xl mx-auto">
+
+            {/* Desktop: autoplay video */}
+            {!isMobile && (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="none"
+                className="w-full object-cover"
                 style={{ aspectRatio: "16/9" }}
+                aria-label="Bella mobile prosecco bar in action"
               >
-                <div className="flex flex-col items-center gap-3 p-8 text-center">
-                  <div className="w-12 h-12 rounded-full border border-[var(--gold-mid)]/40 flex items-center justify-center">
-                    <span className="text-[var(--gold-mid)] text-xl" aria-hidden="true">✦</span>
-                  </div>
-                  <p className="text-[var(--muted)] text-sm">
-                    3D Bella bar experience coming soon
-                  </p>
-                  <p className="text-[var(--muted-light)] text-xs max-w-xs">
-                    Paste a Spline scene URL into <code className="text-[var(--gold-mid)]">BellaSplineScene.tsx</code> to activate
-                  </p>
-                </div>
+                <source src="/assets/dolly-out.mp4" type="video/mp4" />
+              </video>
+            )}
+
+            {/* Mobile: static product image */}
+            {isMobile && (
+              <div
+                className="w-full flex items-center justify-center"
+                style={{ aspectRatio: "16/9", backgroundColor: "var(--cream-dark)" }}
+                aria-hidden="true"
+              >
+                <img
+                  src="/assets/prosecco-extract-1.png"
+                  alt=""
+                  className="h-full object-contain py-6"
+                />
               </div>
             )}
 
@@ -105,13 +83,6 @@ export default function BellaSplineScene() {
             <div className="absolute -bottom-3 -left-3 w-12 h-12 border-l border-b border-[var(--gold-mid)]/30" aria-hidden="true" />
             <div className="absolute -bottom-3 -right-3 w-12 h-12 border-r border-b border-[var(--gold-mid)]/30" aria-hidden="true" />
           </div>
-        </MotionWrapper>
-
-        {/* Caption */}
-        <MotionWrapper delay={0.4} className="text-center mt-8">
-          <p className="text-[var(--muted)] text-sm">
-            Interact with Bella — rotate, explore, fall in love.
-          </p>
         </MotionWrapper>
       </div>
     </section>
