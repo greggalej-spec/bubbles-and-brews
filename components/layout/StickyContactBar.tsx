@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BRAND } from "@/lib/constants";
 
@@ -69,7 +69,34 @@ export default function StickyContactBar() {
             >
               Book
             </Link>
+
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex flex-col items-center gap-1 text-[var(--gold-mid)] hover:text-[var(--gold-deep)] transition-colors"
+              aria-label="Back to top"
+            >
+              <ArrowUp size={18} />
+              <span className="text-xs tracking-widest uppercase">Top</span>
+            </button>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop: back to top — bottom-left */}
+      <AnimatePresence>
+        {visible && (
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="hidden md:flex fixed bottom-8 left-8 z-50 w-10 h-10 items-center justify-center border border-[var(--gold-mid)]/40 text-[var(--gold-mid)] hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-colors duration-300"
+            style={{ backgroundColor: "rgba(250,247,242,0.92)", backdropFilter: "blur(8px)" }}
+            aria-label="Back to top"
+          >
+            <ArrowUp size={14} />
+          </motion.button>
         )}
       </AnimatePresence>
 
