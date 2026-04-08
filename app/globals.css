@@ -157,6 +157,38 @@ body {
   background: linear-gradient(to right, transparent, var(--gold-mid), transparent);
 }
 
+/* ─── Champagne bubble rising animation ──────────────────────────────── */
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.85);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50vh) translateX(var(--bubble-wobble, 8px)) scale(1);
+  }
+  94% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-105vh) translateX(0) scale(0.9);
+    opacity: 0;
+  }
+}
+
+.bubble-rise {
+  animation-name: bubble-rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble-field-container { display: none; }
+}
+
 /* ─── Grain texture overlay ──────────────────────────────────────────── */
 .grain::after {
   content: '';

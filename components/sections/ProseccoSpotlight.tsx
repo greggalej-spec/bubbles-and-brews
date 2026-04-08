@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import BottleScene3D from "@/components/ui/BottleScene3D";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
@@ -17,9 +17,23 @@ import MotionWrapper from "@/components/ui/MotionWrapper";
  *
  * LIGHT PALETTE: warm white bg, charcoal text, gold accents.
  */
+// Mini rising bubbles that appear around the bottle when section enters view
+const BOTTLE_BUBBLES = [
+  { id: 0, left: "18%",  delay: 0.2,  dur: 3.2, size: 6 },
+  { id: 1, left: "28%",  delay: 0.8,  dur: 4.0, size: 4 },
+  { id: 2, left: "38%",  delay: 0.0,  dur: 3.6, size: 7 },
+  { id: 3, left: "50%",  delay: 1.1,  dur: 2.8, size: 5 },
+  { id: 4, left: "62%",  delay: 0.5,  dur: 4.4, size: 4 },
+  { id: 5, left: "74%",  delay: 1.6,  dur: 3.0, size: 6 },
+  { id: 6, left: "22%",  delay: 2.0,  dur: 3.8, size: 5 },
+  { id: 7, left: "45%",  delay: 1.4,  dur: 3.4, size: 4 },
+  { id: 8, left: "68%",  delay: 0.7,  dur: 4.2, size: 7 },
+];
+
 export default function ProseccoSpotlight() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section
@@ -58,6 +72,37 @@ export default function ProseccoSpotlight() {
               {/* Decorative concentric rings — Nyetimber-inspired */}
               <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border border-[var(--gold-mid)]/20" aria-hidden="true" />
               <div className="absolute -bottom-3 -right-3 w-20 h-20 rounded-full border border-[var(--gold-mid)]/35" aria-hidden="true" />
+
+              {/* Bottle reveal bubbles — rise from below the bottle when section enters */}
+              {!shouldReduceMotion && isInView && (
+                <div className="absolute inset-x-0 bottom-0 h-[120%] overflow-visible pointer-events-none" aria-hidden="true">
+                  {BOTTLE_BUBBLES.map((b) => (
+                    <motion.div
+                      key={b.id}
+                      className="absolute rounded-full border border-[var(--gold-mid)]"
+                      style={{
+                        left: b.left,
+                        bottom: "-10px",
+                        width: b.size,
+                        height: b.size,
+                        opacity: 0,
+                      }}
+                      animate={{
+                        y: [0, -180, -320],
+                        opacity: [0, 0.45, 0],
+                        scale: [0.6, 1, 0.7],
+                      }}
+                      transition={{
+                        duration: b.dur,
+                        delay: b.delay,
+                        repeat: Infinity,
+                        repeatDelay: 1.5,
+                        ease: "easeOut",
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
 

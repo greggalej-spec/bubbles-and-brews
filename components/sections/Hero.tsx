@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { BRAND } from "@/lib/constants";
+import CorkPop from "@/components/ui/CorkPop";
 
 /**
  * Hero section — champagne/cream gradient, dark editorial text.
@@ -141,6 +142,9 @@ export default function Hero() {
       <div className="absolute top-8 right-8 w-16 h-16 border-r border-t border-[var(--gold-mid)]/30" aria-hidden="true" />
       <div className="absolute bottom-8 left-8 w-16 h-16 border-l border-b border-[var(--gold-mid)]/30" aria-hidden="true" />
       <div className="absolute bottom-8 right-8 w-16 h-16 border-r border-b border-[var(--gold-mid)]/30" aria-hidden="true" />
+
+      {/* Cork pop — plays once after hero text settles */}
+      <CorkPop />
     </section>
   );
 }
