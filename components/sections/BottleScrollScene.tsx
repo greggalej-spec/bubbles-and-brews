@@ -85,7 +85,7 @@ export default function BottleScrollScene() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
           poster="/assets/prosecco-zero-rose.png"
           className="w-full h-[60vw] min-h-[320px] object-cover"
           aria-hidden="true"
@@ -145,7 +145,7 @@ export default function BottleScrollScene() {
           src="/assets/slow-dolly-1.mp4"
           muted
           playsInline
-          preload="auto"
+          preload="none"
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         />

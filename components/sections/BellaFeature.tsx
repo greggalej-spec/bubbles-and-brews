@@ -105,7 +105,7 @@ export default function BellaFeature() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
           className="absolute inset-0 w-full h-full object-cover opacity-60"
           aria-hidden="true"
         >

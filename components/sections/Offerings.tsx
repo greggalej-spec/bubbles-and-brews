@@ -125,6 +125,7 @@ function OfferingCard({
             muted
             loop
             playsInline
+            preload="none"
             poster={(offering as { videoPoster?: string }).videoPoster}
             className="w-full h-full object-cover"
             aria-hidden="true"

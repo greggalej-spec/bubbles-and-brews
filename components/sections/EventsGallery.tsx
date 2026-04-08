@@ -117,6 +117,7 @@ export default function EventsGallery() {
               muted
               loop
               playsInline
+              preload="none"
               className="w-full h-full object-contain"
               poster="/assets/prosecco-zero-rose.png"
             >
