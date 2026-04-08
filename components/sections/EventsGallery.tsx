@@ -60,7 +60,7 @@ export default function EventsGallery() {
         {/* Editorial grid — real assets + typographic cells */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-[var(--gold-mid)]/15">
 
-          {/* Cell 1: Rosé bottle — tall portrait */}
+          {/* Cell 1: Prosecco Zero Rosé (black label) — tall portrait */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -87,6 +87,23 @@ export default function EventsGallery() {
             </div>
           </motion.div>
 
+          {/* Cell 1b: Second rosé portrait */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative overflow-hidden md:hidden"
+            style={{ backgroundColor: "color-mix(in srgb, var(--rose-light) 12%, var(--cream-dark))", aspectRatio: "4/5" }}
+          >
+            <Image
+              src="/assets/prosecco-zero-brut.png"
+              alt="Prosecco Rosé — blush bottle"
+              fill
+              className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
+              sizes="50vw"
+            />
+          </motion.div>
+
           {/* Cell 2: Bottle video — wide landscape */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
@@ -103,7 +120,7 @@ export default function EventsGallery() {
               className="w-full h-full object-contain"
               poster="/assets/prosecco-zero-rose.png"
             >
-              <source src="/assets/bottle-dolly.mp4" type="video/mp4" />
+              <source src="/assets/slow-dolly-2.mp4" type="video/mp4" />
             </video>
             <div
               className="absolute inset-0 pointer-events-none"
@@ -146,6 +163,23 @@ export default function EventsGallery() {
               </span>
             </motion.div>
           ))}
+
+          {/* Dark brut bottle portrait */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.30, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative overflow-hidden hidden md:block"
+            style={{ backgroundColor: "var(--charcoal)", aspectRatio: "1/1" }}
+          >
+            <Image
+              src="/assets/prosecco-extract-2.png"
+              alt="Prosecco Brut — dark bottle"
+              fill
+              className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
+              sizes="33vw"
+            />
+          </motion.div>
 
           {/* Instagram CTA cell */}
           <motion.div

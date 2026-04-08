@@ -1,38 +1,36 @@
 import Hero from "@/components/sections/Hero";
+import MetricsCounter from "@/components/sections/MetricsCounter";
 import Tagline from "@/components/sections/Tagline";
 import Offerings from "@/components/sections/Offerings";
 import BellaFeature from "@/components/sections/BellaFeature";
-import ProseccoSpotlight from "@/components/sections/ProseccoSpotlight";
 import BottleScrollScene from "@/components/sections/BottleScrollScene";
 import EventsGallery from "@/components/sections/EventsGallery";
-import MetricsCounter from "@/components/sections/MetricsCounter";
 import ContactCTA from "@/components/sections/ContactCTA";
 
 /**
- * Homepage — Direction 1: "The Golden Hour"
- * Editorial luxury. Premium spacing. Intentional motion.
+ * Homepage — "The Golden Hour"
+ * Story arc: Invitation → Proof → Belief → Collection → Star → Product → World → Action
  *
  * Section order:
- *  1. Hero           — immediate visual impact + primary CTAs
- *  2. Tagline        — brand positioning statement
- *  3. Offerings      — full product/service overview grid
- *  4. Bella Feature  — cinematic split-screen for the star offering
- *  5. Prosecco Zero  — product spotlight with floating visual
- *  6. Events Gallery — social proof + atmosphere
- *  7. Metrics        — credibility counter block
- *  8. Contact CTA    — conversion finish line
+ *  1. Hero           — cinematic entrance, the invitation
+ *  2. MetricsCounter — immediate proof, credibility
+ *  3. Tagline        — brand belief statement
+ *  4. Offerings      — the full collection: Bella, Porta-Bella, Bottles
+ *  5. Bella Feature  — cinematic deep-dive on the star offering
+ *  6. Bottle Scroll  — Prosecco Zero product reveal with scroll scrub
+ *  7. Events Gallery — the world they've created, social proof
+ *  8. Contact CTA    — the invitation to join
  */
 export default function HomePage() {
   return (
     <>
       <Hero />
+      <MetricsCounter />
       <Tagline />
       <Offerings />
       <BellaFeature />
-      <ProseccoSpotlight />
       <BottleScrollScene />
       <EventsGallery />
-      <MetricsCounter />
       <ContactCTA />
     </>
   );

@@ -5,13 +5,12 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import PlaceholderAsset from "@/components/ui/PlaceholderAsset";
 import { OFFERINGS } from "@/lib/constants";
 
 const typeLabel: Record<string, string> = {
-  bottle:     "Product",
+  bottle:     "Bottle",
   experience: "Experience",
-  product:    "Equipment",
+  product:    "On Tap",
 };
 
 export default function Offerings() {
@@ -76,19 +75,19 @@ function OfferingCard({
         delay: 0.1 + index * 0.12,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="group p-8 md:p-10 flex flex-col gap-6 relative overflow-hidden transition-colors duration-500"
+      className="group p-10 md:p-14 flex flex-col gap-8 relative overflow-hidden transition-colors duration-500"
       style={{
-        backgroundColor: offering.id === "prosecco-zero-rose" ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))" : "var(--cream-light)",
+        backgroundColor: offering.id === "bottles" ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))" : "var(--cream-light)",
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.backgroundColor =
-          offering.id === "prosecco-zero-rose"
+          offering.id === "bottles"
             ? "color-mix(in srgb, var(--rose-light) 15%, var(--cream))"
             : "var(--cream)";
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.backgroundColor =
-          offering.id === "prosecco-zero-rose"
+          offering.id === "bottles"
             ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))"
             : "var(--cream-light)";
       }}
@@ -96,7 +95,7 @@ function OfferingCard({
       {/* Hover accent line — rose for rosé card, gold for others */}
       <div
         className="absolute top-0 left-0 right-0 h-px scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
-        style={{ backgroundColor: offering.id === "prosecco-zero-rose" ? "var(--rose)" : "var(--gold-mid)" }}
+        style={{ backgroundColor: offering.id === "bottles" ? "var(--rose)" : "var(--gold-mid)" }}
         aria-hidden="true"
       />
 
@@ -109,7 +108,7 @@ function OfferingCard({
       {"image" in offering && offering.image ? (
         <div
           className="relative w-full overflow-hidden"
-          style={{ aspectRatio: offering.type === "bottle" ? "3/4" : "16/9" }}
+          style={{ aspectRatio: "3/4" }}
         >
           <Image
             src={offering.image as string}
@@ -119,14 +118,27 @@ function OfferingCard({
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
-      ) : (
-        <PlaceholderAsset
-          label={`${offering.name} — Visual`}
-          aspectRatio={offering.type === "bottle" ? "3/4" : "16/9"}
-          note="Awaiting client-supplied or Instagram-derived image"
-          className="w-full"
-        />
-      )}
+      ) : "video" in offering && offering.video ? (
+        <div className="relative w-full overflow-hidden" style={{ aspectRatio: "3/4" }}>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={(offering as { videoPoster?: string }).videoPoster}
+            className="w-full h-full object-cover"
+            aria-hidden="true"
+          >
+            <source src={offering.video as string} type="video/mp4" />
+          </video>
+          {/* Subtle overlay for depth */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, transparent 60%, rgba(14,13,11,0.3))" }}
+            aria-hidden="true"
+          />
+        </div>
+      ) : null}
 
       {/* Content */}
       <div className="flex flex-col gap-3">

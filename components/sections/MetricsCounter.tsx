@@ -12,6 +12,7 @@ import { METRICS } from "@/lib/constants";
 export default function MetricsCounter() {
   return (
     <section
+      id="metrics"
       className="section-padding relative overflow-hidden"
       style={{ backgroundColor: "var(--black)" }}
       aria-labelledby="metrics-heading"

@@ -43,76 +43,54 @@ export const METRICS = [
 /* ─── Navigation links ───────────────────────────────────────────────── */
 export const NAV_LINKS = [
   { label: "Offerings", href: "/#offerings" },
-  { label: "Bella", href: "/offerings/bella" },
-  /* Events page not yet built — restore when /events page is created:
-     { label: "Events", href: "/events" }, */
   { label: "Contact", href: "/contact" },
+];
+
+export const OFFERING_LINKS = [
+  { label: "Bella", href: "/offerings/bella", desc: "Mobile prosecco bar" },
+  { label: "Porta-Bella", href: "/offerings/porta-bella", desc: "Countertop tap system" },
+  { label: "Bottles", href: "/offerings/bottles", desc: "Prosecco Zero collection" },
 ];
 
 /* ─── Offerings data ─────────────────────────────────────────────────── */
 export const OFFERINGS = [
   {
-    id: "prosecco-zero",
-    name: "Prosecco Zero",
-    pitch: "All the sparkle. Zero compromise.",
-    description:
-      "Prosecco Zero delivers the full celebration experience without the alcohol — perfectly crisp, beautifully effervescent, and indistinguishable in elegance. The premium choice for the mindfully sober and the style-conscious alike.",
-    useCases: ["Inclusive celebrations", "Daytime events", "Wellness gatherings"],
-    cta: "Order for Your Event",
-    type: "bottle",
-    /*
-     * ASSET PLACEHOLDER: Product cutout bottle image
-     * Source: Client-supplied or distributor media
-     * Style: Clean product shot on white/gold background with macro bubbles
-     * Status: Awaiting client asset delivery
-     */
-    imagePlaceholder: true,
-  },
-  {
-    id: "prosecco-zero-rose",
-    name: "Prosecco Zero Rosé",
-    pitch: "Blush. Bubbles. Beautiful.",
-    description:
-      "A blush-toned elegance in the zero-alcohol experience. Delicate, romantic, and visually stunning in the glass — the perfect pour for bridal events, intimate celebrations, and those who want their glass to match the moment.",
-    useCases: ["Bridal showers", "Intimate dinners", "Photography-ready events"],
-    cta: "Inquire About Availability",
-    type: "bottle",
-    image: "/assets/prosecco-zero-rose.png",
-    imageAlt: "Prosecco Zero Rosé — blush bottle with black label and cherub graphic",
-    imagePlaceholder: false,
-  },
-  {
     id: "bella",
     name: "Bella",
     pitch: "She arrives. The room notices.",
     description:
-      "Bella is a luxury vintage mobile prosecco bar — a fully curated, visually stunning service unit that becomes the centrepiece of your event. Designed for upscale weddings, brand activations, and premium private functions. She serves on tap. She makes memories.",
-    useCases: ["Weddings", "Corporate events", "Brand activations", "Luxury parties"],
+      "An imported Italian carbonated wine cart — Bella is a fully curated, visually stunning luxury mobile prosecco bar that becomes the centrepiece of your event. Vintage-styled, bespoke-branded, and serving prosecco on tap. She transforms any occasion into an experience people remember.",
+    useCases: ["Weddings", "Corporate activations", "Brand events", "Luxury parties"],
     cta: "Book Bella for Your Event",
     type: "experience",
-    /*
-     * ASSET PLACEHOLDER: Bella bar in-situ event photography
-     * Source: @bubblesandbrewsco Instagram / Client-supplied
-     * Style: Warm editorial lifestyle — Bella as room centrepiece
-     * Status: Instagram-derivable, confirm hi-res versions with client
-     */
-    imagePlaceholder: true,
+    video: "/assets/champagne-glass.mp4",
+    videoPoster: "/assets/prosecco-zero-rose.png",
+    imagePlaceholder: false,
   },
   {
     id: "porta-bella",
     name: "Porta-Bella",
-    pitch: "Prosecco on tap. Wherever you need it.",
+    pitch: "Prosecco on tap. Wherever you are.",
     description:
-      "A countertop prosecco tap system for permanent or temporary venue installation. Offer guests something they've never seen before — prosecco, always fresh, always perfectly poured, directly from tap. Available for restaurants, bars, and home functions.",
-    useCases: ["Restaurants & bars", "Hotels", "Home bar installations", "Recurring venues"],
+      "A portable countertop prosecco tap system, imported from Italy and bespokely branded — new to the Caribbean market. Uses the same 20-litre pressurised keg as Bella (equivalent to 27+ bottles), always sealed and temperature-controlled. Available for permanent restaurant install or event rental. Limited to 5 units.",
+    useCases: ["Restaurants & bars", "Hotels", "Recurring venues", "Corporate offices"],
     cta: "Activate Porta-Bella at Your Venue",
     type: "product",
-    /*
-     * ASSET PLACEHOLDER: Porta-Bella countertop product photo
-     * Source: Client-supplied
-     * Style: Clean product shot in bar/restaurant setting
-     * Status: Awaiting client asset delivery
-     */
-    imagePlaceholder: true,
+    video: "/assets/dolly-clean-2.mp4",
+    videoPoster: "/assets/prosecco-zero-rose.png",
+    imagePlaceholder: false,
   },
-];
+  {
+    id: "bottles",
+    name: "Prosecco Zero",
+    pitch: "All the flavor. Zero the guilt.",
+    description:
+      "From Peninsula Winery — the world's lowest-sugar prosecco. Just 2.8g per bottle versus 25g+ in standard prosecco. Crafted from premium Glera grapes in Italy's Friuli Venezia Giulia region using a novel fermentation approach. Available in Brut (floral, fresh, crisp) and Rosé (strawberries, red berries, lively and silky).",
+    useCases: ["Inclusive celebrations", "Health-conscious hosts", "Bridal events", "Keto-friendly"],
+    cta: "Order for Your Event",
+    type: "bottle",
+    image: "/assets/prosecco-zero-rose.png",
+    imageAlt: "Prosecco Zero Rosé — blush bottle with black label",
+    imagePlaceholder: false,
+  },
+] as const;

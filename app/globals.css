@@ -40,7 +40,7 @@
   --text-small:   0.875rem;
 
   /* Spacing rhythm — mobile-first clamp values */
-  --section-gap:  clamp(4rem, 10vw, 10rem);   /* tighter on mobile */
+  --section-gap:  clamp(5rem, 12vw, 12rem);   /* generous editorial breathing room */
   --content-max:  1400px;
   --content-wide: 1200px;
   --content-mid:  900px;
@@ -122,6 +122,13 @@ body {
   outline-offset: 3px;
 }
 
+/* ─── Cursor pointers on all interactive elements ────────────────────── */
+a, button, [role="button"], label[for], select,
+input[type="submit"], input[type="button"], input[type="reset"],
+.btn {
+  cursor: pointer;
+}
+
 /* ─── Reduced motion — respect user preference ───────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -160,9 +167,58 @@ body {
   max-width: var(--content-max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1.5rem, 4vw, 4rem);
-  padding-right: clamp(1.5rem, 4vw, 4rem);
+  padding-left: clamp(2rem, 5vw, 5rem);
+  padding-right: clamp(2rem, 5vw, 5rem);
 }
+
+/* ─── Button utilities ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.125rem 2.5rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.35s var(--ease-luxury);
+  position: relative;
+  overflow: hidden;
+  min-height: 52px;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--gold-deep);
+  color: var(--cream-light);
+  border: 1px solid transparent;
+}
+.btn-primary:hover { background-color: var(--gold-accent); }
+
+.btn-outline-dark {
+  border: 1px solid rgba(26, 24, 22, 0.25);
+  color: var(--charcoal-mid);
+}
+.btn-outline-dark:hover {
+  border-color: var(--gold-deep);
+  color: var(--gold-deep);
+}
+
+.btn-outline-light {
+  border: 1px solid rgba(250, 250, 248, 0.3);
+  color: rgba(250, 250, 248, 0.85);
+}
+.btn-outline-light:hover {
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+}
+
+.btn-dark {
+  background-color: var(--charcoal);
+  color: var(--cream-light);
+  border: 1px solid transparent;
+}
+.btn-dark:hover { background-color: var(--gold-deep); }
 
 /* ─── Gold divider ───────────────────────────────────────────────────── */
 .divider-gold {

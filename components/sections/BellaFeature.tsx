@@ -82,31 +82,48 @@ export default function BellaFeature() {
           </MotionWrapper>
 
           <MotionWrapper delay={0.62}>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-[var(--charcoal)] text-[var(--cream-light)] text-sm tracking-wider font-medium relative overflow-hidden hover:bg-[var(--gold-deep)] transition-colors duration-300"
-            >
-              <span
-                className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"
-                style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)" }}
-                aria-hidden="true"
-              />
-              <span className="relative">Book Bella for Your Event</span>
+            <div className="flex flex-col sm:flex-row gap-4">
+            <Link href="/contact" className="btn btn-dark">
+              Book Bella for Your Event
             </Link>
+            <Link href="/offerings/bella" className="btn btn-outline-dark">
+              Learn More
+            </Link>
+            </div>
           </MotionWrapper>
         </div>
       </div>
 
-      {/* ── Right: Editorial dark panel ──────────────────────────────── */}
+      {/* ── Right: Video panel ───────────────────────────────────────── */}
       <div
         className="relative overflow-hidden min-h-[60vw] sm:min-h-[50vh] lg:min-h-0 flex items-center justify-center"
         style={{ backgroundColor: "var(--black)" }}
       >
+        {/* Background video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
+          aria-hidden="true"
+        >
+          <source src="/assets/animate-frames.mp4" type="video/mp4" />
+        </video>
+
+        {/* Dark overlay — ensures text remains readable */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "rgba(14,13,11,0.55)" }}
+          aria-hidden="true"
+        />
+
         {/* Champagne radial glow */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse 80% 70% at 60% 40%, rgba(201,169,110,0.07) 0%, transparent 65%)",
+            background: "radial-gradient(ellipse 80% 70% at 60% 40%, rgba(201,169,110,0.10) 0%, transparent 65%)",
           }}
           aria-hidden="true"
         />

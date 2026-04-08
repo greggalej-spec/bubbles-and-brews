@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import StickyContactBar from "@/components/layout/StickyContactBar";
 import BubbleField from "@/components/ui/BubbleField";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -50,6 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body>
+        <LoadingScreen />
         <BubbleField />
         <Navbar />
         <main>{children}</main>
