@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
@@ -16,6 +15,9 @@ const typeLabel: Record<string, string> = {
 export default function Offerings() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+
+  const hero = OFFERINGS[0];
+  const secondaries = OFFERINGS.slice(1);
 
   return (
     <section
@@ -52,10 +54,23 @@ export default function Offerings() {
         </motion.div>
       </div>
 
-      {/* Showcase rows — full section width, alternating layout */}
-      {OFFERINGS.map((offering, i) => (
-        <ShowcaseRow key={offering.id} offering={offering} index={i} inView={isInView} />
-      ))}
+      {/* Gallery — asymmetric: Bella hero left, secondaries stacked right */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col md:flex-row border-t border-[var(--gold-mid)]/20"
+      >
+        {/* Hero — Bella (65% width on desktop) */}
+        <HeroCard offering={hero} inView={isInView} />
+
+        {/* Secondaries stacked (35% width on desktop) */}
+        <div className="w-full md:w-[35%] flex flex-col divide-y divide-[var(--gold-mid)]/20 border-t md:border-t-0 md:border-l border-[var(--gold-mid)]/20">
+          {secondaries.map((offering, i) => (
+            <SecondaryCard key={offering.id} offering={offering} index={i} inView={isInView} />
+          ))}
+        </div>
+      </motion.div>
 
       {/* Bottom spacing */}
       <div style={{ height: "var(--section-gap)" }} />
@@ -63,114 +78,67 @@ export default function Offerings() {
   );
 }
 
-function ShowcaseRow({
+function HeroCard({
   offering,
-  index,
   inView,
 }: {
   offering: (typeof OFFERINGS)[number];
-  index: number;
   inView: boolean;
 }) {
-  const isReversed = index % 2 !== 0;
-  const isRose = offering.id === "bottles";
-  const textBg = index % 2 === 0 ? "var(--cream-light)" : "var(--cream)";
-
   return (
     <motion.article
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.9,
-        delay: 0.15 + index * 0.15,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className={`flex flex-col ${isReversed ? "md:flex-row-reverse" : "md:flex-row"} border-t border-[var(--gold-mid)]/20`}
-      style={{ minHeight: "480px" }}
+      initial={{ opacity: 0, scale: 1.02 }}
+      animate={inView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 1.2, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      className="relative w-full md:w-[65%] overflow-hidden"
+      style={{ minHeight: "clamp(420px, 60vh, 680px)" }}
     >
-      {/* Visual half — fills its side edge to edge */}
-      <div
-        className="relative w-full md:w-1/2 overflow-hidden"
-        style={{
-          minHeight: "320px",
-          backgroundColor: isRose
-            ? "color-mix(in srgb, var(--rose-light) 12%, var(--cream))"
-            : "var(--cream-dark)",
-        }}
-      >
-        {"video" in offering && offering.video ? (
-          <>
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              poster={(offering as { videoPoster?: string }).videoPoster}
-              className="absolute inset-0 w-full h-full object-cover"
-              aria-hidden="true"
-            >
-              <source src={offering.video as string} type="video/mp4" />
-            </video>
-            {/* Subtle cinematic gradient */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: `linear-gradient(${isReversed ? "to right" : "to left"}, rgba(14,13,11,0.18) 0%, transparent 50%)`,
-              }}
-              aria-hidden="true"
-            />
-          </>
-        ) : "image" in offering && offering.image ? (
-          <Image
-            src={offering.image as string}
-            alt={(offering as { imageAlt?: string; name: string }).imageAlt ?? offering.name}
-            fill
-            className="object-contain p-10 md:p-16"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        ) : null}
-      </div>
+      {/* Cinematic video fill */}
+      {"video" in offering && offering.video && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          poster={(offering as { videoPoster?: string }).videoPoster}
+          className="absolute inset-0 w-full h-full object-cover"
+          aria-hidden="true"
+        >
+          <source src={offering.video as string} type="video/mp4" />
+        </video>
+      )}
 
-      {/* Text half */}
+      {/* Dark gradient overlay — heavier on left where text lives */}
       <div
-        className="w-full md:w-1/2 flex flex-col justify-center gap-6 p-10 md:p-16 lg:p-20"
-        style={{ backgroundColor: textBg }}
-      >
-        {/* Type badge */}
-        <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-deep)] border border-[var(--gold-mid)]/40 px-4 py-2 w-fit">
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(14,13,11,0.72) 0%, rgba(14,13,11,0.45) 50%, rgba(14,13,11,0.15) 100%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Text content — overlaid on dark */}
+      <div className="absolute inset-0 flex flex-col justify-end p-10 md:p-14 lg:p-16">
+        <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-light)] border border-[var(--gold-light)]/40 px-4 py-2 w-fit mb-8">
           {typeLabel[offering.type]}
         </span>
 
-        {/* Name */}
         <h3
-          className="font-display font-light text-[var(--charcoal)] leading-tight"
-          style={{ fontSize: "var(--text-section)" }}
+          className="font-display font-light text-[var(--cream-light)] leading-tight mb-4"
+          style={{ fontSize: "var(--text-display)" }}
         >
           {offering.name}
         </h3>
 
-        {/* Pitch */}
-        <p className="text-[var(--gold-deep)] text-base italic font-display leading-relaxed">
+        <p className="text-[var(--gold-light)] text-base italic font-display leading-relaxed mb-10">
           {offering.pitch}
         </p>
 
-        {/* Use cases */}
-        <div className="flex flex-wrap gap-2">
-          {offering.useCases.map((uc) => (
-            <span
-              key={uc}
-              className="text-xs text-[var(--muted)] border border-[var(--charcoal)]/10 px-3 py-1.5"
-            >
-              {uc}
-            </span>
-          ))}
-        </div>
-
-        {/* CTA */}
         <Link
           href={`/offerings/${offering.id}`}
-          className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--gold-deep)] hover:text-[var(--gold-accent)] transition-colors group/link min-h-[44px] w-fit"
+          className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--cream-light)] hover:text-[var(--gold-light)] transition-colors group/link min-h-[44px] w-fit"
         >
           <span>{offering.cta}</span>
           <ArrowRight
@@ -179,6 +147,62 @@ function ShowcaseRow({
           />
         </Link>
       </div>
+    </motion.article>
+  );
+}
+
+function SecondaryCard({
+  offering,
+  index,
+  inView,
+}: {
+  offering: (typeof OFFERINGS)[number];
+  index: number;
+  inView: boolean;
+}) {
+  const isRose = offering.id === "bottles";
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, x: 20 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{
+        duration: 0.8,
+        delay: 0.4 + index * 0.15,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className="flex-1 flex flex-col justify-center gap-6 p-10 md:p-12"
+      style={{
+        backgroundColor: isRose
+          ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))"
+          : "var(--cream-light)",
+      }}
+    >
+      <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-deep)] border border-[var(--gold-mid)]/40 px-4 py-2 w-fit">
+        {typeLabel[offering.type]}
+      </span>
+
+      <h3
+        className="font-display font-light text-[var(--charcoal)] leading-tight"
+        style={{ fontSize: "var(--text-section)" }}
+      >
+        {offering.name}
+      </h3>
+
+      <p className="text-[var(--gold-deep)] text-base italic font-display leading-relaxed">
+        {offering.pitch}
+      </p>
+
+      <Link
+        href={`/offerings/${offering.id}`}
+        className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--gold-deep)] hover:text-[var(--gold-accent)] transition-colors group/link min-h-[44px] w-fit"
+      >
+        <span>{offering.cta}</span>
+        <ArrowRight
+          size={14}
+          className="translate-x-0 group-hover/link:translate-x-1 transition-transform duration-300"
+        />
+      </Link>
     </motion.article>
   );
 }
