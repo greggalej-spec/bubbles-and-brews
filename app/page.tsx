@@ -3,6 +3,7 @@ import Tagline from "@/components/sections/Tagline";
 import Offerings from "@/components/sections/Offerings";
 import BellaFeature from "@/components/sections/BellaFeature";
 import ProseccoSpotlight from "@/components/sections/ProseccoSpotlight";
+import BottleScrollScene from "@/components/sections/BottleScrollScene";
 import EventsGallery from "@/components/sections/EventsGallery";
 import MetricsCounter from "@/components/sections/MetricsCounter";
 import ContactCTA from "@/components/sections/ContactCTA";
@@ -29,6 +30,7 @@ export default function HomePage() {
       <Offerings />
       <BellaFeature />
       <ProseccoSpotlight />
+      <BottleScrollScene />
       <EventsGallery />
       <MetricsCounter />
       <ContactCTA />
