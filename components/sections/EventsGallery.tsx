@@ -5,13 +5,11 @@ import Link from "next/link";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import { BRAND } from "@/lib/constants";
+import { BRAND, METRICS } from "@/lib/constants";
 
-const STAT_CELLS = [
-  { value: "1,200+", label: "Bottles Served" },
-  { value: "85+",    label: "Events Hosted" },
-  { value: "18,500+", label: "Glasses Poured" },
-];
+const STAT_CELLS = METRICS
+  .filter(m => m.label !== "Venues Activated")
+  .map(m => ({ value: m.value.toLocaleString("en-US") + m.suffix, label: m.label }));
 
 export default function EventsGallery() {
   const ref = useRef<HTMLElement>(null);
@@ -50,7 +48,7 @@ export default function EventsGallery() {
               href={BRAND.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm tracking-widest uppercase text-[var(--gold-deep)] hover:text-[var(--gold-accent)] transition-colors border-b border-[var(--gold-mid)]/50 hover:border-[var(--gold-accent)] pb-1"
+              className="inline-flex items-center gap-2 text-sm tracking-widest uppercase text-[var(--gold-deep)] hover:text-[var(--gold-accent)] transition-colors border-b border-[var(--gold-mid)]/50 hover:border-[var(--gold-accent)] pb-1 min-h-[44px]"
             >
               See More on Instagram
             </Link>

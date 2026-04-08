@@ -33,7 +33,7 @@ export default function StickyContactBar() {
           >
             <a
               href={`tel:${BRAND.phone}`}
-              className="flex flex-col items-center gap-1 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors"
+              className="flex flex-col items-center justify-center gap-1 min-h-[44px] px-3 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors"
               aria-label="Call us"
             >
               <Phone size={18} />
@@ -44,7 +44,7 @@ export default function StickyContactBar() {
               href={BRAND.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-1 text-[#22a852] hover:opacity-80 transition-opacity"
+              className="flex flex-col items-center justify-center gap-1 min-h-[44px] px-3 text-[#22a852] hover:opacity-80 transition-opacity"
               aria-label="Chat on WhatsApp"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -56,7 +56,7 @@ export default function StickyContactBar() {
 
             <a
               href={`mailto:${BRAND.email}`}
-              className="flex flex-col items-center gap-1 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors"
+              className="flex flex-col items-center justify-center gap-1 min-h-[44px] px-3 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors"
               aria-label="Email us"
             >
               <Mail size={18} />
@@ -65,7 +65,7 @@ export default function StickyContactBar() {
 
             <Link
               href="/contact"
-              className="px-4 py-2 bg-[var(--charcoal)] text-[var(--cream-light)] text-xs tracking-widest uppercase font-medium hover:bg-[var(--gold-deep)] transition-colors"
+              className="px-4 min-h-[44px] flex items-center bg-[var(--charcoal)] text-[var(--cream-light)] text-xs tracking-widest uppercase font-medium hover:bg-[var(--gold-deep)] transition-colors"
             >
               Book
             </Link>

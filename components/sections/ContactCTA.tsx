@@ -92,14 +92,14 @@ export default function ContactCTA() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
               <a
                 href={`tel:${BRAND.phone}`}
-                className="flex items-center gap-3 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors"
+                className="flex items-center gap-3 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors min-h-[44px] px-2"
               >
                 <Phone size={16} className="text-[var(--gold-mid)]" />
                 <span className="text-sm tracking-wide">{BRAND.phone}</span>
               </a>
               <a
                 href={`mailto:${BRAND.email}`}
-                className="flex items-center gap-3 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors"
+                className="flex items-center gap-3 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors min-h-[44px] px-2"
               >
                 <Mail size={16} className="text-[var(--gold-mid)]" />
                 <span className="text-sm tracking-wide">{BRAND.email}</span>

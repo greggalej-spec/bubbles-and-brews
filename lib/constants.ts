@@ -14,30 +14,10 @@ export const BRAND = {
 
 /* ─── Placeholder metrics (replace with real data when available) ─────── */
 export const METRICS = [
-  {
-    label: "Bottles Served",
-    value: 1200,
-    suffix: "+",
-    /* PLACEHOLDER: Replace with actual cumulative bottles sold/served */
-  },
-  {
-    label: "Glasses Poured",
-    value: 18500,
-    suffix: "+",
-    /* PLACEHOLDER: Replace with actual glasses poured count */
-  },
-  {
-    label: "Events Hosted",
-    value: 85,
-    suffix: "+",
-    /* PLACEHOLDER: Replace with actual event count */
-  },
-  {
-    label: "Venues Activated",
-    value: 12,
-    suffix: "+",
-    /* PLACEHOLDER: Replace with actual activated venue count */
-  },
+  { label: "Bottles Served",   value: 1200,  suffix: "+" },
+  { label: "Glasses Poured",   value: 18500, suffix: "+" },
+  { label: "Events Hosted",    value: 85,    suffix: "+" },
+  { label: "Venues Activated", value: 12,    suffix: "+" },
 ];
 
 /* ─── Navigation links ───────────────────────────────────────────────── */

@@ -6,8 +6,6 @@ import { METRICS } from "@/lib/constants";
  * Metrics counter — deliberately dark section on an otherwise light page.
  * This creates editorial rhythm and makes the gold numbers pop.
  * Classic luxury technique: one dark chapter break in a cream-dominant layout.
- *
- * PLACEHOLDER values — update METRICS array in lib/constants.ts with real data.
  */
 export default function MetricsCounter() {
   return (

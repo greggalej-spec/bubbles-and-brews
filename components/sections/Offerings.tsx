@@ -169,7 +169,7 @@ function OfferingCard({
       {/* CTA link */}
       <Link
         href={`/offerings/${offering.id}`}
-        className="mt-auto inline-flex items-center gap-2 text-sm tracking-wide text-[var(--gold-deep)] hover:text-[var(--gold-accent)] transition-colors group/link"
+        className="mt-auto inline-flex items-center gap-2 text-sm tracking-wide text-[var(--gold-deep)] hover:text-[var(--gold-accent)] transition-colors group/link min-h-[44px]"
       >
         <span>{offering.cta}</span>
         <ArrowRight

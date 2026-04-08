@@ -56,7 +56,7 @@ export default function Navbar() {
             className={cn("flex items-center gap-3 transition-colors duration-300 group", brandColor)}
             aria-label="Bubbles & Brews Co. — Home"
           >
-            <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 border border-[var(--gold-mid)]/30">
+            <div className="w-12 h-12 md:w-20 md:h-20 rounded-full overflow-hidden flex-shrink-0 border border-[var(--gold-mid)]/30">
               <Image
                 src="/assets/bella-event.jpg"
                 alt="Bubbles & Brews Co."
