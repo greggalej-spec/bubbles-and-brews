@@ -61,7 +61,7 @@ export default function Offerings() {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col md:flex-row border border-[var(--gold-mid)]/20 md:border-0 md:border-t mx-4 sm:mx-8 md:mx-0"
+        className="flex flex-col md:flex-row border border-[var(--gold-mid)]/20 md:border-0 md:border-t mx-10 md:mx-0"
       >
         {/* Hero — Bella (65% width on desktop) */}
         <HeroCard offering={hero} inView={isInView} />

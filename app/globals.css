@@ -181,12 +181,14 @@ input[type="submit"], input[type="button"], input[type="reset"],
   letter-spacing: 0.15em;
   text-transform: uppercase;
   font-weight: 500;
-  transition: all 0.35s var(--ease-luxury);
+  transition: background-color 0.35s var(--ease-luxury), color 0.35s var(--ease-luxury), border-color 0.35s var(--ease-luxury), transform 0.15s var(--ease-luxury);
   position: relative;
   overflow: hidden;
   min-height: 52px;
   white-space: nowrap;
 }
+
+.btn:active { transform: scale(0.97); }
 
 .btn-primary {
   background-color: var(--gold-deep);

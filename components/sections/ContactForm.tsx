@@ -103,7 +103,7 @@ export default function ContactForm() {
             href={BRAND.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-[#25D366]/40 text-[#25D366] text-sm tracking-widest uppercase hover:bg-[#25D366]/10 transition-[background-color] duration-200"
+            className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--brand-wa)]/40 text-[var(--brand-wa)] text-sm tracking-widest uppercase hover:bg-[var(--brand-wa)]/10 transition-[background-color] duration-200"
           >
             Continue on WhatsApp
           </Link>

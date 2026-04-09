@@ -83,12 +83,12 @@ export default function BellaFeature() {
 
           <MotionWrapper delay={0.62}>
             <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/contact" className="btn btn-dark">
-              Book Bella for Your Event
-            </Link>
-            <Link href="/offerings/bella" className="btn btn-outline-dark">
-              Learn More
-            </Link>
+              <Link href="/contact" className="btn btn-dark">
+                Book Bella for Your Event
+              </Link>
+              <Link href="/offerings/bella" className="btn btn-outline-dark">
+                Learn More
+              </Link>
             </div>
           </MotionWrapper>
         </div>

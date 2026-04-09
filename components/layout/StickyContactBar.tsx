@@ -44,7 +44,7 @@ export default function StickyContactBar() {
               href={BRAND.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center gap-1 min-h-[44px] px-3 text-[#22a852] hover:opacity-80 transition-opacity"
+              className="flex flex-col items-center justify-center gap-1 min-h-[44px] px-3 text-[var(--brand-wa)] hover:opacity-80 transition-opacity"
               aria-label="Chat on WhatsApp"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -114,7 +114,8 @@ export default function StickyContactBar() {
               href={BRAND.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg shadow-[#25D366]/25 hover:scale-110 transition-transform duration-300"
+              className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300"
+              style={{ backgroundColor: "var(--brand-wa)", boxShadow: "0 10px 15px -3px color-mix(in srgb, var(--brand-wa) 25%, transparent)" }}
               aria-label="Chat on WhatsApp"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true">
