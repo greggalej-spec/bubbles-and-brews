@@ -86,9 +86,9 @@ export default function StickyContactBar() {
       <AnimatePresence>
         {visible && (
           <motion.button
-            initial={{ scale: 0, opacity: 0 }}
+            initial={{ scale: 0.6, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
+            exit={{ scale: 0.6, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="hidden md:flex fixed bottom-8 left-8 z-50 w-10 h-10 items-center justify-center border border-[var(--gold-mid)]/40 text-[var(--gold-mid)] hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-colors duration-300"
@@ -104,9 +104,9 @@ export default function StickyContactBar() {
       <AnimatePresence>
         {visible && (
           <motion.div
-            initial={{ scale: 0, opacity: 0 }}
+            initial={{ scale: 0.6, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
+            exit={{ scale: 0.6, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end gap-3"
           >

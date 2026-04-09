@@ -44,7 +44,7 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
+          "fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-500",
           scrolled ? "border-b border-[var(--gold-mid)]/15" : "bg-transparent"
         )}
         style={scrolled ? { backgroundColor: "rgba(250,247,242,0.96)", backdropFilter: "blur(12px)" } : {}}

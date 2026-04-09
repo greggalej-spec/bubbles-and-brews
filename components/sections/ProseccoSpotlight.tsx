@@ -180,7 +180,7 @@ export default function ProseccoSpotlight() {
                 </Link>
                 <Link
                   href="/offerings/prosecco-zero"
-                  className="px-7 py-3.5 border border-[var(--charcoal)]/20 text-[var(--charcoal-mid)] text-sm tracking-wider hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-all duration-300"
+                  className="px-7 py-3.5 border border-[var(--charcoal)]/20 text-[var(--charcoal-mid)] text-sm tracking-wider hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-[border-color,color] duration-200"
                 >
                   Learn More
                 </Link>

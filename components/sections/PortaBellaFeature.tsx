@@ -145,7 +145,7 @@ export default function PortaBellaFeature() {
               </Link>
               <Link
                 href="/contact"
-                className="px-8 py-4 border border-[var(--charcoal)]/25 text-[var(--charcoal-mid)] text-sm tracking-widest uppercase hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-all duration-300 text-center"
+                className="px-8 py-4 border border-[var(--charcoal)]/25 text-[var(--charcoal-mid)] text-sm tracking-widest uppercase hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-[border-color,color] duration-200 text-center"
               >
                 Rent for an Event
               </Link>

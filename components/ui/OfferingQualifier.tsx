@@ -99,7 +99,7 @@ function StepIndicator({ step, total }: { step: number; total: number }) {
       {Array.from({ length: total }).map((_, i) => (
         <div
           key={i}
-          className="h-px transition-all duration-500"
+          className="h-px transition-[flex,background-color,opacity] duration-300"
           style={{
             flex: i < step ? 2 : 1,
             backgroundColor: i < step ? "var(--gold-deep)" : "var(--gold-mid)",
@@ -125,8 +125,10 @@ function OptionButton({
   return (
     <button
       onClick={onClick}
-      className="w-full text-left px-5 py-4 border transition-colors duration-200 min-h-[44px] text-sm tracking-wide"
+      className="w-full text-left px-5 py-4 border transition-colors min-h-[44px] text-sm tracking-wide"
       style={{
+        transitionDuration: "0.25s",
+        transitionTimingFunction: "var(--ease-luxury)",
         borderColor: selected ? "var(--gold-deep)" : "rgba(var(--gold-mid-rgb, 201,169,110),0.3)",
         backgroundColor: selected ? "rgba(201,169,110,0.08)" : "transparent",
         color: selected ? "var(--gold-deep)" : "var(--charcoal-mid)",
@@ -221,7 +223,7 @@ function RecommendationScreen({
       <button
         onClick={handleWhatsApp}
         className="w-full flex items-center justify-center gap-3 px-6 min-h-[48px] mb-3 text-sm tracking-wide transition-opacity hover:opacity-80"
-        style={{ backgroundColor: "#25D366", color: "#fff" }}
+        style={{ backgroundColor: "var(--brand-wa)", color: "var(--white)" }}
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
@@ -287,7 +289,16 @@ function ChampagneSparkle() {
             transition={{ duration: 0.8, delay: 0.1 + deg / 2000, ease: "easeOut" }}
           />
         ))}
-        <span className="absolute inset-0 flex items-center justify-center text-lg">🥂</span>
+        {/* Champagne glass SVG — no emoji */}
+        <svg
+          className="absolute inset-0 m-auto"
+          width="18" height="18" viewBox="0 0 24 24"
+          fill="none" stroke="var(--gold-mid)" strokeWidth="1.5"
+          strokeLinecap="round" strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M8 22h8M12 22v-7M6 2l2 9h8l2-9H6zM9 11s1 3 3 3 3-3 3-3" />
+        </svg>
       </div>
     </motion.div>
   );
