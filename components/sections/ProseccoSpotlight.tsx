@@ -65,7 +65,7 @@ export default function ProseccoSpotlight() {
               {/* Prosecco Zero Rosé — 3D render video */}
               {shouldReduceMotion ? (
                 <Image
-                  src="/assets/prosecco-extract-1.png"
+                  src="/assets/prosecco-zero-rose.png"
                   alt="Prosecco Zero Rosé — blush bottle with black label and cherub graphic"
                   width={320}
                   height={480}
@@ -80,7 +80,7 @@ export default function ProseccoSpotlight() {
                   playsInline
                   className="w-full object-contain drop-shadow-xl"
                   style={{ maxHeight: 480 }}
-                  poster="/assets/prosecco-extract-1.png"
+                  poster="/assets/prosecco-zero-rose.png"
                 >
                   <source src="/assets/bottle-dolly.mp4" type="video/mp4" />
                 </video>
@@ -124,7 +124,7 @@ export default function ProseccoSpotlight() {
           </motion.div>
 
           {/* ── Content column ────────────────────────────────────────── */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-8">
             <MotionWrapper delay={0.2}>
               <p className="text-[var(--gold-deep)] text-xs tracking-[0.3em] uppercase">
                 Featured Product
@@ -152,7 +152,7 @@ export default function ProseccoSpotlight() {
 
             {/* Stats row */}
             <MotionWrapper delay={0.5}>
-              <div className="grid grid-cols-3 gap-6 py-6 border-y border-[var(--gold-mid)]/20 my-2">
+              <div className="grid grid-cols-3 gap-6 py-8 border-y border-[var(--gold-mid)]/20 my-3">
                 {[
                   { value: "0%", label: "Alcohol" },
                   { value: "100%", label: "Sparkling" },

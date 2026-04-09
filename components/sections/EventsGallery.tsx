@@ -25,7 +25,7 @@ export default function EventsGallery() {
     >
       <div className="container-brand">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-20">
           <div>
             <MotionWrapper delay={0.1}>
               <p className="text-[var(--gold-deep)] text-xs tracking-[0.3em] uppercase mb-4">

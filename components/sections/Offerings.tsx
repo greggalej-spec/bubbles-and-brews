@@ -134,7 +134,7 @@ function HeroCard({
       />
 
       {/* Text content — overlaid on dark */}
-      <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-10 md:p-14 lg:p-16">
+      <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 md:p-14 lg:p-16">
         <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-light)] border border-[var(--gold-light)]/40 px-4 py-2 w-fit mb-8">
           {typeLabel[offering.type]}
         </span>
@@ -185,7 +185,7 @@ function SecondaryCard({
         delay: 0.4 + index * 0.15,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="flex-1 flex flex-col justify-center gap-5 px-6 py-10 sm:px-8 md:px-10 md:py-12"
+      className="flex-1 flex flex-col justify-center gap-6 px-8 py-12 sm:px-10 md:px-12 md:py-14"
       style={{
         backgroundColor: isRose
           ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))"

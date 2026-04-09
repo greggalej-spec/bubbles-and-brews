@@ -44,7 +44,7 @@ export default function BellaFeature() {
           <MotionWrapper delay={0.2}>
             <h2
               id="bella-heading"
-              className="font-display font-light text-[var(--charcoal)] leading-[1.05] mb-6"
+              className="font-display font-light text-[var(--charcoal)] leading-[1.05] mb-10"
               style={{ fontSize: "var(--text-display)" }}
             >
               She arrives.<br />
@@ -53,7 +53,7 @@ export default function BellaFeature() {
           </MotionWrapper>
 
           <MotionWrapper delay={0.32}>
-            <p className="text-[var(--charcoal-mid)] leading-relaxed mb-4">
+            <p className="text-[var(--charcoal-mid)] leading-relaxed mb-6">
               Bella is more than a mobile prosecco bar. She is a statement — a fully curated,
               vintage-styled service unit that transforms the feel of any event from the moment
               she arrives.
@@ -61,14 +61,14 @@ export default function BellaFeature() {
           </MotionWrapper>
 
           <MotionWrapper delay={0.42}>
-            <p className="text-[var(--charcoal-mid)] leading-relaxed mb-10">
+            <p className="text-[var(--charcoal-mid)] leading-relaxed mb-12">
               Designed for weddings, corporate events, brand activations, and premium private
               functions across Trinidad &amp; Tobago. Bella serves on tap. Bella makes memories.
             </p>
           </MotionWrapper>
 
           <MotionWrapper delay={0.52}>
-            <ul className="flex flex-col gap-3 mb-10" aria-label="Bella features">
+            <ul className="flex flex-col gap-4 mb-12" aria-label="Bella features">
               {BELLA_FEATURES.map((point) => (
                 <li key={point} className="flex items-start gap-3 text-sm text-[var(--charcoal-mid)]">
                   <span
@@ -96,7 +96,7 @@ export default function BellaFeature() {
 
       {/* ── Right: Video panel ───────────────────────────────────────── */}
       <div
-        className="relative overflow-hidden min-h-[60vw] sm:min-h-[50vh] lg:min-h-0 flex items-center justify-center"
+        className="relative overflow-hidden min-h-[90vw] sm:min-h-[60vh] lg:min-h-0 flex items-center justify-center"
         style={{ backgroundColor: "var(--black)" }}
       >
         {/* Background video */}
@@ -129,20 +129,20 @@ export default function BellaFeature() {
           aria-hidden="true"
         />
 
-        {/* Corner accents */}
-        <div className="absolute top-8 left-8 w-14 h-14 border-l border-t border-[var(--gold-mid)]/25" aria-hidden="true" />
-        <div className="absolute top-8 right-8 w-14 h-14 border-r border-t border-[var(--gold-mid)]/25" aria-hidden="true" />
-        <div className="absolute bottom-8 left-8 w-14 h-14 border-l border-b border-[var(--gold-mid)]/25" aria-hidden="true" />
-        <div className="absolute bottom-8 right-8 w-14 h-14 border-r border-b border-[var(--gold-mid)]/25" aria-hidden="true" />
+        {/* Corner accents — aligned with px-10 editorial content padding */}
+        <div className="absolute top-10 left-10 w-14 h-14 border-l border-t border-[var(--gold-mid)]/25" aria-hidden="true" />
+        <div className="absolute top-10 right-10 w-14 h-14 border-r border-t border-[var(--gold-mid)]/25" aria-hidden="true" />
+        <div className="absolute bottom-10 left-10 w-14 h-14 border-l border-b border-[var(--gold-mid)]/25" aria-hidden="true" />
+        <div className="absolute bottom-10 right-10 w-14 h-14 border-r border-b border-[var(--gold-mid)]/25" aria-hidden="true" />
 
-        {/* Horizontal gold lines */}
-        <div className="absolute top-1/3 inset-x-8 h-px bg-gradient-to-r from-transparent via-[var(--gold-mid)]/20 to-transparent" aria-hidden="true" />
-        <div className="absolute bottom-1/3 inset-x-8 h-px bg-gradient-to-r from-transparent via-[var(--gold-mid)]/20 to-transparent" aria-hidden="true" />
+        {/* Horizontal gold lines — inset matches corner accents */}
+        <div className="absolute top-1/3 inset-x-10 h-px bg-gradient-to-r from-transparent via-[var(--gold-mid)]/20 to-transparent" aria-hidden="true" />
+        <div className="absolute bottom-1/3 inset-x-10 h-px bg-gradient-to-r from-transparent via-[var(--gold-mid)]/20 to-transparent" aria-hidden="true" />
 
         {/* Editorial content */}
         <motion.div
           style={{ y: textY }}
-          className="relative z-10 flex flex-col items-center text-center px-12 py-16 gap-8"
+          className="relative z-10 flex flex-col items-center text-center px-10 py-12 gap-6 sm:gap-8"
         >
           {/* Large decorative "BELLA" */}
           <motion.p
@@ -170,9 +170,9 @@ export default function BellaFeature() {
             </p>
           </MotionWrapper>
 
-          {/* Spec pills */}
+          {/* Spec pills — hidden on small mobile to prevent overflow */}
           <MotionWrapper delay={0.45}>
-            <div className="flex flex-wrap justify-center gap-3 mt-2">
+            <div className="hidden sm:flex flex-wrap justify-center gap-3">
               {["On Tap", "Vintage Styled", "Full Service", "Trinidad & Tobago"].map((tag) => (
                 <span
                   key={tag}
@@ -184,9 +184,9 @@ export default function BellaFeature() {
             </div>
           </MotionWrapper>
 
-          {/* Stat */}
+          {/* Stats */}
           <MotionWrapper delay={0.6}>
-            <div className="flex items-center gap-6 mt-4">
+            <div className="hidden sm:flex items-center gap-6">
               <div className="flex flex-col items-center gap-1">
                 <span className="font-display text-3xl font-light text-[var(--gold-light)]">85+</span>
                 <span className="text-xs text-[var(--muted-dark)] tracking-widest uppercase">Events</span>

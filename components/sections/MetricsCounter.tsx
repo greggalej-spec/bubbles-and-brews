@@ -52,7 +52,7 @@ export default function MetricsCounter() {
             <MotionWrapper
               key={metric.label}
               delay={0.1 + i * 0.1}
-              className="bg-[var(--black)] px-6 py-10 flex flex-col items-center gap-3 group transition-colors duration-200"
+              className="bg-[var(--black)] px-8 py-14 flex flex-col items-center gap-4 group transition-colors duration-200"
             >
               <div
                 className="w-6 h-6 border border-[var(--gold-mid)]/30 rotate-45 group-hover:border-[var(--gold-mid)] transition-colors duration-200"
