@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { OFFERINGS } from "@/lib/constants";
+import OfferingQualifier from "@/components/ui/OfferingQualifier";
 
 const typeLabel: Record<string, string> = {
   bottle:     "Bottle",
@@ -15,6 +16,7 @@ const typeLabel: Record<string, string> = {
 export default function Offerings() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const [qualifierOpen, setQualifierOpen] = useState(false);
 
   const hero = OFFERINGS[0];
   const secondaries = OFFERINGS.slice(1);
@@ -72,8 +74,20 @@ export default function Offerings() {
         </div>
       </motion.div>
 
-      {/* Bottom spacing */}
-      <div style={{ height: "var(--section-gap)" }} />
+      {/* Qualifier trigger */}
+      <div
+        className="flex justify-center"
+        style={{ paddingTop: "2rem", paddingBottom: "var(--section-gap)" }}
+      >
+        <button
+          onClick={() => setQualifierOpen(true)}
+          className="font-display italic text-[var(--gold-deep)] text-sm hover:text-[var(--gold-accent)] transition-colors min-h-[44px] px-4"
+        >
+          Not sure which is right for you? →
+        </button>
+      </div>
+
+      <OfferingQualifier isOpen={qualifierOpen} onClose={() => setQualifierOpen(false)} />
     </section>
   );
 }
