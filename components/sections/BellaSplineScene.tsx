@@ -56,7 +56,7 @@ export default function BellaSplineScene() {
               style={{ aspectRatio: "16/9" }}
               aria-label="Bella mobile prosecco bar in action"
             >
-              <source src="/assets/dolly-out.mp4" type="video/mp4" />
+              <source src="/assets/bella-dolly.mp4" type="video/mp4" />
             </video>
 
             {/* Decorative corner lines */}

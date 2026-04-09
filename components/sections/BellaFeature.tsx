@@ -34,7 +34,7 @@ export default function BellaFeature() {
         className="flex items-center relative z-10"
         style={{ backgroundColor: "var(--cream-light)" }}
       >
-        <div className="px-10 md:px-16 lg:px-24 py-24 max-w-[580px]">
+        <div className="px-10 lg:px-16 py-20 lg:py-28 max-w-[580px]">
           <MotionWrapper delay={0.1}>
             <p className="text-[var(--gold-deep)] text-xs tracking-[0.3em] uppercase mb-6">
               The Experience
@@ -106,10 +106,11 @@ export default function BellaFeature() {
           loop
           playsInline
           preload="none"
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
+          poster="/assets/bella-cart.png"
+          className="absolute inset-0 w-full h-full object-cover opacity-75"
           aria-hidden="true"
         >
-          <source src="/assets/animate-frames.mp4" type="video/mp4" />
+          <source src="/assets/bella-dolly.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay — ensures text remains readable */}

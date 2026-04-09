@@ -67,8 +67,8 @@ export default function EventsGallery() {
             style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "4/5" }}
           >
             <Image
-              src="/assets/prosecco-extract-1.png"
-              alt="Prosecco Zero — clear bottle with gold cap"
+              src="/assets/prosecco-zero-brut.png"
+              alt="Prosecco Zero Brut — Rovinodo gold cap bottle"
               fill
               className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
               sizes="(max-width: 768px) 50vw, 33vw"
@@ -94,8 +94,8 @@ export default function EventsGallery() {
             style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "4/5" }}
           >
             <Image
-              src="/assets/prosecco-extract-1.png"
-              alt="Prosecco Zero"
+              src="/assets/prosecco-zero-rose.png"
+              alt="Prosecco Zero Rosé"
               fill
               className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
               sizes="50vw"
@@ -117,7 +117,7 @@ export default function EventsGallery() {
               playsInline
               preload="none"
               className="w-full h-full object-contain"
-              poster="/assets/prosecco-extract-1.png"
+              poster="/assets/prosecco-zero-brut.png"
             >
               <source src="/assets/slow-dolly-2.mp4" type="video/mp4" />
             </video>
@@ -172,10 +172,10 @@ export default function EventsGallery() {
             style={{ backgroundColor: "var(--charcoal)", aspectRatio: "1/1" }}
           >
             <Image
-              src="/assets/prosecco-extract-1.png"
-              alt="Prosecco Zero — gold cap bottle"
+              src="/assets/prosecco-zero-satin.png"
+              alt="Prosecco Zero Brut — three bottles on gold satin"
               fill
-              className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="33vw"
             />
           </motion.div>

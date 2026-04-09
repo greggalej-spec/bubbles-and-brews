@@ -62,7 +62,7 @@ export default function BottleScrollScene() {
       <section aria-label="Prosecco Zero bottle showcase">
         <div className="relative flex items-center justify-center py-24" style={{ backgroundColor: "var(--black)" }}>
           <Image
-            src="/assets/prosecco-extract-1.png"
+            src="/assets/prosecco-zero-brut.png"
             alt="Prosecco Zero Rosé bottle"
             width={320}
             height={480}
@@ -87,7 +87,7 @@ export default function BottleScrollScene() {
           loop
           playsInline
           preload="none"
-          poster="/assets/prosecco-extract-1.png"
+          poster="/assets/prosecco-zero-brut.png"
           className="w-full h-[60vw] min-h-[320px] object-cover"
           aria-hidden="true"
         >
@@ -98,7 +98,7 @@ export default function BottleScrollScene() {
         <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(14,13,11,0.55)" }} aria-hidden="true" />
 
         {/* Mobile content */}
-        <div className="relative z-10 px-8 sm:px-12 py-16 text-center" style={{ backgroundColor: "var(--black)" }}>
+        <div className="relative z-10 px-10 sm:px-12 py-16 text-center" style={{ backgroundColor: "var(--black)" }}>
           <p className="text-[var(--gold-mid)] text-xs tracking-[0.3em] uppercase mb-6">The Product</p>
           <h2
             className="font-display font-light text-[var(--white)] leading-tight mb-6"

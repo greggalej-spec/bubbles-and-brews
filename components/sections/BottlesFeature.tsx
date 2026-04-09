@@ -13,8 +13,8 @@ const VARIANTS = [
     tasting: "Wisteria, acacia, and white fruit aromas. Fresh and harmonious on the palate.",
     abv: "11.5%",
     sugar: "2.8g / bottle",
-    image: "/assets/prosecco-extract-1.png",
-    imageAlt: "Prosecco Zero DOC Brut — gold cap bottle with ZERO label",
+    image: "/assets/prosecco-zero-brut.png",
+    imageAlt: "Prosecco Zero DOC Brut — Rovinodo gold cap bottle",
   },
   {
     id: "rose",
@@ -23,8 +23,8 @@ const VARIANTS = [
     tasting: "Strawberries and red berries. Intense and persistent, lively and silky.",
     abv: "11.5%",
     sugar: "2.8g / bottle",
-    image: "/assets/prosecco-extract-1.png",
-    imageAlt: "Prosecco Zero Rosé — gold cap bottle",
+    image: "/assets/prosecco-zero-rose.png",
+    imageAlt: "Prosecco Zero Rosé — Peninsula black label bottle",
   },
 ];
 
