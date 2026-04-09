@@ -98,7 +98,7 @@ export default function BottleScrollScene() {
         <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(14,13,11,0.55)" }} aria-hidden="true" />
 
         {/* Mobile content */}
-        <div className="relative z-10 px-6 py-16 text-center" style={{ backgroundColor: "var(--black)" }}>
+        <div className="relative z-10 px-8 sm:px-12 py-16 text-center" style={{ backgroundColor: "var(--black)" }}>
           <p className="text-[var(--gold-mid)] text-xs tracking-[0.3em] uppercase mb-6">The Product</p>
           <h2
             className="font-display font-light text-[var(--white)] leading-tight mb-6"

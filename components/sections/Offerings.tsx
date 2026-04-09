@@ -61,7 +61,7 @@ export default function Offerings() {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col md:flex-row border-t border-[var(--gold-mid)]/20"
+        className="flex flex-col md:flex-row border border-[var(--gold-mid)]/20 md:border-0 md:border-t mx-4 sm:mx-8 md:mx-0"
       >
         {/* Hero — Bella (65% width on desktop) */}
         <HeroCard offering={hero} inView={isInView} />
@@ -134,7 +134,7 @@ function HeroCard({
       />
 
       {/* Text content — overlaid on dark */}
-      <div className="absolute inset-0 flex flex-col justify-end p-10 md:p-14 lg:p-16">
+      <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-10 md:p-14 lg:p-16">
         <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-light)] border border-[var(--gold-light)]/40 px-4 py-2 w-fit mb-8">
           {typeLabel[offering.type]}
         </span>
@@ -185,7 +185,7 @@ function SecondaryCard({
         delay: 0.4 + index * 0.15,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="flex-1 flex flex-col justify-center gap-6 p-10 md:p-12"
+      className="flex-1 flex flex-col justify-center gap-5 px-6 py-10 sm:px-8 md:px-10 md:py-12"
       style={{
         backgroundColor: isRose
           ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))"
