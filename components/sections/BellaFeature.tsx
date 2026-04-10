@@ -34,7 +34,10 @@ export default function BellaFeature() {
         className="flex items-center relative z-10"
         style={{ backgroundColor: "var(--cream-light)" }}
       >
-        <div className="px-10 sm:px-14 lg:px-20 py-20 lg:py-28 w-full max-w-2xl">
+        <div
+          className="py-20 lg:py-28 w-full"
+          style={{ paddingLeft: "clamp(2.5rem, 6vw, 5rem)", paddingRight: "clamp(2.5rem, 6vw, 5rem)" }}
+        >
           <MotionWrapper delay={0.1}>
             <p className="text-[var(--gold-deep)] text-xs tracking-[0.3em] uppercase mb-6">
               The Experience
