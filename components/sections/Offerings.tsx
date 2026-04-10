@@ -189,8 +189,8 @@ function SecondaryCard({
         ease: [0.16, 1, 0.3, 1],
       }}
       className="flex-1 flex flex-col justify-center gap-6"
-      style={{ padding: "clamp(3rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)" }}
       style={{
+        padding: "clamp(3rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)",
         backgroundColor: isRose
           ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))"
           : "var(--cream-light)",
