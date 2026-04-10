@@ -168,7 +168,7 @@ export default function BottleScrollScene() {
         />
 
         {/* Phase 1: Intro text (0–50% scroll) */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10 pointer-events-none">
           <motion.p
             style={{ opacity: eyebrowOpacity }}
             className="text-[var(--gold-mid)] text-xs tracking-[0.3em] uppercase mb-6"
@@ -194,7 +194,7 @@ export default function BottleScrollScene() {
         </div>
 
         {/* Phase 2: CTA (55–100% scroll) */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10 pointer-events-none">
           <motion.p
             style={{ opacity: ctaHeadOpacity, fontSize: "var(--text-section)" }}
             className="font-display font-light italic text-[var(--white)] mb-8"
