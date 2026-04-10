@@ -171,11 +171,11 @@ export default function Hero() {
         </motion.div>
       </motion.button>
 
-      {/* Corner accents */}
-      <div className="absolute top-8 left-8 w-16 h-16 border-l border-t border-[var(--gold-mid)]/30" aria-hidden="true" />
-      <div className="absolute top-8 right-8 w-16 h-16 border-r border-t border-[var(--gold-mid)]/30" aria-hidden="true" />
-      <div className="absolute bottom-8 left-8 w-16 h-16 border-l border-b border-[var(--gold-mid)]/30" aria-hidden="true" />
-      <div className="absolute bottom-8 right-8 w-16 h-16 border-r border-b border-[var(--gold-mid)]/30" aria-hidden="true" />
+      {/* Corner accents — aligned with container-brand min padding (clamp starts at 2.5rem = 40px) */}
+      <div className="absolute top-10 left-10 w-16 h-16 border-l border-t border-[var(--gold-mid)]/30" aria-hidden="true" />
+      <div className="absolute top-10 right-10 w-16 h-16 border-r border-t border-[var(--gold-mid)]/30" aria-hidden="true" />
+      <div className="absolute bottom-10 left-10 w-16 h-16 border-l border-b border-[var(--gold-mid)]/30" aria-hidden="true" />
+      <div className="absolute bottom-10 right-10 w-16 h-16 border-r border-b border-[var(--gold-mid)]/30" aria-hidden="true" />
 
       {/* Cork pop — plays once after hero text settles */}
       <CorkPop />

@@ -127,7 +127,8 @@ export default function PortaBellaFeature() {
             </div>
 
             {/* Scarcity note */}
-            <div className="border-l-2 border-[var(--gold-mid)] pl-5">
+            <div className="bg-[var(--cream-dark)] border border-[var(--gold-mid)]/20 p-5 flex gap-4">
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--gold-mid)] flex-shrink-0 mt-2" aria-hidden="true" />
               <p className="text-sm text-[var(--charcoal-mid)] leading-relaxed">
                 <span className="font-medium text-[var(--charcoal)]">Only 5 units exist.</span>{" "}
                 Once venues are activated, availability closes. Inquire early to secure

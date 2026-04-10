@@ -30,7 +30,7 @@ export default function BellaSplineScene() {
       />
 
       <div className="container-brand relative z-10">
-        <MotionWrapper delay={0.1} className="text-center mb-12">
+        <MotionWrapper delay={0.1} className="text-center mb-16">
           <p className="text-[var(--gold-deep)] text-xs tracking-[0.3em] uppercase mb-4">
             In Her Element
           </p>
