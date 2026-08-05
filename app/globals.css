@@ -152,9 +152,11 @@ input[type="submit"], input[type="button"], input[type="reset"],
 
 /* ─── Mobile-first global rules ──────────────────────────────────────── */
 
-/* Pad body bottom on mobile to clear the sticky contact bar (≈64px) */
+/* Pad bottom on mobile to clear the sticky contact bar (≈64px). Footer and
+   StickyContactBar are siblings of <main>, not children, so both need the
+   clearance — padding main alone leaves the footer's bottom row covered. */
 @media (max-width: 767px) {
-  main {
+  main, footer {
     padding-bottom: 64px;
   }
 }

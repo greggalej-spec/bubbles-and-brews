@@ -7,14 +7,7 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
 /**
- * Prosecco Zero product spotlight — 3D scroll animation slot.
- *
- * 3D BOTTLE ANIMATION:
- *   - Currently: animated placeholder with float + scroll-driven rotation
- *   - Replace: Pass a splineUrl prop to <BottleScene3D> once the Spline model
- *     is ready (see BottleScene3D.tsx for all integration options)
- *   - Gemini-generated model: export as GLB → upload to Spline → get URL
- *
+ * Prosecco Zero product spotlight — real product video/image, scroll-reveal.
  * LIGHT PALETTE: warm white bg, charcoal text, gold accents.
  */
 // Mini rising bubbles that appear around the bottle when section enters view

@@ -56,8 +56,8 @@ export default function CorkPop() {
   return (
     /* Origin point: bottom-right area of the hero */
     <div
-      className="absolute pointer-events-none select-none"
-      style={{ bottom: "22%", right: "14%", zIndex: 10 }}
+      className="absolute pointer-events-none select-none scale-[0.65] sm:scale-90 md:scale-100 origin-bottom-right"
+      style={{ bottom: "30%", right: "10%", zIndex: 10 }}
       aria-hidden="true"
     >
       {/* Expanding ring flash — the "pop" moment */}

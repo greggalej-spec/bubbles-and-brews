@@ -89,9 +89,11 @@ export default function EventsGallery() {
             />
             <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <span className="text-xs tracking-widest uppercase text-[var(--gold-deep)] border border-[var(--gold-mid)]/40 px-3 py-1.5 bg-[var(--cream-light)]/90">
-                Prosecco Zero
+                View Prosecco Zero
               </span>
             </div>
+            {/* The hover zoom + label above promise a destination — give it one */}
+            <Link href="/offerings/bottles" className="absolute inset-0" aria-label="View Prosecco Zero" />
           </motion.div>
 
           {/* Cell 1b: Second bottle portrait (mobile only) */}
@@ -107,6 +109,7 @@ export default function EventsGallery() {
               className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
               sizes="50vw"
             />
+            <Link href="/offerings/bottles" className="absolute inset-0" aria-label="View Prosecco Zero Rosé" />
           </motion.div>
 
           {/* Cell 2: Bottle video — wide landscape */}
@@ -138,6 +141,7 @@ export default function EventsGallery() {
                 Prosecco Zero
               </span>
             </div>
+            <Link href="/offerings/bottles" className="absolute inset-0" aria-label="View Prosecco Zero" />
           </motion.div>
 
           {/* Stat cells */}
@@ -180,6 +184,7 @@ export default function EventsGallery() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="33vw"
             />
+            <Link href="/offerings/bottles" className="absolute inset-0" aria-label="View Prosecco Zero" />
           </motion.div>
 
           {/* Instagram CTA cell */}

@@ -104,7 +104,7 @@ export default function BottlesFeature() {
             <motion.article
               key={variant.id}
               {...reveal(0.1 + i * 0.15, 0.8, 40)}
-              className="bg-[var(--cream-light)] p-8 md:p-10 flex flex-col gap-6"
+              className="group bg-[var(--cream-light)] p-8 md:p-10 flex flex-col gap-6 transition-shadow duration-300 hover:shadow-[0_20px_40px_-20px_rgba(26,24,22,0.15)]"
               style={
                 variant.id === "rose"
                   ? { backgroundColor: "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))" }
@@ -118,7 +118,7 @@ export default function BottlesFeature() {
                     src={variant.image}
                     alt={(variant as { imageAlt?: string; name: string }).imageAlt ?? variant.name}
                     fill
-                    className="object-contain"
+                    className="object-contain transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
