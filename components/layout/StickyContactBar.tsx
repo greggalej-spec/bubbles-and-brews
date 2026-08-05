@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Phone, Mail, ArrowUp } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { BRAND } from "@/lib/constants";
 
 export default function StickyContactBar() {
   const [visible, setVisible] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const fadeOnly = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 }, transition: { duration: 0.15 } };
 
   useEffect(() => {
     const threshold = window.innerHeight * 0.2;
@@ -22,10 +24,9 @@ export default function StickyContactBar() {
       <AnimatePresence>
         {visible && (
           <motion.div
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 80, opacity: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            {...(shouldReduceMotion
+              ? fadeOnly
+              : { initial: { y: 80, opacity: 0 }, animate: { y: 0, opacity: 1 }, exit: { y: 80, opacity: 0 }, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } })}
             className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-[var(--gold-mid)]/20 py-3 px-4"
             style={{ backgroundColor: "rgba(250,247,242,0.97)", backdropFilter: "blur(12px)" }}
             role="complementary"
@@ -71,7 +72,7 @@ export default function StickyContactBar() {
             </Link>
 
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              onClick={() => window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" })}
               className="flex flex-col items-center gap-1 text-[var(--gold-mid)] hover:text-[var(--gold-deep)] transition-colors"
               aria-label="Back to top"
             >
@@ -86,11 +87,10 @@ export default function StickyContactBar() {
       <AnimatePresence>
         {visible && (
           <motion.button
-            initial={{ scale: 0.6, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.6, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            {...(shouldReduceMotion
+              ? fadeOnly
+              : { initial: { scale: 0.6, opacity: 0 }, animate: { scale: 1, opacity: 1 }, exit: { scale: 0.6, opacity: 0 }, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } })}
+            onClick={() => window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" })}
             className="hidden md:flex fixed bottom-8 left-8 z-50 w-10 h-10 items-center justify-center border border-[var(--gold-mid)]/40 text-[var(--gold-mid)] hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-colors duration-300"
             style={{ backgroundColor: "rgba(250,247,242,0.92)", backdropFilter: "blur(8px)" }}
             aria-label="Back to top"
@@ -104,10 +104,9 @@ export default function StickyContactBar() {
       <AnimatePresence>
         {visible && (
           <motion.div
-            initial={{ scale: 0.6, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.6, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            {...(shouldReduceMotion
+              ? fadeOnly
+              : { initial: { scale: 0.6, opacity: 0 }, animate: { scale: 1, opacity: 1 }, exit: { scale: 0.6, opacity: 0 }, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } })}
             className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end gap-3"
           >
             <Link

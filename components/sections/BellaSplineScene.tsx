@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
 /**
@@ -8,7 +9,7 @@ import MotionWrapper from "@/components/ui/MotionWrapper";
  * Uses dolly-out.mp4 — desktop autoplay, mobile shows static image.
  */
 export default function BellaSplineScene() {
-  const [isMobile, setIsMobile] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
   }, []);
@@ -46,18 +47,29 @@ export default function BellaSplineScene() {
         <MotionWrapper delay={0.25}>
           <div className="relative max-w-4xl mx-auto">
 
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              className="w-full object-cover"
-              style={{ aspectRatio: "16/9" }}
-              aria-label="Bella mobile prosecco bar in action"
-            >
-              <source src="/assets/bella-dolly.mp4" type="video/mp4" />
-            </video>
+            {isMobile ? (
+              <Image
+                src="/assets/bella-cart.png"
+                alt="Bella mobile prosecco bar in action"
+                width={960}
+                height={540}
+                className="w-full object-cover"
+                style={{ aspectRatio: "16/9" }}
+              />
+            ) : (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="none"
+                className="w-full object-cover"
+                style={{ aspectRatio: "16/9" }}
+                aria-label="Bella mobile prosecco bar in action"
+              >
+                <source src="/assets/bella-dolly.mp4" type="video/mp4" />
+              </video>
+            )}
 
             {/* Decorative corner lines */}
             <div className="absolute -top-3 -left-3 w-12 h-12 border-l border-t border-[var(--gold-mid)]/30" aria-hidden="true" />

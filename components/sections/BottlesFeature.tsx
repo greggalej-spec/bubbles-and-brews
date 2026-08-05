@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,6 +31,17 @@ const VARIANTS = [
 export default function BottlesFeature() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const shouldReduceMotion = useReducedMotion();
+
+  // Entrance reveal props, gated on prefers-reduced-motion.
+  const reveal = (delay: number, duration = 0.7, distance = 20) =>
+    shouldReduceMotion
+      ? { initial: false as const, animate: { opacity: 1, y: 0 }, transition: { duration: 0 } }
+      : {
+          initial: { opacity: 0, y: distance },
+          animate: isInView ? { opacity: 1, y: 0 } : {},
+          transition: { duration, delay, ease: [0.16, 1, 0.3, 1] as const },
+        };
 
   return (
     <section
@@ -42,9 +53,7 @@ export default function BottlesFeature() {
       <div className="container-brand">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          {...reveal(0, 0.8, 30)}
           className="mb-14"
         >
           <p className="text-[var(--gold-deep)] text-xs tracking-[0.3em] uppercase mb-4">
@@ -72,9 +81,7 @@ export default function BottlesFeature() {
 
         {/* Sugar stat */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          {...reveal(0.2)}
           className="flex gap-px mb-20"
         >
           <div className="bg-[var(--charcoal)] px-8 py-5 flex flex-col gap-1">
@@ -96,14 +103,8 @@ export default function BottlesFeature() {
           {VARIANTS.map((variant, i) => (
             <motion.article
               key={variant.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.8,
-                delay: 0.1 + i * 0.15,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="bg-[var(--cream-light)] p-8 md:p-10 flex flex-col gap-6"
+              {...reveal(0.1 + i * 0.15, 0.8, 40)}
+              className="group bg-[var(--cream-light)] p-8 md:p-10 flex flex-col gap-6 transition-shadow duration-300 hover:shadow-[0_20px_40px_-20px_rgba(26,24,22,0.15)]"
               style={
                 variant.id === "rose"
                   ? { backgroundColor: "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))" }
@@ -117,7 +118,7 @@ export default function BottlesFeature() {
                     src={variant.image}
                     alt={(variant as { imageAlt?: string; name: string }).imageAlt ?? variant.name}
                     fill
-                    className="object-contain"
+                    className="object-contain transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
@@ -160,9 +161,7 @@ export default function BottlesFeature() {
 
         {/* CTA block */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          {...reveal(0.4)}
           className="mt-16 flex flex-col sm:flex-row gap-4 items-start"
         >
           <Link

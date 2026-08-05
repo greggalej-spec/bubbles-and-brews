@@ -12,12 +12,12 @@ export const BRAND = {
   location: "Trinidad & Tobago",
 } as const;
 
-/* ─── Placeholder metrics (replace with real data when available) ─────── */
-export const METRICS = [
-  { label: "Bottles Served",   value: 1200,  suffix: "+" },
-  { label: "Glasses Poured",   value: 18500, suffix: "+" },
-  { label: "Events Hosted",    value: 85,    suffix: "+" },
-  { label: "Venues Activated", value: 12,    suffix: "+" },
+/* ─── What sets us apart — qualitative, not invented figures ───────────── */
+export const HIGHLIGHTS = [
+  { label: "Prosecco on Tap", value: "Bella & Porta-Bella" },
+  { label: "Island-Wide", value: "Trinidad & Tobago" },
+  { label: "Zero-Sugar Option", value: "Prosecco Zero range" },
+  { label: "Every Occasion", value: "Weddings to corporate activations" },
 ];
 
 /* ─── Navigation links ───────────────────────────────────────────────── */

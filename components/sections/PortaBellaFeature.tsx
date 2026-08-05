@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -17,9 +17,20 @@ export default function PortaBellaFeature() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
   const [isMobile, setIsMobile] = useState(true);
+  const shouldReduceMotion = useReducedMotion();
   useEffect(() => {
     setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
   }, []);
+
+  // Entrance reveal props, gated on prefers-reduced-motion.
+  const reveal = (axis: "x" | "y", distance: number, delay: number, duration: number) =>
+    shouldReduceMotion
+      ? { initial: false as const, animate: { opacity: 1, x: 0, y: 0 }, transition: { duration: 0 } }
+      : {
+          initial: { opacity: 0, [axis]: distance },
+          animate: isInView ? { opacity: 1, [axis]: 0 } : {},
+          transition: { duration, delay, ease: [0.16, 1, 0.3, 1] as const },
+        };
 
   return (
     <section
@@ -31,9 +42,7 @@ export default function PortaBellaFeature() {
       <div className="container-brand">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          {...reveal("y", 30, 0, 0.8)}
           className="mb-16"
         >
           <p className="text-[var(--gold-deep)] text-xs tracking-[0.3em] uppercase mb-4">
@@ -62,12 +71,13 @@ export default function PortaBellaFeature() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Visual */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            {...reveal("x", -30, 0.15, 0.9)}
             className="relative overflow-hidden w-full"
             style={{ aspectRatio: "4/5", backgroundColor: "var(--cream-dark)" }}
           >
+            {/* No static poster asset exists for this unit yet, so the video keeps
+                playing even under reduced-motion rather than leaving a blank box;
+                it's a quiet product loop with no camera movement, not a cut. */}
             <video
               autoPlay
               muted
@@ -83,9 +93,7 @@ export default function PortaBellaFeature() {
 
           {/* Specs + content */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            {...reveal("x", 30, 0.25, 0.9)}
             className="flex flex-col gap-10"
           >
             {/* The pitch */}

@@ -20,16 +20,16 @@ export default function LoadingScreen() {
     sessionStorage.setItem("bb-loaded", "1");
     setVisible(true);
 
-    // Phase timeline:
+    // Phase timeline — kept brisk so it reads as a flourish, not a wait:
     // 0ms    → show glass at -20° tilt
-    // 200ms  → start fill
-    // 2000ms → glass full, begin straighten
-    // 2700ms → upright, hold briefly
-    // 3400ms → dismiss
-    const t1 = setTimeout(() => setPhase("fill"),       200);
-    const t2 = setTimeout(() => setPhase("straighten"), 2000);
-    const t3 = setTimeout(() => setPhase("done"),       2700);
-    const t4 = setTimeout(() => setVisible(false),      3400);
+    // 150ms  → start fill
+    // 950ms  → glass full, begin straighten
+    // 1350ms → upright, hold briefly
+    // 1700ms → dismiss
+    const t1 = setTimeout(() => setPhase("fill"),       150);
+    const t2 = setTimeout(() => setPhase("straighten"), 950);
+    const t3 = setTimeout(() => setPhase("done"),       1350);
+    const t4 = setTimeout(() => setVisible(false),      1700);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
   }, [shouldReduceMotion]);
 
@@ -54,7 +54,7 @@ export default function LoadingScreen() {
           animate={{ rotate: isStraightening ? 0 : -20 }}
           transition={{
             rotate: {
-              duration: isStraightening ? 0.7 : 0,
+              duration: isStraightening ? 0.35 : 0,
               ease: [0.16, 1, 0.3, 1],
             },
           }}
@@ -98,7 +98,7 @@ export default function LoadingScreen() {
               fill="url(#liquidGrad)"
               clipPath="url(#bowlClip)"
               animate={{ y: isFilling ? 10 : 140 }}
-              transition={{ duration: 1.8, ease: [0.25, 0.1, 0.25, 1], delay: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0 }}
             />
 
             {/* Shimmer sweep across bowl */}
@@ -111,17 +111,17 @@ export default function LoadingScreen() {
                 fill="url(#shimmerGrad)"
                 clipPath="url(#bowlClip)"
                 animate={{ x: ["-80", "80", "80"] }}
-                transition={{ duration: 1.6, delay: 0.5, ease: "easeInOut" }}
+                transition={{ duration: 0.7, delay: 0.25, ease: "easeInOut" }}
               />
             )}
 
             {/* Rising bubbles */}
             {isFilling && [
-              { cx: 34, delay: 0.4, dur: 1.1 },
-              { cx: 40, delay: 0.8, dur: 1.4 },
-              { cx: 46, delay: 0.3, dur: 1.0 },
-              { cx: 37, delay: 1.0, dur: 1.2 },
-              { cx: 44, delay: 0.6, dur: 1.5 },
+              { cx: 34, delay: 0.18, dur: 0.5 },
+              { cx: 40, delay: 0.35, dur: 0.6 },
+              { cx: 46, delay: 0.12, dur: 0.45 },
+              { cx: 37, delay: 0.45, dur: 0.55 },
+              { cx: 44, delay: 0.25, dur: 0.65 },
             ].map((b, i) => (
               <motion.circle
                 key={i}
@@ -137,7 +137,7 @@ export default function LoadingScreen() {
                   delay: b.delay,
                   ease: "easeOut",
                   repeat: Infinity,
-                  repeatDelay: 0.6,
+                  repeatDelay: 0.25,
                 }}
               />
             ))}
@@ -171,7 +171,7 @@ export default function LoadingScreen() {
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: isFilling ? 1 : 0, y: isFilling ? 0 : 8 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
+          transition={{ duration: 0.4, delay: 0.25 }}
           className="font-display font-light text-[var(--charcoal)] tracking-[0.3em] text-sm uppercase"
         >
           Bubbles &amp; Brews Co.
@@ -181,7 +181,7 @@ export default function LoadingScreen() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: isFilling ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: 1.1 }}
+          transition={{ duration: 0.35, delay: 0.5 }}
           className="text-[var(--muted)] text-xs tracking-[0.2em] uppercase"
         >
           Trinidad &amp; Tobago

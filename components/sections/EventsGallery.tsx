@@ -3,17 +3,28 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import { BRAND, METRICS } from "@/lib/constants";
+import { BRAND, HIGHLIGHTS } from "@/lib/constants";
 
-const STAT_CELLS = METRICS
-  .filter(m => m.label !== "Venues Activated")
-  .map(m => ({ value: m.value.toLocaleString("en-US") + m.suffix, label: m.label }));
+// Non-numeric proof points — keep to 3 cells to match the gallery's grid rhythm.
+const STAT_CELLS = HIGHLIGHTS.filter((h) => h.label !== "Zero-Sugar Option");
 
 export default function EventsGallery() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const shouldReduceMotion = useReducedMotion();
+
+  // Entrance reveal props, gated on prefers-reduced-motion (CSS transition-duration
+  // can't reach Framer Motion's inline transforms, so this has to be explicit).
+  const cellMotion = (delay: number) =>
+    shouldReduceMotion
+      ? { initial: false as const, animate: { opacity: 1, scale: 1 }, transition: { duration: 0 } }
+      : {
+          initial: { opacity: 0, scale: 0.97 },
+          animate: isInView ? { opacity: 1, scale: 1 } : {},
+          transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as const },
+        };
 
   return (
     <section
@@ -60,9 +71,7 @@ export default function EventsGallery() {
 
           {/* Cell 1: Prosecco Zero — tall portrait */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            {...cellMotion(0.05)}
             className="group relative overflow-hidden"
             style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "4/5" }}
           >
@@ -80,16 +89,16 @@ export default function EventsGallery() {
             />
             <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <span className="text-xs tracking-widest uppercase text-[var(--gold-deep)] border border-[var(--gold-mid)]/40 px-3 py-1.5 bg-[var(--cream-light)]/90">
-                Prosecco Zero
+                View Prosecco Zero
               </span>
             </div>
+            {/* The hover zoom + label above promise a destination — give it one */}
+            <Link href="/offerings/bottles" className="absolute inset-0" aria-label="View Prosecco Zero" />
           </motion.div>
 
           {/* Cell 1b: Second bottle portrait (mobile only) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            {...cellMotion(0.08)}
             className="group relative overflow-hidden md:hidden"
             style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "4/5" }}
           >
@@ -100,22 +109,22 @@ export default function EventsGallery() {
               className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
               sizes="50vw"
             />
+            <Link href="/offerings/bottles" className="absolute inset-0" aria-label="View Prosecco Zero Rosé" />
           </motion.div>
 
           {/* Cell 2: Bottle video — wide landscape */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            {...cellMotion(0.1)}
             className="relative overflow-hidden col-span-1 md:col-span-2"
             style={{ backgroundColor: "var(--cream-dark)", aspectRatio: "16/9" }}
           >
             <video
-              autoPlay
+              autoPlay={!shouldReduceMotion}
               muted
               loop
               playsInline
               preload="none"
+              aria-hidden="true"
               className="w-full h-full object-contain"
               poster="/assets/prosecco-zero-brut.png"
             >
@@ -132,15 +141,14 @@ export default function EventsGallery() {
                 Prosecco Zero
               </span>
             </div>
+            <Link href="/offerings/bottles" className="absolute inset-0" aria-label="View Prosecco Zero" />
           </motion.div>
 
           {/* Stat cells */}
           {STAT_CELLS.map((stat, i) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.7, delay: 0.15 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              {...cellMotion(0.15 + i * 0.06)}
               className="relative overflow-hidden flex flex-col items-center justify-center gap-2 py-12 px-6"
               style={{ backgroundColor: "var(--cream-light)", aspectRatio: "1/1" }}
             >
@@ -152,22 +160,20 @@ export default function EventsGallery() {
                 aria-hidden="true"
               />
               <span
-                className="font-display font-light text-[var(--gold-deep)] relative"
+                className="font-display font-light text-[var(--gold-deep)] relative text-center"
                 style={{ fontSize: "var(--text-section)" }}
               >
-                {stat.value}
+                {stat.label}
               </span>
               <span className="text-xs tracking-widest uppercase text-[var(--muted)] text-center relative">
-                {stat.label}
+                {stat.value}
               </span>
             </motion.div>
           ))}
 
           {/* Bottle portrait — dark editorial cell */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.30, ease: [0.16, 1, 0.3, 1] }}
+            {...cellMotion(0.30)}
             className="group relative overflow-hidden hidden md:block"
             style={{ backgroundColor: "var(--charcoal)", aspectRatio: "1/1" }}
           >
@@ -178,13 +184,12 @@ export default function EventsGallery() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="33vw"
             />
+            <Link href="/offerings/bottles" className="absolute inset-0" aria-label="View Prosecco Zero" />
           </motion.div>
 
           {/* Instagram CTA cell */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.33, ease: [0.16, 1, 0.3, 1] }}
+            {...cellMotion(0.33)}
             className="group relative overflow-hidden flex flex-col items-center justify-center gap-5 py-12 px-8"
             style={{ backgroundColor: "var(--charcoal)", aspectRatio: "1/1" }}
           >

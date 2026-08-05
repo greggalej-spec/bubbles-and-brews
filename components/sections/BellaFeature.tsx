@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 
 const BELLA_FEATURES = [
@@ -14,13 +14,14 @@ const BELLA_FEATURES = [
 
 export default function BellaFeature() {
   const sectionRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], ["3%", "-3%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? ["0%", "0%"] : ["3%", "-3%"]);
 
   return (
     <section
@@ -104,7 +105,7 @@ export default function BellaFeature() {
       >
         {/* Background video */}
         <video
-          autoPlay
+          autoPlay={!shouldReduceMotion}
           muted
           loop
           playsInline
@@ -149,10 +150,10 @@ export default function BellaFeature() {
         >
           {/* Large decorative "BELLA" */}
           <motion.p
-            initial={{ opacity: 0, letterSpacing: "0.6em" }}
+            initial={shouldReduceMotion ? { opacity: 1, letterSpacing: "0.35em" } : { opacity: 0, letterSpacing: "0.6em" }}
             whileInView={{ opacity: 1, letterSpacing: "0.35em" }}
             viewport={{ once: true }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: shouldReduceMotion ? 0 : 1.4, ease: [0.16, 1, 0.3, 1] }}
             className="font-display font-light text-[var(--gold-mid)]/30 uppercase"
             style={{ fontSize: "clamp(3rem, 8vw, 6rem)" }}
             aria-hidden="true"
@@ -187,25 +188,6 @@ export default function BellaFeature() {
             </div>
           </MotionWrapper>
 
-          {/* Stats */}
-          <MotionWrapper delay={0.6}>
-            <div className="hidden sm:flex items-center gap-6">
-              <div className="flex flex-col items-center gap-1">
-                <span className="font-display text-3xl font-light text-[var(--gold-light)]">85+</span>
-                <span className="text-xs text-[var(--muted-dark)] tracking-widest uppercase">Events</span>
-              </div>
-              <div className="w-px h-10 bg-[var(--gold-mid)]/20" aria-hidden="true" />
-              <div className="flex flex-col items-center gap-1">
-                <span className="font-display text-3xl font-light text-[var(--gold-light)]">12+</span>
-                <span className="text-xs text-[var(--muted-dark)] tracking-widest uppercase">Venues</span>
-              </div>
-              <div className="w-px h-10 bg-[var(--gold-mid)]/20" aria-hidden="true" />
-              <div className="flex flex-col items-center gap-1">
-                <span className="font-display text-3xl font-light text-[var(--gold-light)]">1</span>
-                <span className="text-xs text-[var(--muted-dark)] tracking-widest uppercase">Bella</span>
-              </div>
-            </div>
-          </MotionWrapper>
         </motion.div>
 
         {/* Left edge gradient — blends into cream panel */}

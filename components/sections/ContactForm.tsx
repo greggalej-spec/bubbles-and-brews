@@ -6,7 +6,7 @@ import { Mail, Phone, Send, CheckCircle } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { BRAND } from "@/lib/constants";
 
-type FormState = "idle" | "submitting" | "success" | "error";
+type FormState = "idle" | "success";
 
 const OFFERINGS_OPTIONS = [
   "Book Bella (Mobile Bar)",
@@ -29,11 +29,9 @@ const EVENT_TYPES = [
 
 /**
  * Contact & booking form.
- * ACTION NOTE: This form currently does client-side validation only.
- * Wire up to a form handler before going live:
- *   - Option A: Next.js Server Action (recommended)
- *   - Option B: Formspree / Resend API route
- *   - Option C: WhatsApp deep-link fallback (already included below)
+ * Submission builds a pre-filled WhatsApp message from the form fields and
+ * opens wa.me — the same handoff pattern used by OfferingQualifier. There is
+ * no backend: the "inquiry" is delivered by the visitor's own WhatsApp send.
  */
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -58,7 +56,19 @@ export default function ContactForm() {
     return next;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const buildWhatsAppMessage = () => {
+    const lines = [`Hi! I'd like to get in touch about ${form.offering || "an inquiry"}.`];
+    lines.push(`Name: ${form.name}`);
+    if (form.phone.trim()) lines.push(`Phone: ${form.phone}`);
+    if (form.email.trim()) lines.push(`Email: ${form.email}`);
+    if (form.eventType) lines.push(`Event type: ${form.eventType}`);
+    if (form.date) lines.push(`Approximate date: ${form.date}`);
+    if (form.guests) lines.push(`Approximate guests: ${form.guests}`);
+    if (form.message.trim()) lines.push(`Message: ${form.message.trim()}`);
+    return lines.join("\n");
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) {
@@ -66,21 +76,11 @@ export default function ContactForm() {
       return;
     }
     setErrors({});
-    setStatus("submitting");
 
-    /*
-     * REPLACE THIS with your actual form submission logic:
-     *
-     * const res = await fetch("/api/contact", {
-     *   method: "POST",
-     *   body: JSON.stringify(form),
-     *   headers: { "Content-Type": "application/json" },
-     * });
-     * if (res.ok) setStatus("success"); else setStatus("error");
-     *
-     * For now, simulating success after 1 second.
-     */
-    await new Promise((r) => setTimeout(r, 1000));
+    const params = new URLSearchParams({ text: buildWhatsAppMessage() });
+    const url = `${BRAND.whatsapp}?${params.toString()}`;
+    // No await precedes this — stays in the same click tick so popup blockers allow it.
+    window.open(url, "_blank", "noopener,noreferrer");
     setStatus("success");
   };
 
@@ -89,15 +89,21 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <section className="section-padding flex items-center justify-center min-h-[60vh]" style={{ backgroundColor: "var(--cream-light)" }}>
+      <section
+        className="section-padding flex items-center justify-center min-h-[60vh]"
+        style={{ backgroundColor: "var(--cream-light)" }}
+        role="status"
+        aria-live="polite"
+      >
         <MotionWrapper className="text-center max-w-md mx-auto px-6">
           <CheckCircle size={48} className="text-[var(--gold-mid)] mx-auto mb-6" />
           <h2 className="font-display text-3xl font-light text-[var(--charcoal)] mb-4">
-            We'll be in touch.
+            Opening WhatsApp…
           </h2>
           <p className="text-[var(--muted)] leading-relaxed mb-8">
-            Thank you for reaching out. We typically respond within 24 hours.
-            For urgent inquiries, reach us directly on WhatsApp.
+            We've pre-filled your details in a WhatsApp message — just hit send and
+            we'll pick it up directly. If the WhatsApp tab didn't open, use the
+            button below.
           </p>
           <Link
             href={BRAND.whatsapp}
@@ -206,13 +212,17 @@ export default function ContactForm() {
                   id="name"
                   type="text"
                   value={form.name}
-                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  onChange={(e) => {
+                    setForm((f) => ({ ...f, name: e.target.value }));
+                    if (errors.name) setErrors((er) => ({ ...er, name: undefined }));
+                  }}
                   placeholder="Your full name"
                   className={field}
                   aria-required="true"
                   aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "name-error" : undefined}
                 />
-                {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                {errors.name && <p id="name-error" className="text-[var(--error)] text-xs mt-1">{errors.name}</p>}
               </div>
 
               {/* Phone + Email */}
@@ -225,10 +235,14 @@ export default function ContactForm() {
                     id="phone"
                     type="tel"
                     value={form.phone}
-                    onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                    onChange={(e) => {
+                      setForm((f) => ({ ...f, phone: e.target.value }));
+                      if (errors.phone) setErrors((er) => ({ ...er, phone: undefined }));
+                    }}
                     placeholder="+1 (868) ..."
                     className={field}
                     aria-invalid={!!errors.phone}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
                   />
                 </div>
                 <div>
@@ -239,13 +253,18 @@ export default function ContactForm() {
                     id="email"
                     type="email"
                     value={form.email}
-                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                    onChange={(e) => {
+                      setForm((f) => ({ ...f, email: e.target.value }));
+                      if (errors.phone) setErrors((er) => ({ ...er, phone: undefined }));
+                    }}
                     placeholder="you@example.com"
                     className={field}
+                    aria-invalid={!!errors.phone}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
                   />
                 </div>
               </div>
-              {errors.phone && <p className="text-red-400 text-xs -mt-3">{errors.phone}</p>}
+              {errors.phone && <p id="phone-error" className="text-[var(--error)] text-xs -mt-3">{errors.phone}</p>}
 
               {/* Offering */}
               <div>
@@ -255,17 +274,21 @@ export default function ContactForm() {
                 <select
                   id="offering"
                   value={form.offering}
-                  onChange={(e) => setForm((f) => ({ ...f, offering: e.target.value }))}
+                  onChange={(e) => {
+                    setForm((f) => ({ ...f, offering: e.target.value }));
+                    if (errors.offering) setErrors((er) => ({ ...er, offering: undefined }));
+                  }}
                   className={`${field} appearance-none cursor-pointer`}
                   aria-required="true"
                   aria-invalid={!!errors.offering}
+                  aria-describedby={errors.offering ? "offering-error" : undefined}
                 >
                   <option value="">Select an offering…</option>
                   {OFFERINGS_OPTIONS.map((o) => (
                     <option key={o} value={o}>{o}</option>
                   ))}
                 </select>
-                {errors.offering && <p className="text-red-400 text-xs mt-1">{errors.offering}</p>}
+                {errors.offering && <p id="offering-error" className="text-[var(--error)] text-xs mt-1">{errors.offering}</p>}
               </div>
 
               {/* Event type + Date */}
@@ -334,8 +357,7 @@ export default function ContactForm() {
               {/* Submit */}
               <button
                 type="submit"
-                disabled={status === "submitting"}
-                className="group relative flex items-center justify-center gap-3 px-8 py-4 min-h-[44px] bg-[var(--gold-mid)] text-[var(--black)] text-sm tracking-widest uppercase font-medium overflow-hidden hover:bg-[var(--gold-light)] transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+                className="group relative flex items-center justify-center gap-3 px-8 py-4 min-h-[44px] bg-[var(--gold-mid)] text-[var(--black)] text-sm tracking-widest uppercase font-medium overflow-hidden hover:bg-[var(--gold-light)] transition-colors duration-300 mt-2"
               >
                 <span
                   className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"
@@ -343,29 +365,14 @@ export default function ContactForm() {
                   aria-hidden="true"
                 />
                 <span className="relative flex items-center gap-2">
-                  {status === "submitting" ? (
-                    "Sending…"
-                  ) : (
-                    <>
-                      Send Inquiry
-                      <Send size={14} />
-                    </>
-                  )}
+                  Send Inquiry via WhatsApp
+                  <Send size={14} />
                 </span>
               </button>
 
-              {status === "error" && (
-                <p className="text-red-400 text-sm text-center">
-                  Something went wrong. Please try again or{" "}
-                  <Link href={BRAND.whatsapp} target="_blank" className="underline">contact us on WhatsApp</Link>.
-                </p>
-              )}
-
               <p className="text-[var(--muted)] text-xs text-center mt-2">
-                We typically respond within 24 hours. For urgent inquiries,{" "}
-                <Link href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="text-[var(--brand-wa)] hover:underline">
-                  WhatsApp us directly
-                </Link>.
+                This opens a pre-filled WhatsApp message so we can respond directly.
+                Prefer a call or email? Use the contact details on the left.
               </p>
             </form>
           </MotionWrapper>

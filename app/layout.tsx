@@ -51,10 +51,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-3 focus:bg-[var(--charcoal)] focus:text-[var(--cream-light)] focus:text-sm focus:tracking-wide"
+        >
+          Skip to content
+        </a>
         <LoadingScreen />
         <BubbleField />
         <Navbar />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
         <StickyContactBar />
       </body>
