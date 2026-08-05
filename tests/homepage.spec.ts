@@ -40,8 +40,13 @@ test.describe("Homepage", () => {
     // Scoped to the overlay by data-testid
     const overlay = page.locator('[data-testid="mobile-menu"]');
     await expect(overlay).toBeVisible();
+    // The mobile menu lists individual offering links (Bella, Porta-Bella,
+    // Bottles) under an "Offerings" text label — there's no link named
+    // "Offerings" itself.
     const menuLink = overlay.getByRole("link", { name: /^bella$/i });
     await expect(menuLink).toBeVisible();
+    // Scoped to the overlay — the header toggle button shares the same
+    // "Close menu" accessible name while the menu is open.
     await overlay.getByRole("button", { name: /close menu/i }).click();
     // AnimatePresence unmounts after exit animation (~500ms)
     await expect(overlay).not.toBeVisible({ timeout: 2000 });

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { OFFERINGS } from "@/lib/constants";
@@ -17,6 +17,7 @@ export default function Offerings() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
   const [qualifierOpen, setQualifierOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const hero = OFFERINGS[0];
   const secondaries = OFFERINGS.slice(1);
@@ -38,9 +39,9 @@ export default function Offerings() {
         }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+          animate={shouldReduceMotion ? { opacity: 1, y: 0 } : (isInView ? { opacity: 1, y: 0 } : {})}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="text-[var(--gold-deep)] text-xs tracking-[0.3em] uppercase mb-4">
             The Collection
@@ -58,18 +59,18 @@ export default function Offerings() {
 
       {/* Gallery — asymmetric: Bella hero left, secondaries stacked right */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
+        animate={shouldReduceMotion ? { opacity: 1 } : (isInView ? { opacity: 1 } : {})}
+        transition={{ duration: shouldReduceMotion ? 0 : 1, delay: shouldReduceMotion ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="flex flex-col md:flex-row border border-[var(--gold-mid)]/20 md:border-0 md:border-t mx-10 lg:mx-0"
       >
         {/* Hero — Bella (65% width on desktop) */}
-        <HeroCard offering={hero} inView={isInView} />
+        <HeroCard offering={hero} inView={isInView} reduceMotion={shouldReduceMotion ?? false} />
 
         {/* Secondaries stacked (35% width on desktop) */}
         <div className="w-full md:w-[35%] flex flex-col divide-y divide-[var(--gold-mid)]/20 border-t md:border-t-0 md:border-l border-[var(--gold-mid)]/20">
           {secondaries.map((offering, i) => (
-            <SecondaryCard key={offering.id} offering={offering} index={i} inView={isInView} />
+            <SecondaryCard key={offering.id} offering={offering} index={i} inView={isInView} reduceMotion={shouldReduceMotion ?? false} />
           ))}
         </div>
       </motion.div>
@@ -95,75 +96,81 @@ export default function Offerings() {
 function HeroCard({
   offering,
   inView,
+  reduceMotion,
 }: {
   offering: (typeof OFFERINGS)[number];
   inView: boolean;
+  reduceMotion: boolean;
 }) {
   return (
     <motion.article
-      initial={{ opacity: 0, scale: 1.02 }}
-      animate={inView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 1.2, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      className="relative w-full md:w-[65%] overflow-hidden"
+      initial={reduceMotion ? false : { opacity: 0, scale: 1.02 }}
+      animate={reduceMotion ? { opacity: 1, scale: 1 } : (inView ? { opacity: 1, scale: 1 } : {})}
+      transition={{ duration: reduceMotion ? 0 : 1.2, delay: reduceMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative w-full md:w-[65%] overflow-hidden"
       style={{ minHeight: "clamp(420px, 60vh, 680px)" }}
     >
-      {/* Cinematic video fill */}
-      {"video" in offering && offering.video && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          poster={(offering as { videoPoster?: string }).videoPoster}
-          className="absolute inset-0 w-full h-full object-cover"
-          aria-hidden="true"
-        >
-          <source src={offering.video as string} type="video/mp4" />
-        </video>
-      )}
-
-      {/* Dark gradient overlay — heavier on left where text lives */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(14,13,11,0.72) 0%, rgba(14,13,11,0.45) 50%, rgba(14,13,11,0.15) 100%)",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Text content — overlaid on dark */}
-      <div
-        className="absolute inset-0 flex flex-col justify-end"
-        style={{ padding: "clamp(2rem, 4vw, 4rem)" }}
+      {/* Whole card is one clickable region — matches how large media tiles are expected to behave */}
+      <Link
+        href={`/offerings/${offering.id}`}
+        className="absolute inset-0 block"
+        aria-label={`${offering.name} — ${offering.cta}`}
       >
-        <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-light)] border border-[var(--gold-light)]/40 px-4 py-2 w-fit mb-8">
-          {typeLabel[offering.type]}
-        </span>
+        {/* Cinematic video fill */}
+        {"video" in offering && offering.video && (
+          <video
+            autoPlay={!reduceMotion}
+            muted
+            loop
+            playsInline
+            preload="none"
+            poster={(offering as { videoPoster?: string }).videoPoster}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            aria-hidden="true"
+          >
+            <source src={offering.video as string} type="video/mp4" />
+          </video>
+        )}
 
-        <h3
-          className="font-display font-light text-[var(--cream-light)] leading-tight mb-4"
-          style={{ fontSize: "var(--text-display)" }}
+        {/* Dark gradient overlay — heavier on left where text lives */}
+        <div
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-90"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(14,13,11,0.72) 0%, rgba(14,13,11,0.45) 50%, rgba(14,13,11,0.15) 100%)",
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Text content — overlaid on dark */}
+        <div
+          className="absolute inset-0 flex flex-col justify-end"
+          style={{ padding: "clamp(2rem, 4vw, 4rem)" }}
         >
-          {offering.name}
-        </h3>
+          <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-light)] border border-[var(--gold-light)]/40 px-4 py-2 w-fit mb-8">
+            {typeLabel[offering.type]}
+          </span>
 
-        <p className="text-[var(--gold-light)] text-base italic font-display leading-relaxed mb-10">
-          {offering.pitch}
-        </p>
+          <h3
+            className="font-display font-light text-[var(--cream-light)] leading-tight mb-4"
+            style={{ fontSize: "var(--text-display)" }}
+          >
+            {offering.name}
+          </h3>
 
-        <Link
-          href={`/offerings/${offering.id}`}
-          className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--cream-light)] hover:text-[var(--gold-light)] transition-colors group/link min-h-[44px] w-fit"
-        >
-          <span>{offering.cta}</span>
-          <ArrowRight
-            size={14}
-            className="translate-x-0 group-hover/link:translate-x-1 transition-transform duration-300"
-          />
-        </Link>
-      </div>
+          <p className="text-[var(--gold-light)] text-base italic font-display leading-relaxed mb-10">
+            {offering.pitch}
+          </p>
+
+          <span className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--cream-light)] group-hover:text-[var(--gold-light)] transition-colors min-h-[44px] w-fit">
+            {offering.cta}
+            <ArrowRight
+              size={14}
+              className="translate-x-0 group-hover:translate-x-1 transition-transform duration-300"
+            />
+          </span>
+        </div>
+      </Link>
     </motion.article>
   );
 }
@@ -172,55 +179,66 @@ function SecondaryCard({
   offering,
   index,
   inView,
+  reduceMotion,
 }: {
   offering: (typeof OFFERINGS)[number];
   index: number;
   inView: boolean;
+  reduceMotion: boolean;
 }) {
   const isRose = offering.id === "bottles";
 
   return (
     <motion.article
-      initial={{ opacity: 0, x: 20 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
+      initial={reduceMotion ? false : { opacity: 0, x: 20 }}
+      animate={reduceMotion ? { opacity: 1, x: 0 } : (inView ? { opacity: 1, x: 0 } : {})}
       transition={{
-        duration: 0.8,
-        delay: 0.4 + index * 0.15,
+        duration: reduceMotion ? 0 : 0.8,
+        delay: reduceMotion ? 0 : 0.4 + index * 0.15,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="flex-1 flex flex-col justify-center gap-6"
+      className="group relative flex-1 transition-colors duration-300"
       style={{
-        padding: "clamp(3rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)",
         backgroundColor: isRose
           ? "color-mix(in srgb, var(--rose-light) 8%, var(--cream-light))"
           : "var(--cream-light)",
       }}
     >
-      <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-deep)] border border-[var(--gold-mid)]/40 px-4 py-2 w-fit">
-        {typeLabel[offering.type]}
-      </span>
-
-      <h3
-        className="font-display font-light text-[var(--charcoal)] leading-tight"
-        style={{ fontSize: "var(--text-section)" }}
-      >
-        {offering.name}
-      </h3>
-
-      <p className="text-[var(--gold-deep)] text-base italic font-display leading-relaxed">
-        {offering.pitch}
-      </p>
-
+      {/* Whole card is one clickable region — matches the HeroCard tile behavior */}
       <Link
         href={`/offerings/${offering.id}`}
-        className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--gold-deep)] hover:text-[var(--gold-accent)] transition-colors group/link min-h-[44px] w-fit"
+        aria-label={`${offering.name} — ${offering.cta}`}
+        className="flex flex-col justify-center gap-6 h-full"
+        style={{ padding: "clamp(3rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)" }}
       >
-        <span>{offering.cta}</span>
-        <ArrowRight
-          size={14}
-          className="translate-x-0 group-hover/link:translate-x-1 transition-transform duration-300"
-        />
+        <span className="text-xs tracking-[0.2em] uppercase text-[var(--gold-deep)] border border-[var(--gold-mid)]/40 px-4 py-2 w-fit">
+          {typeLabel[offering.type]}
+        </span>
+
+        <h3
+          className="font-display font-light text-[var(--charcoal)] leading-tight transition-colors duration-300 group-hover:text-[var(--gold-deep)]"
+          style={{ fontSize: "var(--text-section)" }}
+        >
+          {offering.name}
+        </h3>
+
+        <p className="text-[var(--gold-deep)] text-base italic font-display leading-relaxed">
+          {offering.pitch}
+        </p>
+
+        <span className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--gold-deep)] group-hover:text-[var(--gold-accent)] transition-colors min-h-[44px] w-fit">
+          {offering.cta}
+          <ArrowRight
+            size={14}
+            className="translate-x-0 group-hover:translate-x-1 transition-transform duration-300"
+          />
+        </span>
       </Link>
+      {/* Left accent bar reveals on hover — subtle whole-card affordance */}
+      <div
+        className="absolute inset-y-0 left-0 w-0.5 bg-[var(--gold-mid)] scale-y-0 group-hover:scale-y-100 origin-center transition-transform duration-300"
+        aria-hidden="true"
+      />
     </motion.article>
   );
 }
