@@ -1,11 +1,12 @@
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import MotionWrapper from "@/components/ui/MotionWrapper";
-import { METRICS } from "@/lib/constants";
+import { HIGHLIGHTS } from "@/lib/constants";
 
 /**
- * Metrics counter — deliberately dark section on an otherwise light page.
- * This creates editorial rhythm and makes the gold numbers pop.
+ * Highlights — deliberately dark section on an otherwise light page.
+ * This creates editorial rhythm and makes the gold text pop.
  * Classic luxury technique: one dark chapter break in a cream-dominant layout.
+ * Renders qualitative proof points rather than numeric stats — no figures
+ * to back up are asserted here.
  */
 export default function MetricsCounter() {
   return (
@@ -41,16 +42,16 @@ export default function MetricsCounter() {
             className="font-display font-light text-[var(--white)]"
             style={{ fontSize: "var(--text-section)" }}
           >
-            The numbers behind<br />
-            <span className="italic text-gold-gradient">the pour.</span>
+            What sets us<br />
+            <span className="italic text-gold-gradient">apart.</span>
           </h2>
         </MotionWrapper>
 
-        {/* Counter grid */}
+        {/* Highlight grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--gold-mid)]/8">
-          {METRICS.map((metric, i) => (
+          {HIGHLIGHTS.map((highlight, i) => (
             <MotionWrapper
-              key={metric.label}
+              key={highlight.label}
               delay={0.1 + i * 0.1}
               className="bg-[var(--black)] px-8 py-14 flex flex-col items-center gap-4 group transition-colors duration-200"
             >
@@ -60,17 +61,12 @@ export default function MetricsCounter() {
               />
               <span
                 className="font-display font-light text-[var(--gold-light)] text-center"
-                style={{ fontSize: "var(--text-display)" }}
-                aria-label={`${metric.value}${metric.suffix} ${metric.label}`}
+                style={{ fontSize: "var(--text-section)" }}
               >
-                <AnimatedCounter
-                  target={metric.value}
-                  suffix={metric.suffix}
-                  duration={1800}
-                />
+                {highlight.label}
               </span>
               <span className="text-xs tracking-widest uppercase text-[var(--muted-dark)] text-center">
-                {metric.label}
+                {highlight.value}
               </span>
             </MotionWrapper>
           ))}

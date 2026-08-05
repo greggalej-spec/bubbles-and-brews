@@ -78,6 +78,7 @@ export default function ProseccoSpotlight() {
                   muted
                   loop
                   playsInline
+                  aria-label="Prosecco Zero Rosé — blush bottle with black label and cherub graphic"
                   className="w-full object-contain drop-shadow-xl"
                   style={{ maxHeight: 480 }}
                   poster="/assets/prosecco-zero-rose.png"
@@ -179,7 +180,7 @@ export default function ProseccoSpotlight() {
                   Order for Your Event
                 </Link>
                 <Link
-                  href="/offerings/prosecco-zero"
+                  href="/offerings/bottles"
                   className="px-7 py-3.5 border border-[var(--charcoal)]/20 text-[var(--charcoal-mid)] text-sm tracking-wider hover:border-[var(--gold-deep)] hover:text-[var(--gold-deep)] transition-[border-color,color] duration-200"
                 >
                   Learn More

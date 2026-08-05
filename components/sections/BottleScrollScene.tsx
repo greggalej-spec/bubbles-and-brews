@@ -63,7 +63,7 @@ export default function BottleScrollScene() {
         <div className="relative flex items-center justify-center py-24" style={{ backgroundColor: "var(--black)" }}>
           <Image
             src="/assets/prosecco-zero-brut.png"
-            alt="Prosecco Zero Rosé bottle"
+            alt="Prosecco Zero Brut bottle"
             width={320}
             height={480}
             className="object-contain"

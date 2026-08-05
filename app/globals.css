@@ -28,6 +28,9 @@
   --rose-light:   #ECC5C8;
   --rose-dark:    #A85A60;
 
+  /* Form validation */
+  --error:        #A83232; /* form error text — 6.2:1 on cream (was text-red-400 at ~2.8:1, failed AA) */
+
   /* WhatsApp brand green — isolated, not a general accent */
   --brand-wa:     #25D366;
 

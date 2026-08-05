@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { BRAND, NAV_LINKS, OFFERING_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/cn";
@@ -13,6 +13,9 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen]       = useState(false);
   const [offeringsOpen, setOfferingsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -36,9 +39,38 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  // Escape closes whichever overlay is open — dropdown first, else the mobile menu.
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (offeringsOpen) setOfferingsOpen(false);
+      else if (menuOpen) setMenuOpen(false);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [offeringsOpen, menuOpen]);
+
+  // Move focus into the mobile menu on open; restore to the toggle button on
+  // close (but not on initial mount, when it was never open to begin with).
+  const menuWasOpenRef = useRef(false);
+  useEffect(() => {
+    if (menuOpen) {
+      menuWasOpenRef.current = true;
+      setTimeout(() => mobileMenuRef.current?.querySelector<HTMLElement>("a, button")?.focus(), 50);
+    } else if (menuWasOpenRef.current) {
+      menuButtonRef.current?.focus();
+    }
+  }, [menuOpen]);
+
   const textColor   = scrolled ? "text-[var(--charcoal-mid)]" : "text-[var(--white)]/90";
   const hoverColor  = scrolled ? "hover:text-[var(--gold-deep)]" : "hover:text-[var(--gold-light)]";
   const brandColor  = scrolled ? "text-[var(--charcoal)]" : "text-[var(--white)]";
+
+  // Staggered mobile-menu item reveal, gated on prefers-reduced-motion.
+  const staggerItem = (delay: number) =>
+    shouldReduceMotion
+      ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.15 } }
+      : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { delay, duration: 0.4, ease: [0.16, 1, 0.3, 1] as const } };
 
   return (
     <>
@@ -94,10 +126,10 @@ export default function Navbar() {
               <AnimatePresence>
                 {offeringsOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                    initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.97 }}
-                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.97 }}
+                    transition={{ duration: shouldReduceMotion ? 0.1 : 0.2, ease: [0.16, 1, 0.3, 1] }}
                     className="absolute top-full left-0 mt-4 w-56 border border-[var(--gold-mid)]/20 overflow-hidden shadow-lg"
                     style={{ backgroundColor: "var(--cream-light)" }}
                   >
@@ -147,6 +179,7 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <button
+            ref={menuButtonRef}
             className={cn("md:hidden transition-colors p-2", textColor, hoverColor)}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -161,11 +194,15 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
+            ref={mobileMenuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 overflow-y-auto py-24"
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: "100%" }}
+            transition={{ duration: shouldReduceMotion ? 0.15 : 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[55] flex flex-col items-center justify-center gap-8 overflow-y-auto py-24"
             style={{ backgroundColor: "var(--cream-light)" }}
             data-testid="mobile-menu"
           >
@@ -190,9 +227,7 @@ export default function Navbar() {
               {OFFERING_LINKS.map((link, i) => (
                 <motion.div
                   key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.08 + i * 0.06, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  {...staggerItem(0.08 + i * 0.06)}
                 >
                   <Link
                     href={link.href}
@@ -212,9 +247,7 @@ export default function Navbar() {
             {[{ label: "Home", href: "/" }, ...NAV_LINKS.slice(1)].map((link, i) => (
               <motion.div
                 key={link.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.28 + i * 0.06, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                {...staggerItem(0.28 + i * 0.06)}
               >
                 <Link
                   href={link.href}
@@ -227,9 +260,7 @@ export default function Navbar() {
             ))}
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.46, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              {...staggerItem(0.46)}
               className="mt-4"
             >
               <Link

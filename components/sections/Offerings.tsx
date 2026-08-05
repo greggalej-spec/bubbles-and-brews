@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { OFFERINGS } from "@/lib/constants";
@@ -17,6 +17,7 @@ export default function Offerings() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
   const [qualifierOpen, setQualifierOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const hero = OFFERINGS[0];
   const secondaries = OFFERINGS.slice(1);
@@ -38,9 +39,9 @@ export default function Offerings() {
         }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+          animate={shouldReduceMotion ? { opacity: 1, y: 0 } : (isInView ? { opacity: 1, y: 0 } : {})}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="text-[var(--gold-deep)] text-xs tracking-[0.3em] uppercase mb-4">
             The Collection
@@ -58,18 +59,18 @@ export default function Offerings() {
 
       {/* Gallery — asymmetric: Bella hero left, secondaries stacked right */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
+        animate={shouldReduceMotion ? { opacity: 1 } : (isInView ? { opacity: 1 } : {})}
+        transition={{ duration: shouldReduceMotion ? 0 : 1, delay: shouldReduceMotion ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="flex flex-col md:flex-row border border-[var(--gold-mid)]/20 md:border-0 md:border-t mx-10 lg:mx-0"
       >
         {/* Hero — Bella (65% width on desktop) */}
-        <HeroCard offering={hero} inView={isInView} />
+        <HeroCard offering={hero} inView={isInView} reduceMotion={shouldReduceMotion ?? false} />
 
         {/* Secondaries stacked (35% width on desktop) */}
         <div className="w-full md:w-[35%] flex flex-col divide-y divide-[var(--gold-mid)]/20 border-t md:border-t-0 md:border-l border-[var(--gold-mid)]/20">
           {secondaries.map((offering, i) => (
-            <SecondaryCard key={offering.id} offering={offering} index={i} inView={isInView} />
+            <SecondaryCard key={offering.id} offering={offering} index={i} inView={isInView} reduceMotion={shouldReduceMotion ?? false} />
           ))}
         </div>
       </motion.div>
@@ -95,22 +96,24 @@ export default function Offerings() {
 function HeroCard({
   offering,
   inView,
+  reduceMotion,
 }: {
   offering: (typeof OFFERINGS)[number];
   inView: boolean;
+  reduceMotion: boolean;
 }) {
   return (
     <motion.article
-      initial={{ opacity: 0, scale: 1.02 }}
-      animate={inView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 1.2, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      initial={reduceMotion ? false : { opacity: 0, scale: 1.02 }}
+      animate={reduceMotion ? { opacity: 1, scale: 1 } : (inView ? { opacity: 1, scale: 1 } : {})}
+      transition={{ duration: reduceMotion ? 0 : 1.2, delay: reduceMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
       className="relative w-full md:w-[65%] overflow-hidden"
       style={{ minHeight: "clamp(420px, 60vh, 680px)" }}
     >
       {/* Cinematic video fill */}
       {"video" in offering && offering.video && (
         <video
-          autoPlay
+          autoPlay={!reduceMotion}
           muted
           loop
           playsInline
@@ -172,20 +175,22 @@ function SecondaryCard({
   offering,
   index,
   inView,
+  reduceMotion,
 }: {
   offering: (typeof OFFERINGS)[number];
   index: number;
   inView: boolean;
+  reduceMotion: boolean;
 }) {
   const isRose = offering.id === "bottles";
 
   return (
     <motion.article
-      initial={{ opacity: 0, x: 20 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
+      initial={reduceMotion ? false : { opacity: 0, x: 20 }}
+      animate={reduceMotion ? { opacity: 1, x: 0 } : (inView ? { opacity: 1, x: 0 } : {})}
       transition={{
-        duration: 0.8,
-        delay: 0.4 + index * 0.15,
+        duration: reduceMotion ? 0 : 0.8,
+        delay: reduceMotion ? 0 : 0.4 + index * 0.15,
         ease: [0.16, 1, 0.3, 1],
       }}
       className="flex-1 flex flex-col justify-center gap-6"

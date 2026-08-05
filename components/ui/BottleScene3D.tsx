@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import PlaceholderAsset from "./PlaceholderAsset";
 
 interface BottleScene3DProps {
@@ -48,6 +48,7 @@ interface BottleScene3DProps {
  */
 export default function BottleScene3D({ splineUrl, className }: BottleScene3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -55,9 +56,9 @@ export default function BottleScene3D({ splineUrl, className }: BottleScene3DPro
   });
 
   /* Scroll-driven rotation: bottle rotates 0→30deg as section scrolls through */
-  const rotateY = useTransform(scrollYProgress, [0, 1], ["-15deg", "15deg"]);
+  const rotateY = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? ["0deg", "0deg"] : ["-15deg", "15deg"]);
   /* Parallax lift */
-  const y = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
+  const y = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? ["0%", "0%"] : ["8%", "-8%"]);
 
   if (splineUrl) {
     /* ── FUTURE: Spline embed ──────────────────────────────────────── */
@@ -84,8 +85,8 @@ export default function BottleScene3D({ splineUrl, className }: BottleScene3DPro
     >
       {/* Float loop */}
       <motion.div
-        animate={{ y: [0, -14, 0] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+        animate={shouldReduceMotion ? { y: 0 } : { y: [0, -14, 0] }}
+        transition={shouldReduceMotion ? { duration: 0 } : { duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
         style={{ rotateY }}
         className="w-full h-full"
       >
@@ -99,8 +100,8 @@ export default function BottleScene3D({ splineUrl, className }: BottleScene3DPro
 
       {/* Subtle shadow — gives the float animation depth */}
       <motion.div
-        animate={{ scaleX: [1, 0.85, 1], opacity: [0.15, 0.08, 0.15] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+        animate={shouldReduceMotion ? { scaleX: 1, opacity: 0.15 } : { scaleX: [1, 0.85, 1], opacity: [0.15, 0.08, 0.15] }}
+        transition={shouldReduceMotion ? { duration: 0 } : { duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
         className="mx-auto mt-4 w-1/2 h-3 rounded-full"
         style={{
           background: "radial-gradient(ellipse, rgba(26,24,22,0.25) 0%, transparent 70%)",
