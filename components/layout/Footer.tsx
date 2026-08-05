@@ -46,7 +46,7 @@ export default function Footer() {
               Contact
             </p>
             <a
-              href={`tel:${BRAND.phone}`}
+              href={`tel:+${BRAND.phoneRaw}`}
               className="flex items-center gap-3 text-sm text-[var(--white)]/60 hover:text-[var(--gold-light)] transition-colors"
             >
               <Phone size={14} className="text-[var(--gold-mid)]" />

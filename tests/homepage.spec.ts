@@ -40,9 +40,9 @@ test.describe("Homepage", () => {
     // Scoped to the overlay by data-testid
     const overlay = page.locator('[data-testid="mobile-menu"]');
     await expect(overlay).toBeVisible();
-    const menuLink = overlay.getByRole("link", { name: /^offerings$/i });
+    const menuLink = overlay.getByRole("link", { name: /^bella$/i });
     await expect(menuLink).toBeVisible();
-    await page.getByRole("button", { name: /close menu/i }).click();
+    await overlay.getByRole("button", { name: /close menu/i }).click();
     // AnimatePresence unmounts after exit animation (~500ms)
     await expect(overlay).not.toBeVisible({ timeout: 2000 });
   });
@@ -63,10 +63,10 @@ test.describe("Homepage", () => {
     await expect(bar).toBeVisible({ timeout: 2000 });
   });
 
-  test("offerings section has 4 offering cards", async ({ page }) => {
+  test("offerings section has 3 offering cards", async ({ page }) => {
     await page.locator("#offerings").scrollIntoViewIfNeeded();
     const cards = page.locator("#offerings article");
-    await expect(cards).toHaveCount(4);
+    await expect(cards).toHaveCount(3);
   });
 
   /* ── Contact ────────────────────────────────────────────────────── */

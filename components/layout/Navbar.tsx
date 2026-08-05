@@ -3,16 +3,24 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { BRAND, NAV_LINKS, OFFERING_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/cn";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  // Only the homepage opens on a dark, full-bleed hero — every other route
+  // starts on a light (cream) background, so the header needs dark text
+  // from the very first frame instead of waiting for the scroll threshold.
+  const hasDarkHero = pathname === "/";
+
   const [scrolled, setScrolled]       = useState(false);
   const [menuOpen, setMenuOpen]       = useState(false);
   const [offeringsOpen, setOfferingsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const isDark = scrolled || !hasDarkHero;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -36,9 +44,9 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const textColor   = scrolled ? "text-[var(--charcoal-mid)]" : "text-[var(--white)]/90";
-  const hoverColor  = scrolled ? "hover:text-[var(--gold-deep)]" : "hover:text-[var(--gold-light)]";
-  const brandColor  = scrolled ? "text-[var(--charcoal)]" : "text-[var(--white)]";
+  const textColor   = isDark ? "text-[var(--charcoal-mid)]" : "text-[var(--white)]/90";
+  const hoverColor  = isDark ? "hover:text-[var(--gold-deep)]" : "hover:text-[var(--gold-light)]";
+  const brandColor  = isDark ? "text-[var(--charcoal)]" : "text-[var(--white)]";
 
   return (
     <>
@@ -136,7 +144,7 @@ export default function Navbar() {
               href="/contact"
               className={cn(
                 "ml-2 btn text-xs py-3 px-6",
-                scrolled
+                isDark
                   ? "btn-dark"
                   : "btn-outline-light"
               )}
@@ -165,7 +173,7 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 overflow-y-auto py-24"
+            className="fixed inset-0 z-[55] flex flex-col items-center justify-center gap-8 overflow-y-auto py-24"
             style={{ backgroundColor: "var(--cream-light)" }}
             data-testid="mobile-menu"
           >

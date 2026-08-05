@@ -91,7 +91,7 @@ export default function ContactCTA() {
           <MotionWrapper delay={0.6}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
               <a
-                href={`tel:${BRAND.phone}`}
+                href={`tel:+${BRAND.phoneRaw}`}
                 className="flex items-center gap-3 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors min-h-[44px] px-2"
               >
                 <Phone size={16} className="text-[var(--gold-mid)]" />

@@ -75,7 +75,7 @@ export default function BottlesFeature() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex gap-px mb-20"
+          className="flex gap-4 mb-20"
         >
           <div className="bg-[var(--charcoal)] px-8 py-5 flex flex-col gap-1">
             <span className="font-display text-[var(--gold-light)] text-3xl">2.8g</span>

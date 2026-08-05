@@ -6,7 +6,7 @@ import { Mail, Phone, Send, CheckCircle } from "lucide-react";
 import MotionWrapper from "@/components/ui/MotionWrapper";
 import { BRAND } from "@/lib/constants";
 
-type FormState = "idle" | "submitting" | "success" | "error";
+type FormState = "idle" | "submitting" | "success";
 
 const OFFERINGS_OPTIONS = [
   "Book Bella (Mobile Bar)",
@@ -27,13 +27,33 @@ const EVENT_TYPES = [
   "Other",
 ];
 
+/** Builds a readable WhatsApp message from the filled-in booking form. */
+function buildInquiryMessage(form: {
+  name: string;
+  phone: string;
+  email: string;
+  eventType: string;
+  offering: string;
+  date: string;
+  guests: string;
+  message: string;
+}): string {
+  const lines = [`Hi! I'd like to make an inquiry via the website.`, "", `Name: ${form.name}`];
+  if (form.phone.trim()) lines.push(`Phone: ${form.phone}`);
+  if (form.email.trim()) lines.push(`Email: ${form.email}`);
+  lines.push(`Interested in: ${form.offering}`);
+  if (form.eventType) lines.push(`Event type: ${form.eventType}`);
+  if (form.date) lines.push(`Approximate date: ${form.date}`);
+  if (form.guests) lines.push(`Guest count: ${form.guests}`);
+  if (form.message.trim()) lines.push("", form.message.trim());
+  return lines.join("\n");
+}
+
 /**
  * Contact & booking form.
- * ACTION NOTE: This form currently does client-side validation only.
- * Wire up to a form handler before going live:
- *   - Option A: Next.js Server Action (recommended)
- *   - Option B: Formspree / Resend API route
- *   - Option C: WhatsApp deep-link fallback (already included below)
+ * Submits via WhatsApp deep-link pre-fill (same delivery mechanism as
+ * OfferingQualifier) — opens WhatsApp with the inquiry pre-filled so the
+ * user just has to hit send.
  */
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -48,6 +68,7 @@ export default function ContactForm() {
   });
   const [status, setStatus] = useState<FormState>("idle");
   const [errors, setErrors] = useState<Partial<typeof form>>({});
+  const [whatsappURL, setWhatsappURL] = useState<string>(BRAND.whatsapp);
 
   const validate = () => {
     const next: Partial<typeof form> = {};
@@ -68,19 +89,15 @@ export default function ContactForm() {
     setErrors({});
     setStatus("submitting");
 
-    /*
-     * REPLACE THIS with your actual form submission logic:
-     *
-     * const res = await fetch("/api/contact", {
-     *   method: "POST",
-     *   body: JSON.stringify(form),
-     *   headers: { "Content-Type": "application/json" },
-     * });
-     * if (res.ok) setStatus("success"); else setStatus("error");
-     *
-     * For now, simulating success after 1 second.
-     */
-    await new Promise((r) => setTimeout(r, 1000));
+    const text = buildInquiryMessage(form);
+    const url = `${BRAND.whatsapp}?${new URLSearchParams({ text }).toString()}`;
+    setWhatsappURL(url);
+
+    if (typeof gtag !== "undefined") {
+      gtag("event", "contact_form_submitted", { offering: form.offering });
+    }
+
+    window.open(url, "_blank", "noopener,noreferrer");
     setStatus("success");
   };
 
@@ -93,14 +110,15 @@ export default function ContactForm() {
         <MotionWrapper className="text-center max-w-md mx-auto px-6">
           <CheckCircle size={48} className="text-[var(--gold-mid)] mx-auto mb-6" />
           <h2 className="font-display text-3xl font-light text-[var(--charcoal)] mb-4">
-            We'll be in touch.
+            Almost there.
           </h2>
           <p className="text-[var(--muted)] leading-relaxed mb-8">
-            Thank you for reaching out. We typically respond within 24 hours.
-            For urgent inquiries, reach us directly on WhatsApp.
+            We've opened WhatsApp with your inquiry pre-filled — hit send and
+            we typically respond within 24 hours. If the WhatsApp window
+            didn't open, use the button below.
           </p>
           <Link
-            href={BRAND.whatsapp}
+            href={whatsappURL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--brand-wa)]/40 text-[var(--brand-wa)] text-sm tracking-widest uppercase hover:bg-[var(--brand-wa)]/10 transition-[background-color] duration-200"
@@ -144,7 +162,7 @@ export default function ContactForm() {
             <MotionWrapper delay={0.42}>
               <div className="flex flex-col gap-5">
                 <a
-                  href={`tel:${BRAND.phone}`}
+                  href={`tel:+${BRAND.phoneRaw}`}
                   className="flex items-center gap-4 group"
                 >
                   <div className="w-10 h-10 border border-[var(--gold-mid)]/30 flex items-center justify-center group-hover:border-[var(--gold-mid)] transition-colors">
@@ -353,13 +371,6 @@ export default function ContactForm() {
                   )}
                 </span>
               </button>
-
-              {status === "error" && (
-                <p className="text-red-400 text-sm text-center">
-                  Something went wrong. Please try again or{" "}
-                  <Link href={BRAND.whatsapp} target="_blank" className="underline">contact us on WhatsApp</Link>.
-                </p>
-              )}
 
               <p className="text-[var(--muted)] text-xs text-center mt-2">
                 We typically respond within 24 hours. For urgent inquiries,{" "}

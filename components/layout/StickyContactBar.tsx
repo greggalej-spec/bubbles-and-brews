@@ -32,7 +32,7 @@ export default function StickyContactBar() {
             aria-label="Quick contact options"
           >
             <a
-              href={`tel:${BRAND.phone}`}
+              href={`tel:+${BRAND.phoneRaw}`}
               className="flex flex-col items-center justify-center gap-1 min-h-[44px] px-3 text-[var(--charcoal-mid)] hover:text-[var(--gold-deep)] transition-colors"
               aria-label="Call us"
             >
